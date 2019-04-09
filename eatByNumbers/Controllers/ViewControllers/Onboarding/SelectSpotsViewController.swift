@@ -32,11 +32,6 @@ class SelectSpotsViewController: UIViewController {
         tableView.delegate = self
         setSearchController()
         checkLocationServices()
-        UserController.shared.fetchUser { (success) in
-            if success {
-                self.user = UserController.shared.loggedInUser
-            }
-        }
     }
     
     func setSearchController() {

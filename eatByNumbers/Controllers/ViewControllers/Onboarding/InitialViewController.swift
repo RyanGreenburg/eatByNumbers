@@ -28,24 +28,35 @@ class InitialViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         FoodSpotController.shared.fetchSpots { (success) in
             if success {
-                self.foundFoodSpots = true
-                self.foundFoodSpotsLabel.text = "Success"
-                UserController.shared.fetchUser { (success) in
-                    if success {
-                        self.isUser = true
-                        self.foundUserLabel.text = "Success"
-                        self.goToMainApp()
-                    } else {
-                        // create new user page
-                        self.goToUserCreation()
-                    }
-                }
+                self.didFindFoodSpots()
             } else {
-                // show alert?
+                // handle?
+            }
+        }
+        UserController.shared.fetchUser { (success) in
+            if success {
+                self.didFindUser()
+                self.goToMainApp()
+            } else {
+                // create new user page
+                self.goToUserCreation()
             }
         }
     }
 
+    func didFindFoodSpots() {
+        DispatchQueue.main.async {
+            self.foundFoodSpots = true
+            self.foundFoodSpotsLabel.text = "Success"
+        }
+    }
+    
+    func didFindUser() {
+        DispatchQueue.main.async {
+            self.isUser = true
+            self.foundUserLabel.text = "Success"
+        }
+    }
     
     func goToUserCreation() {
         DispatchQueue.main.async {

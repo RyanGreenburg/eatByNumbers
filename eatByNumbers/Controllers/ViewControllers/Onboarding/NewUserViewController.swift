@@ -17,13 +17,10 @@ class NewUserViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameTextField.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - Actions
