@@ -34,6 +34,9 @@
 		62B8E177225C333C00196ED9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E176225C333C00196ED9 /* Colors.swift */; };
 		62B8E179225D38C800196ED9 /* AnnotationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E178225D38C800196ED9 /* AnnotationExtensions.swift */; };
 		62B8E17B225D3CD300196ED9 /* FoodSpotAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E17A225D3CD300196ED9 /* FoodSpotAnnotationView.swift */; };
+		62B8E17E225D4BBD00196ED9 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E17D225D4BBD00196ED9 /* InitialViewController.swift */; };
+		62B8E180225D4F9800196ED9 /* NewUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E17F225D4F9800196ED9 /* NewUser.storyboard */; };
+		62B8E183225D4FBE00196ED9 /* SelectFavSpots.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E181225D4FBE00196ED9 /* SelectFavSpots.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +70,9 @@
 		62B8E176225C333C00196ED9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		62B8E178225D38C800196ED9 /* AnnotationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationExtensions.swift; sourceTree = "<group>"; };
 		62B8E17A225D3CD300196ED9 /* FoodSpotAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSpotAnnotationView.swift; sourceTree = "<group>"; };
+		62B8E17D225D4BBD00196ED9 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		62B8E17F225D4F9800196ED9 /* NewUser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewUser.storyboard; sourceTree = "<group>"; };
+		62B8E182225D4FBE00196ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = eatByNumbers/Storyboards/Base.lproj/SelectFavSpots.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,9 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				62B8E11E2254FBE100196ED9 /* Main.storyboard */,
-				62B8E14C2256648D00196ED9 /* HomePage.storyboard */,
-				62B8E14E2256675100196ED9 /* EditProfile.storyboard */,
-				62B8E1562256B35E00196ED9 /* MapView.storyboard */,
+				62B8E184225D4FCB00196ED9 /* OnboardingSBs */,
+				62B8E185225D4FDA00196ED9 /* MainAppSBs */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -178,11 +183,9 @@
 			children = (
 				62B8E14222551FE600196ED9 /* MapViewController.swift */,
 				62B8E14A225654CC00196ED9 /* PhotoSelectorViewController.swift */,
-				62B8E1582256BAB500196ED9 /* Onboarding */,
-				62B8E154225674BC00196ED9 /* HomePageViewController.swift */,
-				62B8E1592256BAE800196ED9 /* FindSpotsViewController.swift */,
-				62B8E15B2256BB8D00196ED9 /* EditProfileViewController.swift */,
 				62B8E17A225D3CD300196ED9 /* FoodSpotAnnotationView.swift */,
+				62B8E1582256BAB500196ED9 /* Onboarding */,
+				62B8E17C225D3DEE00196ED9 /* MainApp */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -190,11 +193,41 @@
 		62B8E1582256BAB500196ED9 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				62B8E17D225D4BBD00196ED9 /* InitialViewController.swift */,
 				62B8E1482256542000196ED9 /* NewUserViewController.swift */,
 				62B8E13D2255196100196ED9 /* SelectSpotsViewController.swift */,
 				62B8E15D2257AAED00196ED9 /* LocationsTableViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		62B8E17C225D3DEE00196ED9 /* MainApp */ = {
+			isa = PBXGroup;
+			children = (
+				62B8E154225674BC00196ED9 /* HomePageViewController.swift */,
+				62B8E1592256BAE800196ED9 /* FindSpotsViewController.swift */,
+				62B8E15B2256BB8D00196ED9 /* EditProfileViewController.swift */,
+			);
+			path = MainApp;
+			sourceTree = "<group>";
+		};
+		62B8E184225D4FCB00196ED9 /* OnboardingSBs */ = {
+			isa = PBXGroup;
+			children = (
+				62B8E17F225D4F9800196ED9 /* NewUser.storyboard */,
+				62B8E181225D4FBE00196ED9 /* SelectFavSpots.storyboard */,
+			);
+			path = OnboardingSBs;
+			sourceTree = "<group>";
+		};
+		62B8E185225D4FDA00196ED9 /* MainAppSBs */ = {
+			isa = PBXGroup;
+			children = (
+				62B8E14C2256648D00196ED9 /* HomePage.storyboard */,
+				62B8E14E2256675100196ED9 /* EditProfile.storyboard */,
+				62B8E1562256B35E00196ED9 /* MapView.storyboard */,
+			);
+			path = MainAppSBs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,8 +299,10 @@
 				62B8E14D2256648D00196ED9 /* HomePage.storyboard in Resources */,
 				62B8E14F2256675100196ED9 /* EditProfile.storyboard in Resources */,
 				62B8E1572256B35E00196ED9 /* MapView.storyboard in Resources */,
+				62B8E180225D4F9800196ED9 /* NewUser.storyboard in Resources */,
 				62B8E1252254FBE300196ED9 /* LaunchScreen.storyboard in Resources */,
 				62B8E1222254FBE300196ED9 /* Assets.xcassets in Resources */,
+				62B8E183225D4FBE00196ED9 /* SelectFavSpots.storyboard in Resources */,
 				62B8E1202254FBE100196ED9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +329,7 @@
 				62B8E160225A5A5000196ED9 /* FoodSearch.swift in Sources */,
 				62B8E145225523DC00196ED9 /* AlertController.swift in Sources */,
 				62B8E11B2254FBE100196ED9 /* AppDelegate.swift in Sources */,
+				62B8E17E225D4BBD00196ED9 /* InitialViewController.swift in Sources */,
 				62B8E155225674BC00196ED9 /* HomePageViewController.swift in Sources */,
 				62B8E13A2255010B00196ED9 /* FoodSpot.swift in Sources */,
 				62B8E14322551FE600196ED9 /* MapViewController.swift in Sources */,
@@ -319,6 +355,14 @@
 				62B8E1242254FBE300196ED9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		62B8E181225D4FBE00196ED9 /* SelectFavSpots.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62B8E182225D4FBE00196ED9 /* Base */,
+			);
+			name = SelectFavSpots.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

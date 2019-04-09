@@ -14,6 +14,7 @@ class FindSpotsViewController: UIViewController {
     let locationManager = CLLocationManager()
     var regionInMeters: Double = 1000
     var selectedPlacemark: MKPlacemark?
+    @IBOutlet weak var suggestionButton: UIButton!
     
     
     @IBOutlet weak var mapView: MKMapView!
@@ -31,6 +32,13 @@ class FindSpotsViewController: UIViewController {
     @IBAction func closeButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func suggestionButtonTapped(_ sender: Any) {
+        guard let suggestion = mapView.annotations.randomElement() else { return }
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(suggestion)
+    }
+    
     
     
 // MARK: - Find Spots(FoodSpot)

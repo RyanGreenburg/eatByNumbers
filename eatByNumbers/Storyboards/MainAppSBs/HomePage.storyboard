@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rBF-l8-7hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902.89855072463774" y="179.46428571428569"/>
+            <point key="canvasLocation" x="949" y="179"/>
         </scene>
         <!--Storyboard Reference-->
         <scene sceneID="lpF-6y-Daf">
@@ -102,7 +102,7 @@
         <!--Navigation Controller-->
         <scene sceneID="aLB-Y9-m70">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="khw-SU-KcY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomePageNavController" automaticallyAdjustsScrollViewInsets="NO" id="khw-SU-KcY" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="avU-rf-isr">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

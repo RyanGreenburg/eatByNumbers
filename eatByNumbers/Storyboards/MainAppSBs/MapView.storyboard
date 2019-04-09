@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zld-hk-xyn">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -54,15 +54,26 @@
                                     <action selector="closeButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="nSk-4M-Pc0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-zr-bnz">
+                                <rect key="frame" x="20" y="810" width="374" height="32"/>
+                                <state key="normal" title="Suggestion"/>
+                                <connections>
+                                    <action selector="suggestionButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="xxY-Sf-DeB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Yx0-wB-yZR" firstAttribute="trailing" secondItem="DDk-fh-hET" secondAttribute="trailing" constant="20" id="4jj-j1-3Hl"/>
+                            <constraint firstItem="g8I-zr-bnz" firstAttribute="leading" secondItem="Yx0-wB-yZR" secondAttribute="leading" constant="20" id="Mgd-pp-UqZ"/>
                             <constraint firstItem="DDk-fh-hET" firstAttribute="leading" secondItem="Yx0-wB-yZR" secondAttribute="leading" constant="20" id="PDP-f8-Uxr"/>
+                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="trailing" secondItem="g8I-zr-bnz" secondAttribute="trailing" constant="20" id="TGG-4f-znw"/>
                             <constraint firstItem="Kfe-mX-Mif" firstAttribute="top" secondItem="DDk-fh-hET" secondAttribute="top" constant="-10" id="XWy-6l-6KM"/>
                             <constraint firstItem="Yx0-wB-yZR" firstAttribute="bottom" secondItem="DDk-fh-hET" secondAttribute="bottom" constant="60" id="d74-sK-iFF"/>
+                            <constraint firstItem="g8I-zr-bnz" firstAttribute="top" secondItem="DDk-fh-hET" secondAttribute="bottom" constant="8" id="esR-P9-AG6"/>
                             <constraint firstItem="Kfe-mX-Mif" firstAttribute="trailing" secondItem="DDk-fh-hET" secondAttribute="trailing" constant="10" id="jeY-Xc-kB9"/>
                             <constraint firstItem="DDk-fh-hET" firstAttribute="top" secondItem="Yx0-wB-yZR" secondAttribute="top" constant="60" id="jfk-T9-xQZ"/>
+                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="bottom" secondItem="g8I-zr-bnz" secondAttribute="bottom" constant="20" id="zxd-Ar-OCr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx0-wB-yZR"/>
                     </view>
@@ -70,6 +81,7 @@
                         <outlet property="closeButton" destination="Kfe-mX-Mif" id="x3V-M4-b24"/>
                         <outlet property="containerView" destination="3To-rS-rzf" id="c5e-s4-eia"/>
                         <outlet property="mapView" destination="rM2-8C-4ze" id="g25-nb-VkG"/>
+                        <outlet property="suggestionButton" destination="g8I-zr-bnz" id="Dd9-hG-gWj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8i-IX-o9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -88,7 +100,7 @@
                                 <rect key="frame" x="0.0" y="60" width="374" height="488"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Wk2-7X-duL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" id="Wk2-7X-duL" customClass="locationCell">
                                         <rect key="frame" x="0.0" y="28" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wk2-7X-duL" id="95X-tI-99R">
@@ -123,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRt-Mm-14I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789.85507246376812" y="156.69642857142856"/>
+            <point key="canvasLocation" x="746" y="68"/>
         </scene>
     </scenes>
 </document>
