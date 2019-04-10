@@ -14,11 +14,9 @@ struct TopLevel: Codable {
 }
 
 struct Response: Codable {
-    let venues: [Venue]
+    let venues: [Venue]?
+    let minivenues: [Venue]?
     
-    enum CodingKeys: String, CodingKey {
-        case venues = "minivenues"
-    }
 }
 
 struct Venue: Codable {

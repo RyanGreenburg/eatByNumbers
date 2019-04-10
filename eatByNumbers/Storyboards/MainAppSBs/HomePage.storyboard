@@ -59,7 +59,9 @@
                                 <state key="normal" title="I'm Hungry"/>
                                 <connections>
                                     <action selector="imHungryButtonTapped:" destination="Ze0-vD-TNe" eventType="touchUpInside" id="WoW-BJ-BdB"/>
-                                    <segue destination="9uG-KL-Pb2" kind="presentation" id="kNy-Bo-lje"/>
+                                    <segue destination="9uG-KL-Pb2" kind="popoverPresentation" popoverAnchorView="bh7-me-LMm" id="kNy-Bo-lje">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -91,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="949" y="179"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--MapView-->
         <scene sceneID="lpF-6y-Daf">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="FindSpotsVC" id="9uG-KL-Pb2" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="FindSpotsVC" storyboardName="MapView" id="9uG-KL-Pb2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ej7-Tg-fVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1550" y="179"/>

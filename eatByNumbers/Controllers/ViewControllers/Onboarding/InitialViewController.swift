@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class InitialViewController: UIViewController {
     
@@ -29,10 +30,14 @@ class InitialViewController: UIViewController {
         FoodSpotController.shared.fetchSpots { (success) in
             if success {
                 self.didFindFoodSpots()
+                self.fetchUser()
             } else {
                 // handle?
             }
         }
+    }
+    
+    func fetchUser() {
         UserController.shared.fetchUser { (success) in
             if success {
                 self.didFindUser()
@@ -55,6 +60,7 @@ class InitialViewController: UIViewController {
         DispatchQueue.main.async {
             self.isUser = true
             self.foundUserLabel.text = "Success"
+            UserController.shared.userLocationManager = CLLocationManager()
         }
     }
     

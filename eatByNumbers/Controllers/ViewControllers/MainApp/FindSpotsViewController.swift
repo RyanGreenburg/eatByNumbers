@@ -24,9 +24,13 @@ class FindSpotsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         mapView.delegate = self
         checkLocationServices()
-        closeButton.layer.cornerRadius = closeButton.frame.height / 2
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -39,14 +43,12 @@ class FindSpotsViewController: UIViewController {
         mapView.addAnnotation(suggestion)
     }
     
-    
-    
 // MARK: - Find Spots(FoodSpot)
     func findFoodSpotsNear(location: CLLocation) -> [MKMapItem] {
         // filter spots by location
         var mapItems: [MKMapItem] = []
         
-        for spot in FoodSpotController.shared.allFoodSpots {
+        for spot in FoodSpotController.shared.nearbyFoodSpots {
             if spot.location.distance(from: location) <= regionInMeters {
                 // perform map request for all nearby spots
                 let item = performMapSearchRequestWith(query: spot.name)

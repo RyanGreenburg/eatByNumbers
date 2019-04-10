@@ -23,23 +23,13 @@
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rM2-8C-4ze">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="698"/>
                                     </mapView>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3To-rS-rzf">
-                                        <rect key="frame" x="0.0" y="150" width="374" height="548"/>
-                                        <connections>
-                                            <segue destination="YiV-MW-WQb" kind="embed" id="yea-nu-bd5"/>
-                                        </connections>
-                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="rM2-8C-4ze" firstAttribute="top" secondItem="DDk-fh-hET" secondAttribute="top" id="64e-Vq-NBY"/>
-                                    <constraint firstAttribute="bottom" secondItem="3To-rS-rzf" secondAttribute="bottom" id="Avc-HL-xev"/>
                                     <constraint firstAttribute="trailing" secondItem="rM2-8C-4ze" secondAttribute="trailing" id="N6Q-bM-deV"/>
-                                    <constraint firstItem="3To-rS-rzf" firstAttribute="top" secondItem="DDk-fh-hET" secondAttribute="top" constant="150" id="Tl5-gU-3eo"/>
                                     <constraint firstItem="rM2-8C-4ze" firstAttribute="leading" secondItem="DDk-fh-hET" secondAttribute="leading" id="WPF-d3-Jog"/>
                                     <constraint firstAttribute="bottom" secondItem="rM2-8C-4ze" secondAttribute="bottom" id="YAx-Jf-z3a"/>
-                                    <constraint firstItem="3To-rS-rzf" firstAttribute="leading" secondItem="DDk-fh-hET" secondAttribute="leading" id="enF-SS-LTj"/>
-                                    <constraint firstAttribute="trailing" secondItem="3To-rS-rzf" secondAttribute="trailing" id="pJJ-Qv-X6B"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kfe-mX-Mif">
@@ -79,7 +69,6 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="Kfe-mX-Mif" id="x3V-M4-b24"/>
-                        <outlet property="containerView" destination="3To-rS-rzf" id="c5e-s4-eia"/>
                         <outlet property="mapView" destination="rM2-8C-4ze" id="g25-nb-VkG"/>
                         <outlet property="suggestionButton" destination="g8I-zr-bnz" id="Dd9-hG-gWj"/>
                     </connections>
@@ -93,25 +82,25 @@
             <objects>
                 <viewController storyboardIdentifier="FindSpotsVC" id="YiV-MW-WQb" customClass="FindSpotsViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aUt-Qv-bRK">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jbo-ts-RZ0">
-                                <rect key="frame" x="0.0" y="60" width="374" height="488"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="836"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" id="Wk2-7X-duL" customClass="locationCell">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" id="Wk2-7X-duL" customClass="locationCell">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wk2-7X-duL" id="95X-tI-99R">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spots Near Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EyW-Fc-Ww2">
-                                <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="0af-Dc-BUs"/>
                                 </constraints>
@@ -135,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRt-Mm-14I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="746" y="68"/>
+            <point key="canvasLocation" x="967" y="157"/>
         </scene>
     </scenes>
 </document>

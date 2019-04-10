@@ -24,12 +24,13 @@ class FoodSeachController {
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         let userLocation = URLQueryItem(name: "ll", value: location)
+        let total = URLQueryItem(name: "limit", value: "10")
         
         if searchTerm != nil {
             let search = URLQueryItem(name: "query", value: searchTerm)
             components?.queryItems = [id, key, userLocation, foodCategory, search, version]
         } else {
-            components?.queryItems = [id, key, userLocation, foodCategory, version]
+            components?.queryItems = [id, key, userLocation, total, foodCategory, version]
         }
         
         guard let componentsURL = components?.url else { completion([]) ; return }

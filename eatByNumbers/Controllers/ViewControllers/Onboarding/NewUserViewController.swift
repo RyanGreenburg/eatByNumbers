@@ -7,30 +7,42 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NewUserViewController: UIViewController {
     
     // MARK: - Properties
     var profilePhoto: UIImage?
     var user: User?
+    let locationManager = CLLocationManager()
     
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-
+    @IBOutlet weak var allowLocationButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameTextField.delegate = self
     }
     
     // MARK: - Actions
+    
+    @IBAction func allowLocationButtonTapped(_ sender: Any) {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let name = usernameTextField.text, !name.isEmpty,
             let photo = profilePhoto else { return }
         
         let newUser = User(username: name, photo: photo, favoriteSpots: nil, appleUserRef: nil)
-        
         user = newUser
+        UserController.shared.createUserWith(name: name, photo: photo, foodSpots: nil) { (success) in
+            if success {
+                print("User Created Successfully")
+            }
+        }
     }
     
     // MARK: - Navigation

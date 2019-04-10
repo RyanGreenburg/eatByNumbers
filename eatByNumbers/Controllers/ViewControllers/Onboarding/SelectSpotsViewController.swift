@@ -16,7 +16,10 @@ class SelectSpotsViewController: UIViewController {
     
     var resultsController: UISearchController?
     var selectedPlacemark: MKPlacemark?
-    let locationManager = CLLocationManager()
+    var locationManager: CLLocationManager {
+        return UserController.shared.userLocationManager ?? CLLocationManager()
+    }
+    
     var regionInMeters: Double = 1000
     
     @IBOutlet weak var mapView: MKMapView!
@@ -30,12 +33,13 @@ class SelectSpotsViewController: UIViewController {
         mapView.isHidden = false
         mapView.delegate = self
         tableView.delegate = self
+        tableView.dataSource = self
         setSearchController()
         checkLocationServices()
     }
-    
+
     func setSearchController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "SelectFavSpots", bundle: nil)
         let locationsTVC = storyboard.instantiateViewController(withIdentifier: "locationsTableViewController") as? LocationsTableViewController
         resultsController = UISearchController(searchResultsController: locationsTVC)
         resultsController?.searchResultsUpdater = locationsTVC
@@ -67,9 +71,9 @@ class SelectSpotsViewController: UIViewController {
         
         FoodSpotController.shared.saveFoodSpot(withName: name, address: address, location: location) { (success) in
             if success {
+                DispatchQueue.main.async {
                 self.mapView.removeAnnotations(self.mapView.annotations)
                 self.centerViewOnUserLocation()
-                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
@@ -77,29 +81,27 @@ class SelectSpotsViewController: UIViewController {
     }
     
     @IBAction func doneBarButtonTapped(_ sender: Any) {
-        guard let user = user,
-            let photo = user.photo
-            else { return }
         
-        UserController.shared.createUserWith(name: user.username, photo: photo, foodSpots: foodSpots) { (success) in
-            if success {
-                
-                let viewController = HomePageViewController()
-                let navController = UINavigationController(rootViewController: viewController)
-                
-                guard let window = UIApplication.shared.keyWindow,
-                    let rootViewController = window.rootViewController else { return }
-                
-                navController.view.frame = rootViewController.view.frame
-                navController.view.layoutIfNeeded()
-                
-                UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil) { (success) in
-                    if success {
-                        window.rootViewController = navController
-                    }
+        if foodSpots.count == 0 {
+            goToHomePage()
+        } else {
+            guard let user = user,
+                let photo = user.photo
+                else { return }
+            
+            UserController.shared.update(user: user, with: foodSpots) { (success) in
+                if success {
+                    self.goToHomePage()
                 }
             }
         }
+    }
+    
+    func goToHomePage() {
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        guard let viewController = storyboard.instantiateInitialViewController() else { return }
+        
+        present(viewController, animated: true, completion: nil)
     }
     
     // NEED TO COLLAPSE MAP NOT JUST HIDE IT

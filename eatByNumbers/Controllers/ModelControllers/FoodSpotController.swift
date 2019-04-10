@@ -14,7 +14,18 @@ class FoodSpotController {
     // singleton
     static let shared = FoodSpotController()
     // source of truth
-    var allFoodSpots: [FoodSpot] = []
+    var allFoodSpots: [FoodSpot] = [] {
+        didSet {
+            guard let userLocation = UserController.shared.userLocationManager?.location else { return }
+            nearbyFoodSpots = allFoodSpots.filter({ $0.location.distance(from: userLocation) <= 80467 })
+        }
+    }
+    
+    // spots within 50 miles of the user
+    var nearbyFoodSpots: [FoodSpot] = []
+    
+    // API Call
+    var venuesNearby: [Venue] = []
     
     // MARK: - CRUD
     

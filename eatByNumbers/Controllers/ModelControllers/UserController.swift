@@ -20,6 +20,9 @@ class UserController {
     // User's spots
     var userFoodSpots: [FoodSpot] = []
     
+    // User's location
+    var userLocationManager: CLLocationManager?
+    
     // MARK: - CRUD
     
     // create
@@ -74,8 +77,7 @@ class UserController {
                 print("Fetched logged in user.")
                 self.loggedInUser = user
                 //  set user fav spots
-                guard let foodSpots = self.loggedInUser?.favoriteSpots else { return }
-                self.userFoodSpots = foodSpots
+                self.userFoodSpots = self.loggedInUser?.favoriteSpots ?? []
                 completion(true)
             })
         }
@@ -91,9 +93,9 @@ class UserController {
             guard let recordID = recordID else { completion(false) ; return }
             
             let reference = CKRecord.Reference(recordID: recordID, action: .deleteSelf)
-            let newUser = User(username: name, photo: photo, favoriteSpots: foodSpots, appleUserRef: reference)
+            let userToUpdate = User(username: name, photo: photo, favoriteSpots: foodSpots, appleUserRef: reference)
             
-            let userRecord = CKRecord(user: newUser)
+            let userRecord = CKRecord(user: userToUpdate)
             
             CloudKitManager.shared.save(record: userRecord, completion: { (record, error) in
                 if let error = error {
@@ -102,6 +104,37 @@ class UserController {
                 }
                 guard let record = record,
                 let user = User(record: record) else { completion(false) ; return }
+                self.loggedInUser = user
+                //  set user fav spots
+                guard let foodSpots = self.loggedInUser?.favoriteSpots else { return }
+                self.userFoodSpots = foodSpots
+                completion(true)
+            })
+        }
+    }
+    
+    func update(user: User, with foodSpots: [FoodSpot], completion: @escaping (Bool) -> Void) {
+        CKContainer.default().fetchUserRecordID { (recordID, error) in
+            if let error = error {
+                print("Error fetching user AppleID : \(error.localizedDescription)")
+                completion(false)
+            }
+            guard let photo = user.photo,
+                let recordID = recordID
+                else { completion(false) ; return }
+            
+            let reference = CKRecord.Reference(recordID: recordID, action: .deleteSelf)
+            let userToUpdate = User(username: user.username, photo: photo, favoriteSpots: foodSpots, appleUserRef: reference)
+            
+            let userRecord = CKRecord(user: userToUpdate)
+            
+            CloudKitManager.shared.save(record: userRecord, completion: { (record, error) in
+                if let error = error {
+                    print("Error saving new user to CloudKit : \(error.localizedDescription)")
+                    completion(false)
+                }
+                guard let record = record,
+                    let user = User(record: record) else { completion(false) ; return }
                 self.loggedInUser = user
                 //  set user fav spots
                 guard let foodSpots = self.loggedInUser?.favoriteSpots else { return }

@@ -63,9 +63,17 @@
                                     <segue destination="pya-J9-aMU" kind="show" identifier="toSelectSpotsVC" id="hcD-Mw-lWv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5z2-tN-vks">
+                                <rect key="frame" x="126" y="570.5" width="162" height="30"/>
+                                <state key="normal" title="Allow Location Services"/>
+                                <connections>
+                                    <action selector="allowLocationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Es6-Jf-Dq3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="5z2-tN-vks" firstAttribute="top" secondItem="3cq-96-Fuv" secondAttribute="bottom" constant="40" id="0V0-7a-hrc"/>
                             <constraint firstItem="3cq-96-Fuv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1ll-6W-PJq"/>
                             <constraint firstItem="YIy-k0-cw1" firstAttribute="top" secondItem="3cq-96-Fuv" secondAttribute="bottom" constant="111.5" id="ESl-gW-A1N"/>
                             <constraint firstItem="7bO-wW-qTc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="SqN-m3-dhY"/>
@@ -73,12 +81,14 @@
                             <constraint firstItem="YIy-k0-cw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mQZ-0z-KOO"/>
                             <constraint firstItem="3cq-96-Fuv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="te3-kU-5xE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3cq-96-Fuv" secondAttribute="trailing" constant="20" id="xBN-0S-v9q"/>
+                            <constraint firstItem="5z2-tN-vks" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z3k-MZ-yTW"/>
                             <constraint firstItem="7bO-wW-qTc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zJj-9x-le8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="b95-9d-ojg"/>
                     <connections>
+                        <outlet property="allowLocationButton" destination="5z2-tN-vks" id="Exh-pE-b5Q"/>
                         <outlet property="nextButton" destination="YIy-k0-cw1" id="dMK-px-sez"/>
                         <outlet property="usernameTextField" destination="NNM-n5-nHv" id="9S2-IK-Ir9"/>
                     </connections>
