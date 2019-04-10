@@ -27,14 +27,24 @@ class InitialViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        FoodSpotController.shared.fetchSpots { (success) in
+        UserController.shared.fetchUser { (success) in
             if success {
-                self.didFindFoodSpots()
-                self.fetchUser()
+                self.didFindUser()
+                self.fetchFoodSpots()
+                self.goToMainApp()
             } else {
-                // handle?
+                self.fetchFoodSpots()
+                self.goToUserCreation()
             }
         }
+    }
+    
+    func fetchFoodSpots() {
+        FoodSpotController.shared.fetchSpots(completion: { (success) in
+            if success {
+                self.didFindFoodSpots()
+            }
+        })
     }
     
     func fetchUser() {

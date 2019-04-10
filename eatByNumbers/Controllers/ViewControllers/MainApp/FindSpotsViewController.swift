@@ -11,25 +11,29 @@ import MapKit
 
 class FindSpotsViewController: UIViewController {
 
-    let locationManager = CLLocationManager()
+    var locationManager: CLLocationManager {
+        return UserController.shared.userLocationManager ?? CLLocationManager()
+    }
     var regionInMeters: Double = 1000
     var selectedPlacemark: MKPlacemark?
+    var foodSpotItems: [MKMapItem] = []
+    var venueItems: [MKMapItem] = []
+    
+    
     @IBOutlet weak var suggestionButton: UIButton!
-    
-    
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard let location = locationManager.location else { return }
+        findFoodSpotsNear(location: location)
+        findVenuesNear(location: location)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mapView.delegate = self
         checkLocationServices()
     }
 
@@ -44,18 +48,16 @@ class FindSpotsViewController: UIViewController {
     }
     
 // MARK: - Find Spots(FoodSpot)
-    func findFoodSpotsNear(location: CLLocation) -> [MKMapItem] {
+    func findFoodSpotsNear(location: CLLocation) {
         // filter spots by location
         var mapItems: [MKMapItem] = []
         
         for spot in FoodSpotController.shared.nearbyFoodSpots {
-            if spot.location.distance(from: location) <= regionInMeters {
-                // perform map request for all nearby spots
-                let item = performMapSearchRequestWith(query: spot.name)
-                mapItems.append(item)
-            }
+            // Perform map search
+            let item = performMapSearchRequestWith(query: spot.name)
+            mapItems.append(item)
         }
-        return mapItems
+        foodSpotItems.append(contentsOf: mapItems)
     }
     
     func performMapSearchRequestWith(query: String) -> MKMapItem {
@@ -87,21 +89,18 @@ class FindSpotsViewController: UIViewController {
     }
     
 // MARK: - Find Spots (API)
-    func findVenuesNear(location: CLLocation) -> [MKMapItem] {
+    func findVenuesNear(location: CLLocation) {
         var mapItems: [MKMapItem] = []
-        guard let location = locationManager.location else { return [] }
-        let locationString = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
-        FoodSeachController.shared.searchWith(searchTerm: nil, location: locationString) { (foundVenues) in
-            
-            let filtered = foundVenues.filter{ $0.categories.contains{ $0.name == "Food" }}
-            
-            for item in filtered {
-                guard let name = item.name else { return }
-                let item = self.performMapSearchRequestWith(query: name)
-                mapItems.append(item)
+        
+        for venue in FoodSpotController.shared.nearbyVenues {
+            if venue.name != nil {
+                let item = performMapSearchRequestWith(query: venue.name!)
+                if !foodSpotItems.contains(item) {
+                    mapItems.append(item)
+                }
             }
         }
-        return mapItems
+        venueItems.append(contentsOf: mapItems)
     }
     
     func displayVenue(mapItems: [MKMapItem]) {
@@ -139,17 +138,16 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
         if let location = locationManager.location {
             let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
             mapView.setRegion(region, animated: true)
-            let spots = findFoodSpotsNear(location: location)
-            let venues = findVenuesNear(location: location)
-            mapView.removeAnnotations(mapView.annotations)
-            displayFoodSpot(mapItems: spots)
-            displayVenue(mapItems: venues)
+            //mapView.removeAnnotations(mapView.annotations)
+            displayFoodSpot(mapItems: foodSpotItems)
+            displayVenue(mapItems: venueItems)
         }
     }
     
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
+            mapView.delegate = self
             mapView.showsUserLocation = true
             centerViewOnUserLocation()
             locationManager.startUpdatingLocation()

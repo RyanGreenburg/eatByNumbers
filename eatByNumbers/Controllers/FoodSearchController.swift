@@ -24,7 +24,7 @@ class FoodSeachController {
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         let userLocation = URLQueryItem(name: "ll", value: location)
-        let total = URLQueryItem(name: "limit", value: "10")
+        let total = URLQueryItem(name: "limit", value: "20")
         
         if searchTerm != nil {
             let search = URLQueryItem(name: "query", value: searchTerm)
@@ -49,7 +49,7 @@ class FoodSeachController {
                 let decoder = JSONDecoder()
                 let venueDictionary = try decoder.decode(TopLevel.self, from: data)
                 let foundVenues = venueDictionary.response.venues
-                completion(foundVenues)
+                completion(foundVenues ?? [])
             } catch {
                 print("Error decoding venues : \(error.localizedDescription) \n---\n\(error)")
                 completion([])
@@ -83,7 +83,7 @@ class FoodSeachController {
                 let decoder = JSONDecoder()
                 let venueDictionary = try decoder.decode(TopLevel.self, from: data)
                 let suggestedVenues = venueDictionary.response.venues
-                completion(suggestedVenues)
+                completion(suggestedVenues ?? [])
             } catch {
                 print("Error decoding venues : \(error.localizedDescription) \n---\n\(error)")
                 completion([])

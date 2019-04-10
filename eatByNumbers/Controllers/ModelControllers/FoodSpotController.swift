@@ -25,7 +25,16 @@ class FoodSpotController {
     var nearbyFoodSpots: [FoodSpot] = []
     
     // API Call
-    var venuesNearby: [Venue] = []
+    var nearbyVenues: [Venue] {
+        guard let userLocation = UserController.shared.userLocationManager?.location else { return [] }
+        let userLocationString = "\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)"
+        var venues: [Venue] = []
+        FoodSeachController.shared.searchWith(searchTerm: nil, location: userLocationString) { (foundVenues) in
+            let filtered = foundVenues.filter({ $0.categories.contains(where: { $0.name == "Food"}) })
+            venues = filtered
+        }
+        return venues
+    }
     
     // MARK: - CRUD
     
@@ -71,6 +80,7 @@ class FoodSpotController {
             }
             guard let records = records else { return }
             let foundSpots = records.compactMap( {FoodSpot(record: $0)} )
+            print("Fetched all foodSpots")
             self.allFoodSpots = foundSpots
             completion(true)
         }
