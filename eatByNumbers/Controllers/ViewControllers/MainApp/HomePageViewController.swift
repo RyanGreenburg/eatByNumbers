@@ -11,7 +11,13 @@ import UIKit
 class HomePageViewController: UIViewController {
     
     var user: User?
-    var foodSpots: [FoodSpot] = []
+    var userFoodSpots: [FoodSpot] = []
+    var foodSpots: [FoodSpot] {
+        return FoodSpotController.shared.nearbyFoodSpots
+    }
+    var venues: [Venue] {
+        return FoodSpotController.shared.nearbyVenues
+    }
     
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var imHungryButton: UIButton!
@@ -24,6 +30,10 @@ class HomePageViewController: UIViewController {
         updateViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     @IBAction func imHungryButtonTapped(_ sender: Any) {
         
     }
@@ -34,25 +44,29 @@ class HomePageViewController: UIViewController {
         self.user = user
         photoView.image = user.photo
         nameLabel.text = user.username
-        foodSpots = UserController.shared.userFoodSpots
+        userFoodSpots = UserController.shared.userFoodSpots
     }
 
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "toFindSpotsVC" {
+            let destinationVC = segue.destination as? FindSpotsViewController
+            destinationVC?.foodSpotItems = self.foodSpots
+            destinationVC?.venueItems = self.venues
+        }
     }
 }
 
 // MARK: - TableView DataSource/Delegate
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodSpots.count
+        return userFoodSpots.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "foodSpotcell", for: indexPath)
-        let foodSpot = foodSpots[indexPath.row]
+        let foodSpot = userFoodSpots[indexPath.row]
         
         cell.textLabel?.text = foodSpot.name
         

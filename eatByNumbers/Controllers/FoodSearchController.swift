@@ -15,22 +15,22 @@ class FoodSeachController {
     let baseVenueURL = URL(string: "https://api.foursquare.com/v2/venues")
     let id = URLQueryItem(name: "client_id", value: "DGOFXPWHO1XRDWI511XMBMT5WSDYWYPEA4QZSFXG5LZCBYHR")
     let key = URLQueryItem(name: "client_secret", value: "FH44UMGJBJL3TFZ4KDC5JGJPXLGAH0AAT0W0DVNYEBCYRCTQ")
-    let version = URLQueryItem(name: "v", value: "20190101")
+    let version = URLQueryItem(name: "v", value: "20190301")
     let foodCategory = URLQueryItem(name: "categoryid", value: "4d4b7105d754a06374d81259")
     
     func searchWith(searchTerm: String?, location: String, completion: @escaping ([Venue]) -> Void) {
         guard var url = baseVenueURL else { completion([]) ; return }
-        url.appendPathComponent("search")
+        url.appendPathComponent("explore")
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         let userLocation = URLQueryItem(name: "ll", value: location)
-        let total = URLQueryItem(name: "limit", value: "20")
         
         if searchTerm != nil {
             let search = URLQueryItem(name: "query", value: searchTerm)
             components?.queryItems = [id, key, userLocation, foodCategory, search, version]
         } else {
-            components?.queryItems = [id, key, userLocation, total, foodCategory, version]
+            let search = URLQueryItem(name: "section", value: "food")
+            components?.queryItems = [id, key, userLocation, search, version]
         }
         
         guard let componentsURL = components?.url else { completion([]) ; return }
@@ -48,8 +48,12 @@ class FoodSeachController {
             do {
                 let decoder = JSONDecoder()
                 let venueDictionary = try decoder.decode(TopLevel.self, from: data)
-                let foundVenues = venueDictionary.response.venues
-                completion(foundVenues ?? [])
+                var tempVenueArray: [Venue] = []
+                for item in venueDictionary.response.groups[0].items {
+                    let venue = item.venue
+                    tempVenueArray.append(venue)
+                    completion(tempVenueArray)
+                }
             } catch {
                 print("Error decoding venues : \(error.localizedDescription) \n---\n\(error)")
                 completion([])

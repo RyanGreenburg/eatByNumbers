@@ -31,7 +31,6 @@ class InitialViewController: UIViewController {
             if success {
                 self.didFindUser()
                 self.fetchFoodSpots()
-                self.goToMainApp()
             } else {
                 self.fetchFoodSpots()
                 self.goToUserCreation()
@@ -39,10 +38,21 @@ class InitialViewController: UIViewController {
         }
     }
     
+    func fetchVenues() {
+        guard let userLocation = UserController.shared.userLocationManager?.location
+            else { return }
+        let userLocationString = "\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)"
+        FoodSeachController.shared.searchWith(searchTerm: nil, location: userLocationString) { (foundVenues) in
+            FoodSpotController.shared.nearbyVenues = foundVenues
+        }
+    }
+    
     func fetchFoodSpots() {
         FoodSpotController.shared.fetchSpots(completion: { (success) in
             if success {
                 self.didFindFoodSpots()
+                self.fetchVenues()
+                self.goToMainApp()
             }
         })
     }

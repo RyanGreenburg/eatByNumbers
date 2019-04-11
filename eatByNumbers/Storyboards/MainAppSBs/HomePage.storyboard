@@ -59,7 +59,7 @@
                                 <state key="normal" title="I'm Hungry"/>
                                 <connections>
                                     <action selector="imHungryButtonTapped:" destination="Ze0-vD-TNe" eventType="touchUpInside" id="WoW-BJ-BdB"/>
-                                    <segue destination="9uG-KL-Pb2" kind="popoverPresentation" popoverAnchorView="bh7-me-LMm" id="kNy-Bo-lje">
+                                    <segue destination="9uG-KL-Pb2" kind="popoverPresentation" identifier="toFindSpotsVC" popoverAnchorView="bh7-me-LMm" id="kNy-Bo-lje">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>

@@ -16,8 +16,8 @@ class FindSpotsViewController: UIViewController {
     }
     var regionInMeters: Double = 1000
     var selectedPlacemark: MKPlacemark?
-    var foodSpotItems: [MKMapItem] = []
-    var venueItems: [MKMapItem] = []
+    var foodSpotItems: [FoodSpot]?
+    var venueItems: [Venue]?
     
     
     @IBOutlet weak var suggestionButton: UIButton!
@@ -27,9 +27,7 @@ class FindSpotsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let location = locationManager.location else { return }
-        findFoodSpotsNear(location: location)
-        findVenuesNear(location: location)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,70 +46,46 @@ class FindSpotsViewController: UIViewController {
     }
     
 // MARK: - Find Spots(FoodSpot)
-    func findFoodSpotsNear(location: CLLocation) {
-        // filter spots by location
-        var mapItems: [MKMapItem] = []
-        
-        for spot in FoodSpotController.shared.nearbyFoodSpots {
-            // Perform map search
-            let item = performMapSearchRequestWith(query: spot.name)
-            mapItems.append(item)
-        }
-        foodSpotItems.append(contentsOf: mapItems)
-    }
-    
-    func performMapSearchRequestWith(query: String) -> MKMapItem {
-        var mapItem = MKMapItem()
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = query
-        request.region = mapView.region
-        
-        let search = MKLocalSearch(request: request)
-        search.start { (response, error) in
-            if let error = error {
-                print("Error completing MKSearch : \(error) \n---\n\(error.localizedDescription)")
-            }
-            guard let foundMapItem = response?.mapItems.first else { return }
-            mapItem = foundMapItem
-        }
-        return mapItem
-    }
-    
-    func displayFoodSpot(mapItems: [MKMapItem]) {
-        for item in mapItems {
+    func findFoodSpotAnnotations(_ foodSpots: [FoodSpot]) -> [MKPointAnnotation] {
+        var annotations: [MKPointAnnotation] = []
+        for item in foodSpots {
             // custom annotation?
             let annotation = MKPointAnnotation()
-            annotation.coordinate = item.placemark.coordinate
+            annotation.coordinate = item.location.coordinate
             annotation.title = item.name
-            annotation.subtitle = parseAddress(selectedItem: item.placemark)
-            mapView.addAnnotation(annotation)
+            annotation.subtitle = item.address
+            if !annotations.contains(annotation) {
+                annotations.append(annotation)
+            }
         }
+        return annotations
     }
     
 // MARK: - Find Spots (API)
-    func findVenuesNear(location: CLLocation) {
-        var mapItems: [MKMapItem] = []
-        
-        for venue in FoodSpotController.shared.nearbyVenues {
-            if venue.name != nil {
-                let item = performMapSearchRequestWith(query: venue.name!)
-                if !foodSpotItems.contains(item) {
-                    mapItems.append(item)
-                }
-            }
-        }
-        venueItems.append(contentsOf: mapItems)
-    }
-    
-    func displayVenue(mapItems: [MKMapItem]) {
-        for item in mapItems {
+    func findVenueAnnotations(_ venues: [Venue]) -> [MKPointAnnotation] {
+        var annotations: [MKPointAnnotation] = []
+        for item in venues {
             // custom annotation?
             let annotation = MKPointAnnotation()
-            annotation.coordinate = item.placemark.coordinate
+            annotation.coordinate = CLLocationCoordinate2D(latitude: item.location.lat, longitude: item.location.lng)
             annotation.title = item.name
-            annotation.subtitle = parseAddress(selectedItem: item.placemark)
-            mapView.addAnnotation(annotation)
+            annotation.subtitle = item.location.address
+            if !annotations.contains(annotation) {
+                annotations.append(annotation)
+            }
         }
+        return annotations
+    }
+    
+    func displayAnnotations(_ foodSpotAnnotations: [MKPointAnnotation], _ venueAnnotations: [MKPointAnnotation]) {
+        var filteredAnnotations = venueAnnotations.filter { (venueAnnotation) -> Bool in
+            return foodSpotAnnotations.contains(where: { $0.coordinate.latitude == venueAnnotation.coordinate.latitude && $0.coordinate.longitude == venueAnnotation.coordinate.longitude }) == true ? false : true
+        }
+        filteredAnnotations += foodSpotAnnotations
+        print(filteredAnnotations.count)
+        print(foodSpotAnnotations.count)
+        print(venueAnnotations.count)
+        mapView.addAnnotations(filteredAnnotations)
     }
 }
 
@@ -138,9 +112,11 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
         if let location = locationManager.location {
             let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
             mapView.setRegion(region, animated: true)
-            //mapView.removeAnnotations(mapView.annotations)
-            displayFoodSpot(mapItems: foodSpotItems)
-            displayVenue(mapItems: venueItems)
+            mapView.removeAnnotations(mapView.annotations)
+            guard let spots = foodSpotItems, let items = venueItems else { return }
+            let foodSpotAnnotations = findFoodSpotAnnotations(spots)
+            let venueAnnotations = findVenueAnnotations(items)
+            displayAnnotations(foodSpotAnnotations, venueAnnotations)
         }
     }
     
@@ -168,18 +144,17 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation {
-            return nil
-        }
+        
+        guard annotation is MKPointAnnotation else { return nil }
         let reuseID = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-        pinView?.pinTintColor = Colors.lightBlue.color()
-        pinView?.canShowCallout = true
-        let smallSqure = CGSize(width: 30, height: 30)
-        let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSqure))
-        button.addTarget(self, action: #selector(getDirections), for: .touchUpInside)
-        pinView?.leftCalloutAccessoryView = button
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            pinView?.canShowCallout = true
+        } else {
+            pinView?.annotation = annotation
+        }
         return pinView
     }
     
@@ -222,8 +197,6 @@ extension FindSpotsViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionInMeters , longitudinalMeters: regionInMeters)
-        mapView.setRegion(region, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
