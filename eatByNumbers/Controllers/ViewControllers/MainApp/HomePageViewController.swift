@@ -52,8 +52,6 @@ class HomePageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFindSpotsVC" {
             let destinationVC = segue.destination as? FindSpotsViewController
-            destinationVC?.foodSpotItems = self.foodSpots
-            destinationVC?.venueItems = self.venues
         }
     }
 }

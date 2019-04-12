@@ -9,43 +9,21 @@
 import UIKit
 import MapKit
 
-class FoodSpotAnnotation: NSObject, MKAnnotation {
+class FoodSpotAnnotation: MKPointAnnotation {
     
-    var foodSpot: FoodSpot
-    var coordinate: CLLocationCoordinate2D {
-        return foodSpot.location.coordinate
-    }
+    var isFoodSpot: Bool
     
-    init(foodSpot: FoodSpot) {
-        self.foodSpot = foodSpot
-    }
-    
-    var title: String? {
-        return foodSpot.name
-    }
-    
-    var subtitle: String? {
-        return foodSpot.address
+    init(isFoodSpot: Bool) {
+        self.isFoodSpot = isFoodSpot
     }
 }
 
 
-class VenueSpotAnnotation: NSObject, MKAnnotation {
+class VenueSpotAnnotation: MKPointAnnotation {
     
-    var venue: Venue
-    var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lng)
-    }
+    var isVenue: Bool
     
-    init(venue: Venue) {
-        self.venue = venue
-    }
-    
-    var title: String? {
-        return venue.name
-    }
-    
-    var subtitle: String? {
-        return venue.location.address
+    init(isVenue: Bool) {
+        self.isVenue = isVenue
     }
 }

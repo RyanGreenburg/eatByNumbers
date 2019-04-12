@@ -12,40 +12,17 @@
         <!--Find Spots View Controller-->
         <scene sceneID="565-cF-IfG">
             <objects>
-                <viewController id="zld-hk-xyn" customClass="FindSpotsViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindSpotsVC" id="zld-hk-xyn" customClass="FindSpotsViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KNi-8b-blk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDk-fh-hET">
-                                <rect key="frame" x="20" y="104" width="374" height="698"/>
-                                <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rM2-8C-4ze">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="698"/>
-                                    </mapView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="rM2-8C-4ze" firstAttribute="top" secondItem="DDk-fh-hET" secondAttribute="top" id="64e-Vq-NBY"/>
-                                    <constraint firstAttribute="trailing" secondItem="rM2-8C-4ze" secondAttribute="trailing" id="N6Q-bM-deV"/>
-                                    <constraint firstItem="rM2-8C-4ze" firstAttribute="leading" secondItem="DDk-fh-hET" secondAttribute="leading" id="WPF-d3-Jog"/>
-                                    <constraint firstAttribute="bottom" secondItem="rM2-8C-4ze" secondAttribute="bottom" id="YAx-Jf-z3a"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kfe-mX-Mif">
-                                <rect key="frame" x="354" y="94" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Kfe-mX-Mif" secondAttribute="height" multiplier="1:1" id="gCc-qQ-wfP"/>
-                                    <constraint firstAttribute="height" constant="50" id="nn6-5l-rYn"/>
-                                </constraints>
-                                <state key="normal" title="Close"/>
-                                <connections>
-                                    <action selector="closeButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="nSk-4M-Pc0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-zr-bnz">
-                                <rect key="frame" x="20" y="810" width="374" height="32"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rM2-8C-4ze">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-zr-bnz">
+                                <rect key="frame" x="168" y="795" width="78" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Suggestion"/>
                                 <connections>
                                     <action selector="suggestionButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="xxY-Sf-DeB"/>
@@ -54,21 +31,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="trailing" secondItem="DDk-fh-hET" secondAttribute="trailing" constant="20" id="4jj-j1-3Hl"/>
-                            <constraint firstItem="g8I-zr-bnz" firstAttribute="leading" secondItem="Yx0-wB-yZR" secondAttribute="leading" constant="20" id="Mgd-pp-UqZ"/>
-                            <constraint firstItem="DDk-fh-hET" firstAttribute="leading" secondItem="Yx0-wB-yZR" secondAttribute="leading" constant="20" id="PDP-f8-Uxr"/>
-                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="trailing" secondItem="g8I-zr-bnz" secondAttribute="trailing" constant="20" id="TGG-4f-znw"/>
-                            <constraint firstItem="Kfe-mX-Mif" firstAttribute="top" secondItem="DDk-fh-hET" secondAttribute="top" constant="-10" id="XWy-6l-6KM"/>
-                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="bottom" secondItem="DDk-fh-hET" secondAttribute="bottom" constant="60" id="d74-sK-iFF"/>
-                            <constraint firstItem="g8I-zr-bnz" firstAttribute="top" secondItem="DDk-fh-hET" secondAttribute="bottom" constant="8" id="esR-P9-AG6"/>
-                            <constraint firstItem="Kfe-mX-Mif" firstAttribute="trailing" secondItem="DDk-fh-hET" secondAttribute="trailing" constant="10" id="jeY-Xc-kB9"/>
-                            <constraint firstItem="DDk-fh-hET" firstAttribute="top" secondItem="Yx0-wB-yZR" secondAttribute="top" constant="60" id="jfk-T9-xQZ"/>
-                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="bottom" secondItem="g8I-zr-bnz" secondAttribute="bottom" constant="20" id="zxd-Ar-OCr"/>
+                            <constraint firstItem="rM2-8C-4ze" firstAttribute="top" secondItem="KNi-8b-blk" secondAttribute="top" id="8RD-qs-7bu"/>
+                            <constraint firstItem="rM2-8C-4ze" firstAttribute="bottom" secondItem="KNi-8b-blk" secondAttribute="bottom" constant="-34" id="bCS-35-j9S"/>
+                            <constraint firstItem="rM2-8C-4ze" firstAttribute="leading" secondItem="KNi-8b-blk" secondAttribute="leading" id="iCx-gs-RE0"/>
+                            <constraint firstAttribute="trailing" secondItem="rM2-8C-4ze" secondAttribute="trailing" id="qGn-dJ-gbm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx0-wB-yZR"/>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="Kfe-mX-Mif" id="x3V-M4-b24"/>
                         <outlet property="mapView" destination="rM2-8C-4ze" id="g25-nb-VkG"/>
                         <outlet property="suggestionButton" destination="g8I-zr-bnz" id="Dd9-hG-gWj"/>
                     </connections>
@@ -76,55 +46,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8i-IX-o9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="156.69642857142856"/>
-        </scene>
-        <!--Find Spots View Controller-->
-        <scene sceneID="YyO-r8-HEx">
-            <objects>
-                <viewController storyboardIdentifier="FindSpotsVC" id="YiV-MW-WQb" customClass="FindSpotsViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aUt-Qv-bRK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jbo-ts-RZ0">
-                                <rect key="frame" x="0.0" y="60" width="414" height="836"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" id="Wk2-7X-duL" customClass="locationCell">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wk2-7X-duL" id="95X-tI-99R">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spots Near Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EyW-Fc-Ww2">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="0af-Dc-BUs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="jbo-ts-RZ0" firstAttribute="leading" secondItem="aUt-Qv-bRK" secondAttribute="leading" id="1rP-QS-yjf"/>
-                            <constraint firstItem="EyW-Fc-Ww2" firstAttribute="top" secondItem="aUt-Qv-bRK" secondAttribute="top" id="8wy-jT-1Nj"/>
-                            <constraint firstAttribute="bottom" secondItem="jbo-ts-RZ0" secondAttribute="bottom" id="BsI-fx-eeK"/>
-                            <constraint firstItem="EyW-Fc-Ww2" firstAttribute="leading" secondItem="aUt-Qv-bRK" secondAttribute="leading" id="Tmx-wW-fbz"/>
-                            <constraint firstItem="jbo-ts-RZ0" firstAttribute="top" secondItem="EyW-Fc-Ww2" secondAttribute="bottom" id="omt-HA-HIO"/>
-                            <constraint firstAttribute="trailing" secondItem="jbo-ts-RZ0" secondAttribute="trailing" id="twp-RI-UKa"/>
-                            <constraint firstAttribute="trailing" secondItem="EyW-Fc-Ww2" secondAttribute="trailing" id="vlC-Jq-UEs"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="kqO-Af-lG3"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lRt-Mm-14I" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="967" y="157"/>
         </scene>
     </scenes>
 </document>

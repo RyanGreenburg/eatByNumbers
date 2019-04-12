@@ -16,13 +16,12 @@ class FindSpotsViewController: UIViewController {
     }
     var regionInMeters: Double = 1000
     var selectedPlacemark: MKPlacemark?
-    var foodSpotItems: [FoodSpot]?
-    var venueItems: [Venue]?
+    var foodSpotItems: [FoodSpot] = []
+    var venueItems: [Venue] = []
     
     
     @IBOutlet weak var suggestionButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var closeButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -34,15 +33,20 @@ class FindSpotsViewController: UIViewController {
         super.viewDidAppear(animated)
         checkLocationServices()
     }
-
-    @IBAction func closeButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    
+    func updateViews() {
+        foodSpotItems = FoodSpotController.shared.nearbyFoodSpots
+        venueItems = FoodSpotController.shared.nearbyVenues
+        let venues = findVenueAnnotations(venueItems)
+        let foodSpots = findFoodSpotAnnotations(foodSpotItems)
+        displayAnnotations(foodSpots, venues)
     }
     
     @IBAction func suggestionButtonTapped(_ sender: Any) {
-        guard let suggestion = mapView.annotations.randomElement() else { return }
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(suggestion)
+        updateViews()
+//        guard let suggestion = mapView.annotations.randomElement() else { return }
+//        mapView.removeAnnotations(mapView.annotations)
+//        mapView.addAnnotation(suggestion)
     }
     
 // MARK: - Find Spots(FoodSpot)
@@ -50,7 +54,7 @@ class FindSpotsViewController: UIViewController {
         var annotations: [MKPointAnnotation] = []
         for item in foodSpots {
             // custom annotation?
-            let annotation = MKPointAnnotation()
+            let annotation = FoodSpotAnnotation(isFoodSpot: true)
             annotation.coordinate = item.location.coordinate
             annotation.title = item.name
             annotation.subtitle = item.address
@@ -66,7 +70,7 @@ class FindSpotsViewController: UIViewController {
         var annotations: [MKPointAnnotation] = []
         for item in venues {
             // custom annotation?
-            let annotation = MKPointAnnotation()
+            let annotation = VenueSpotAnnotation(isVenue: true)
             annotation.coordinate = CLLocationCoordinate2D(latitude: item.location.lat, longitude: item.location.lng)
             annotation.title = item.name
             annotation.subtitle = item.location.address
@@ -111,13 +115,16 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
     func centerViewOnUserLocation() {
         if let location = locationManager.location {
             let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            mapView.setRegion(region, animated: true)
-            mapView.removeAnnotations(mapView.annotations)
-            guard let spots = foodSpotItems, let items = venueItems else { return }
-            let foodSpotAnnotations = findFoodSpotAnnotations(spots)
-            let venueAnnotations = findVenueAnnotations(items)
-            displayAnnotations(foodSpotAnnotations, venueAnnotations)
+            mapView.setRegion(region, animated: false)
+            
         }
+    }
+    
+    func setAnnotations() {
+        mapView.removeAnnotations(mapView.annotations)
+        let foodSpotAnnotations = findFoodSpotAnnotations(foodSpotItems)
+        let venueAnnotations = findVenueAnnotations(venueItems)
+        displayAnnotations(foodSpotAnnotations, venueAnnotations)
     }
     
     func checkLocationAuthorization() {
@@ -146,16 +153,38 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         guard annotation is MKPointAnnotation else { return nil }
-        let reuseID = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
-        pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            pinView?.canShowCallout = true
-        } else {
-            pinView?.annotation = annotation
+        
+        if let venueAnnotation = annotation as? VenueSpotAnnotation {
+            let reuseID = "venuePin"
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? FoodSpotAnnotationView
+            pinView = FoodSpotAnnotationView(annotation: venueAnnotation, reuseIdentifier: reuseID)
+            if pinView == nil {
+                pinView = FoodSpotAnnotationView(annotation: venueAnnotation, reuseIdentifier: reuseID)
+//                pinView?.pinTintColor = Colors.darkBlue.color()
+                pinView?.canShowCallout = true
+            } else {
+                pinView?.annotation = venueAnnotation
+//                pinView?.pinTintColor = Colors.darkBlue.color()
+            }
+            return pinView
         }
-        return pinView
+        
+        if let foodSpotAnnotation = annotation as? FoodSpotAnnotation {
+            let reuseID = "foodSpotPin"
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
+            pinView = MKPinAnnotationView(annotation: foodSpotAnnotation, reuseIdentifier: reuseID)
+            if pinView == nil {
+                pinView = MKPinAnnotationView(annotation: foodSpotAnnotation, reuseIdentifier: reuseID)
+                pinView?.pinTintColor = Colors.lightBlue.color()
+                pinView?.canShowCallout = true
+            } else {
+                pinView?.annotation = foodSpotAnnotation
+                pinView?.tintColor = Colors.lightBlue.color()
+            }
+            pinView?.animatesDrop = true
+            return pinView
+        }
+        return nil
     }
     
     @objc func getDirections(){

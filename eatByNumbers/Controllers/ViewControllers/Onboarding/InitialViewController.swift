@@ -94,8 +94,11 @@ class InitialViewController: UIViewController {
     
     func goToMainApp() {
         DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-            let navigationController = storyboard.instantiateViewController(withIdentifier: "HomePageNavController")
+            let storyboard = UIStoryboard(name: "MapView", bundle: nil)
+            let navigationController = storyboard.instantiateViewController(withIdentifier: "FindSpotsVC")
+            
+            
+            
             self.present(navigationController, animated: true, completion: nil)
         }
     }

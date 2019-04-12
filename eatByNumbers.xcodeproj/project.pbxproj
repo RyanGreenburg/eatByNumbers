@@ -37,6 +37,7 @@
 		62B8E17E225D4BBD00196ED9 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E17D225D4BBD00196ED9 /* InitialViewController.swift */; };
 		62B8E180225D4F9800196ED9 /* NewUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E17F225D4F9800196ED9 /* NewUser.storyboard */; };
 		62B8E183225D4FBE00196ED9 /* SelectFavSpots.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E181225D4FBE00196ED9 /* SelectFavSpots.storyboard */; };
+		62F90A8F2260E80D004179F3 /* FoodSpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F90A8E2260E80D004179F3 /* FoodSpotDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		62B8E17D225D4BBD00196ED9 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		62B8E17F225D4F9800196ED9 /* NewUser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewUser.storyboard; sourceTree = "<group>"; };
 		62B8E182225D4FBE00196ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = eatByNumbers/Storyboards/Base.lproj/SelectFavSpots.storyboard; sourceTree = "<group>"; };
+		62F90A8E2260E80D004179F3 /* FoodSpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSpotDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				62B8E12C2254FC0900196ED9 /* eatByNumbers.entitlements */,
 				62B8E1342254FC5900196ED9 /* Models */,
 				62B8E1372254FC7000196ED9 /* Controllers */,
+				62F90A8D2260E7E2004179F3 /* Views */,
 				62B8E1312254FC2B00196ED9 /* Storyboards */,
 				62B8E1302254FC1B00196ED9 /* Resources */,
 			);
@@ -183,7 +186,6 @@
 			children = (
 				62B8E14222551FE600196ED9 /* MapViewController.swift */,
 				62B8E14A225654CC00196ED9 /* PhotoSelectorViewController.swift */,
-				62B8E17A225D3CD300196ED9 /* FoodSpotAnnotationView.swift */,
 				62B8E1582256BAB500196ED9 /* Onboarding */,
 				62B8E17C225D3DEE00196ED9 /* MainApp */,
 			);
@@ -228,6 +230,15 @@
 				62B8E1562256B35E00196ED9 /* MapView.storyboard */,
 			);
 			path = MainAppSBs;
+			sourceTree = "<group>";
+		};
+		62F90A8D2260E7E2004179F3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				62B8E17A225D3CD300196ED9 /* FoodSpotAnnotationView.swift */,
+				62F90A8E2260E80D004179F3 /* FoodSpotDetailView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +342,7 @@
 				62B8E11B2254FBE100196ED9 /* AppDelegate.swift in Sources */,
 				62B8E17E225D4BBD00196ED9 /* InitialViewController.swift in Sources */,
 				62B8E155225674BC00196ED9 /* HomePageViewController.swift in Sources */,
+				62F90A8F2260E80D004179F3 /* FoodSpotDetailView.swift in Sources */,
 				62B8E13A2255010B00196ED9 /* FoodSpot.swift in Sources */,
 				62B8E14322551FE600196ED9 /* MapViewController.swift in Sources */,
 				62B8E179225D38C800196ED9 /* AnnotationExtensions.swift in Sources */,
