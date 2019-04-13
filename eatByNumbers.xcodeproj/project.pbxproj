@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62957FCA2261652500E70E4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FC92261652500E70E4C /* Extensions.swift */; };
 		62B8E11B2254FBE100196ED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E11A2254FBE100196ED9 /* AppDelegate.swift */; };
 		62B8E1202254FBE100196ED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E11E2254FBE100196ED9 /* Main.storyboard */; };
 		62B8E1222254FBE300196ED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E1212254FBE300196ED9 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		62957FC92261652500E70E4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		62B8E1172254FBE100196ED9 /* eatByNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eatByNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B8E11A2254FBE100196ED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62B8E11F2254FBE100196ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				62B8E17A225D3CD300196ED9 /* FoodSpotAnnotationView.swift */,
 				62F90A8E2260E80D004179F3 /* FoodSpotDetailView.swift */,
+				62957FC92261652500E70E4C /* Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62957FCA2261652500E70E4C /* Extensions.swift in Sources */,
 				62B8E15A2256BAE800196ED9 /* FindSpotsViewController.swift in Sources */,
 				62B8E177225C333C00196ED9 /* Colors.swift in Sources */,
 				62B8E13E2255196100196ED9 /* SelectSpotsViewController.swift in Sources */,

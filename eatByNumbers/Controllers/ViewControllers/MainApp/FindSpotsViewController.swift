@@ -19,14 +19,27 @@ class FindSpotsViewController: UIViewController {
     var foodSpotItems: [FoodSpot] = []
     var venueItems: [Venue] = []
     
+    // MARK: - Outlets
     
+    @IBOutlet weak var hungryButton: UIButton!
+    @IBOutlet weak var centerButton: UIButton!
+    @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var suggestionButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        guard let user = UserController.shared.loggedInUser,
+                let userPhoto = user.photo else { return }
+        suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
+        centerButton.layer.cornerRadius = centerButton.frame.width / 2
+        suggestionButton.imageView?.clipsToBounds = true
+        centerButton.imageView?.clipsToBounds = true
+        suggestionButton.layer.masksToBounds = true
+        centerButton.layer.masksToBounds = true
+        centerButton.layer.shadowColor = Colors.darkGray.color().cgColor
+        suggestionButton.layer.shadowColor = Colors.darkGray.color().cgColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,11 +55,23 @@ class FindSpotsViewController: UIViewController {
         displayAnnotations(foodSpots, venues)
     }
     
+    // MARK: - Actions
     @IBAction func suggestionButtonTapped(_ sender: Any) {
+        guard let suggestion = mapView.annotations.randomElement() else { return }
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(suggestion)
+    }
+    
+    @IBAction func userButtonTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func centerButtonTapped(_ sender: Any) {
+        centerViewOnUserLocation()
+    }
+    
+    @IBAction func hungryButtonTapped(_ sender: Any) {
         updateViews()
-//        guard let suggestion = mapView.annotations.randomElement() else { return }
-//        mapView.removeAnnotations(mapView.annotations)
-//        mapView.addAnnotation(suggestion)
     }
     
 // MARK: - Find Spots(FoodSpot)
@@ -115,7 +140,7 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
     func centerViewOnUserLocation() {
         if let location = locationManager.location {
             let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            mapView.setRegion(region, animated: false)
+            mapView.setRegion(region, animated: true)
             
         }
     }
@@ -181,7 +206,6 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
                 pinView?.annotation = foodSpotAnnotation
                 pinView?.tintColor = Colors.lightBlue.color()
             }
-            pinView?.animatesDrop = true
             return pinView
         }
         return nil

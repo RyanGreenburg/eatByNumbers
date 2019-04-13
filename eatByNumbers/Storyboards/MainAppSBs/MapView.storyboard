@@ -20,32 +20,96 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rM2-8C-4ze">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-zr-bnz">
-                                <rect key="frame" x="168" y="795" width="78" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Suggestion"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-zr-bnz">
+                                <rect key="frame" x="20" y="94" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="9Ta-1b-gMl"/>
+                                    <constraint firstAttribute="width" secondItem="g8I-zr-bnz" secondAttribute="height" multiplier="1:1" id="Dny-NB-XPe"/>
+                                </constraints>
+                                <state key="normal" title="Suggestion" image="suggestion"/>
                                 <connections>
                                     <action selector="suggestionButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="xxY-Sf-DeB"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9mx-yK-sUt">
+                                <rect key="frame" x="75.5" y="734" width="263" height="29"/>
+                                <segments>
+                                    <segment title="All Spots"/>
+                                    <segment title="Eat10 Spots"/>
+                                    <segment title="Other Spots"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijH-dv-s4n">
+                                <rect key="frame" x="353" y="104" width="41" height="30"/>
+                                <state key="normal" title="(user)"/>
+                                <connections>
+                                    <action selector="userButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="cnQ-1L-iCb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4z-48-sB1">
+                                <rect key="frame" x="169.5" y="660" width="75" height="30"/>
+                                <state key="normal" title="I'm Hungry"/>
+                                <connections>
+                                    <action selector="hungryButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="9XO-d8-yHJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpn-qq-BKz">
+                                <rect key="frame" x="344" y="147" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vpn-qq-BKz" secondAttribute="height" multiplier="1:1" id="KRy-2p-d5Q"/>
+                                    <constraint firstAttribute="width" constant="50" id="ZqW-rY-f3R"/>
+                                </constraints>
+                                <state key="normal" title="(center)" image="userLocation"/>
+                                <connections>
+                                    <action selector="centerButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="hR0-Ft-ulQ"/>
+                                    <segue destination="NwW-cI-RxF" kind="popoverPresentation" popoverAnchorView="vpn-qq-BKz" id="2z4-nX-GYM">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="g8I-zr-bnz" firstAttribute="top" secondItem="Yx0-wB-yZR" secondAttribute="top" constant="50" id="04B-V7-CdP"/>
                             <constraint firstItem="rM2-8C-4ze" firstAttribute="top" secondItem="KNi-8b-blk" secondAttribute="top" id="8RD-qs-7bu"/>
+                            <constraint firstItem="m4z-48-sB1" firstAttribute="centerX" secondItem="KNi-8b-blk" secondAttribute="centerX" id="CJu-bS-a0q"/>
+                            <constraint firstItem="9mx-yK-sUt" firstAttribute="centerX" secondItem="KNi-8b-blk" secondAttribute="centerX" id="GrX-Jj-ekW"/>
+                            <constraint firstItem="ijH-dv-s4n" firstAttribute="centerY" secondItem="g8I-zr-bnz" secondAttribute="centerY" id="KV3-al-IRR"/>
+                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="trailing" secondItem="ijH-dv-s4n" secondAttribute="trailing" constant="20" id="alB-aM-HFn"/>
                             <constraint firstItem="rM2-8C-4ze" firstAttribute="bottom" secondItem="KNi-8b-blk" secondAttribute="bottom" constant="-34" id="bCS-35-j9S"/>
+                            <constraint firstItem="vpn-qq-BKz" firstAttribute="top" secondItem="ijH-dv-s4n" secondAttribute="bottom" constant="13" id="hU4-Sk-r6L"/>
                             <constraint firstItem="rM2-8C-4ze" firstAttribute="leading" secondItem="KNi-8b-blk" secondAttribute="leading" id="iCx-gs-RE0"/>
+                            <constraint firstItem="vpn-qq-BKz" firstAttribute="trailing" secondItem="ijH-dv-s4n" secondAttribute="trailing" id="ow6-hr-MR8"/>
+                            <constraint firstItem="Yx0-wB-yZR" firstAttribute="bottom" secondItem="9mx-yK-sUt" secondAttribute="bottom" constant="100" id="puK-8E-QN3"/>
+                            <constraint firstItem="g8I-zr-bnz" firstAttribute="leading" secondItem="Yx0-wB-yZR" secondAttribute="leading" constant="20" id="q6d-JU-GXX"/>
                             <constraint firstAttribute="trailing" secondItem="rM2-8C-4ze" secondAttribute="trailing" id="qGn-dJ-gbm"/>
+                            <constraint firstItem="9mx-yK-sUt" firstAttribute="top" secondItem="m4z-48-sB1" secondAttribute="bottom" constant="44" id="x0t-eI-Ycu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx0-wB-yZR"/>
                     </view>
                     <connections>
+                        <outlet property="centerButton" destination="vpn-qq-BKz" id="rey-MR-0RB"/>
+                        <outlet property="hungryButton" destination="m4z-48-sB1" id="dDf-HR-UMo"/>
                         <outlet property="mapView" destination="rM2-8C-4ze" id="g25-nb-VkG"/>
                         <outlet property="suggestionButton" destination="g8I-zr-bnz" id="Dd9-hG-gWj"/>
+                        <outlet property="userButton" destination="ijH-dv-s4n" id="1cO-NU-AvP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8i-IX-o9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="156.69642857142856"/>
         </scene>
+        <!--HomePageVC-->
+        <scene sceneID="e3H-eQ-W0I">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HomePage" referencedIdentifier="HomePageVC" id="NwW-cI-RxF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fO4-rU-Gad" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="685" y="-22"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="suggestion" width="250" height="250"/>
+        <image name="userLocation" width="250" height="250"/>
+    </resources>
 </document>

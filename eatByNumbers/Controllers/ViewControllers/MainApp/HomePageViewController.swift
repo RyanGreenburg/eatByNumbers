@@ -50,9 +50,7 @@ class HomePageViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toFindSpotsVC" {
-            let destinationVC = segue.destination as? FindSpotsViewController
-        }
+        
     }
 }
 

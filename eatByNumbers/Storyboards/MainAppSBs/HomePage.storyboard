@@ -12,7 +12,7 @@
         <!--Home Page View Controller-->
         <scene sceneID="aGa-Ck-dpu">
             <objects>
-                <viewController id="Ze0-vD-TNe" customClass="HomePageViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePageVC" id="Ze0-vD-TNe" customClass="HomePageViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0D3-NW-XGO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,9 +59,6 @@
                                 <state key="normal" title="I'm Hungry"/>
                                 <connections>
                                     <action selector="imHungryButtonTapped:" destination="Ze0-vD-TNe" eventType="touchUpInside" id="WoW-BJ-BdB"/>
-                                    <segue destination="9uG-KL-Pb2" kind="popoverPresentation" identifier="toFindSpotsVC" popoverAnchorView="bh7-me-LMm" id="kNy-Bo-lje">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -81,7 +78,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0KR-Zc-Z34"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9mh-Bs-JqP"/>
+                    <navigationItem key="navigationItem" id="9mh-Bs-JqP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3XR-55-cTc">
+                            <connections>
+                                <segue destination="B9f-6y-ahM" kind="show" id="uHf-Bx-tt5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imHungryButton" destination="bh7-me-LMm" id="xOi-i6-HcJ"/>
                         <outlet property="nameLabel" destination="z5d-Y8-pWO" id="fhM-p0-NIM"/>
@@ -93,13 +96,13 @@
             </objects>
             <point key="canvasLocation" x="949" y="179"/>
         </scene>
-        <!--MapView-->
-        <scene sceneID="lpF-6y-Daf">
+        <!--EditProfileVC-->
+        <scene sceneID="34t-KW-Kwv">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="FindSpotsVC" storyboardName="MapView" id="9uG-KL-Pb2" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ej7-Tg-fVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="EditProfileVC" storyboardName="EditProfile" referencedIdentifier="EditProfileVC" id="B9f-6y-ahM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xej-zR-nsV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1550" y="179"/>
+            <point key="canvasLocation" x="1560" y="-63"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aLB-Y9-m70">
