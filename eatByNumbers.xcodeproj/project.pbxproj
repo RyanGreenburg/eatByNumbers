@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		62957FCA2261652500E70E4C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FC92261652500E70E4C /* Extensions.swift */; };
+		62957FCC2264EA1900E70E4C /* FoodSpotCallout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62957FCB2264EA1900E70E4C /* FoodSpotCallout.xib */; };
+		62957FCE2264F6D500E70E4C /* VenueAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FCD2264F6D500E70E4C /* VenueAnnotationView.swift */; };
+		62957FD02264F6FF00E70E4C /* VenueDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FCF2264F6FF00E70E4C /* VenueDetailView.swift */; };
+		62957FD22264FA5C00E70E4C /* VenueCallout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62957FD12264FA5C00E70E4C /* VenueCallout.xib */; };
 		62B8E11B2254FBE100196ED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E11A2254FBE100196ED9 /* AppDelegate.swift */; };
 		62B8E1202254FBE100196ED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E11E2254FBE100196ED9 /* Main.storyboard */; };
 		62B8E1222254FBE300196ED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E1212254FBE300196ED9 /* Assets.xcassets */; };
@@ -43,6 +47,10 @@
 
 /* Begin PBXFileReference section */
 		62957FC92261652500E70E4C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		62957FCB2264EA1900E70E4C /* FoodSpotCallout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodSpotCallout.xib; sourceTree = "<group>"; };
+		62957FCD2264F6D500E70E4C /* VenueAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAnnotationView.swift; sourceTree = "<group>"; };
+		62957FCF2264F6FF00E70E4C /* VenueDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailView.swift; sourceTree = "<group>"; };
+		62957FD12264FA5C00E70E4C /* VenueCallout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VenueCallout.xib; sourceTree = "<group>"; };
 		62B8E1172254FBE100196ED9 /* eatByNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eatByNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B8E11A2254FBE100196ED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62B8E11F2254FBE100196ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -168,6 +176,7 @@
 				62B8E14622553ED700196ED9 /* CloudKitManager.swift */,
 				62B8E161225A5A9800196ED9 /* FoodSearchController.swift */,
 				62B8E176225C333C00196ED9 /* Colors.swift */,
+				62957FC92261652500E70E4C /* Extensions.swift */,
 				62B8E1382254FC7700196ED9 /* ModelControllers */,
 				62B8E13F2255196F00196ED9 /* ViewControllers */,
 			);
@@ -230,6 +239,8 @@
 				62B8E14C2256648D00196ED9 /* HomePage.storyboard */,
 				62B8E14E2256675100196ED9 /* EditProfile.storyboard */,
 				62B8E1562256B35E00196ED9 /* MapView.storyboard */,
+				62957FCB2264EA1900E70E4C /* FoodSpotCallout.xib */,
+				62957FD12264FA5C00E70E4C /* VenueCallout.xib */,
 			);
 			path = MainAppSBs;
 			sourceTree = "<group>";
@@ -239,7 +250,8 @@
 			children = (
 				62B8E17A225D3CD300196ED9 /* FoodSpotAnnotationView.swift */,
 				62F90A8E2260E80D004179F3 /* FoodSpotDetailView.swift */,
-				62957FC92261652500E70E4C /* Extensions.swift */,
+				62957FCD2264F6D500E70E4C /* VenueAnnotationView.swift */,
+				62957FCF2264F6FF00E70E4C /* VenueDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,8 +324,10 @@
 			files = (
 				62B8E14D2256648D00196ED9 /* HomePage.storyboard in Resources */,
 				62B8E14F2256675100196ED9 /* EditProfile.storyboard in Resources */,
+				62957FD22264FA5C00E70E4C /* VenueCallout.xib in Resources */,
 				62B8E1572256B35E00196ED9 /* MapView.storyboard in Resources */,
 				62B8E180225D4F9800196ED9 /* NewUser.storyboard in Resources */,
+				62957FCC2264EA1900E70E4C /* FoodSpotCallout.xib in Resources */,
 				62B8E1252254FBE300196ED9 /* LaunchScreen.storyboard in Resources */,
 				62B8E1222254FBE300196ED9 /* Assets.xcassets in Resources */,
 				62B8E183225D4FBE00196ED9 /* SelectFavSpots.storyboard in Resources */,
@@ -335,12 +349,14 @@
 				62B8E1362254FC6900196ED9 /* UserController.swift in Sources */,
 				62B8E14B225654CC00196ED9 /* PhotoSelectorViewController.swift in Sources */,
 				62B8E1492256542000196ED9 /* NewUserViewController.swift in Sources */,
+				62957FD02264F6FF00E70E4C /* VenueDetailView.swift in Sources */,
 				62B8E162225A5A9800196ED9 /* FoodSearchController.swift in Sources */,
 				62B8E15E2257AAED00196ED9 /* LocationsTableViewController.swift in Sources */,
 				62B8E1332254FC5100196ED9 /* User.swift in Sources */,
 				62B8E15C2256BB8D00196ED9 /* EditProfileViewController.swift in Sources */,
 				62B8E13C2255012C00196ED9 /* FoodSpotController.swift in Sources */,
 				62B8E17B225D3CD300196ED9 /* FoodSpotAnnotationView.swift in Sources */,
+				62957FCE2264F6D500E70E4C /* VenueAnnotationView.swift in Sources */,
 				62B8E160225A5A5000196ED9 /* FoodSearch.swift in Sources */,
 				62B8E145225523DC00196ED9 /* AlertController.swift in Sources */,
 				62B8E11B2254FBE100196ED9 /* AppDelegate.swift in Sources */,

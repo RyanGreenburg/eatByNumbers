@@ -30,8 +30,6 @@ class FindSpotsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = UserController.shared.loggedInUser,
-                let userPhoto = user.photo else { return }
         suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
         centerButton.layer.cornerRadius = centerButton.frame.width / 2
         suggestionButton.imageView?.clipsToBounds = true
@@ -40,6 +38,8 @@ class FindSpotsViewController: UIViewController {
         centerButton.layer.masksToBounds = true
         centerButton.layer.shadowColor = Colors.darkGray.color().cgColor
         suggestionButton.layer.shadowColor = Colors.darkGray.color().cgColor
+        mapView.register(VenueAnnotationView.self, forAnnotationViewWithReuseIdentifier: "venuePin")
+        mapView.register(FoodSpotAnnotationView.self, forAnnotationViewWithReuseIdentifier: "foodSpotPin")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +63,9 @@ class FindSpotsViewController: UIViewController {
     }
     
     @IBAction func userButtonTapped(_ sender: Any) {
-        
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        guard let viewController = storyboard.instantiateInitialViewController() else { return }
+        present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func centerButtonTapped(_ sender: Any) {
@@ -79,7 +81,7 @@ class FindSpotsViewController: UIViewController {
         var annotations: [MKPointAnnotation] = []
         for item in foodSpots {
             // custom annotation?
-            let annotation = FoodSpotAnnotation(isFoodSpot: true)
+            let annotation = FoodSpotAnnotation(foodSpot: item)
             annotation.coordinate = item.location.coordinate
             annotation.title = item.name
             annotation.subtitle = item.address
@@ -95,7 +97,7 @@ class FindSpotsViewController: UIViewController {
         var annotations: [MKPointAnnotation] = []
         for item in venues {
             // custom annotation?
-            let annotation = VenueSpotAnnotation(isVenue: true)
+            let annotation = VenueAnnotation(venue: item)
             annotation.coordinate = CLLocationCoordinate2D(latitude: item.location.lat, longitude: item.location.lng)
             annotation.title = item.name
             annotation.subtitle = item.location.address
@@ -179,39 +181,23 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
         
         guard annotation is MKPointAnnotation else { return nil }
         
-        if let venueAnnotation = annotation as? VenueSpotAnnotation {
+        if let venueAnnotation = annotation as? VenueAnnotation {
             let reuseID = "venuePin"
-            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? FoodSpotAnnotationView
-            pinView = FoodSpotAnnotationView(annotation: venueAnnotation, reuseIdentifier: reuseID)
-            if pinView == nil {
-                pinView = FoodSpotAnnotationView(annotation: venueAnnotation, reuseIdentifier: reuseID)
-//                pinView?.pinTintColor = Colors.darkBlue.color()
-                pinView?.canShowCallout = true
-            } else {
-                pinView?.annotation = venueAnnotation
-//                pinView?.pinTintColor = Colors.darkBlue.color()
-            }
+            let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID, for: venueAnnotation) as? VenueAnnotationView
+            pinView?.venueDetailDelegate = self
             return pinView
         }
         
         if let foodSpotAnnotation = annotation as? FoodSpotAnnotation {
             let reuseID = "foodSpotPin"
-            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
-            pinView = MKPinAnnotationView(annotation: foodSpotAnnotation, reuseIdentifier: reuseID)
-            if pinView == nil {
-                pinView = MKPinAnnotationView(annotation: foodSpotAnnotation, reuseIdentifier: reuseID)
-                pinView?.pinTintColor = Colors.lightBlue.color()
-                pinView?.canShowCallout = true
-            } else {
-                pinView?.annotation = foodSpotAnnotation
-                pinView?.tintColor = Colors.lightBlue.color()
-            }
+            let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID, for: foodSpotAnnotation) as? FoodSpotAnnotationView
+            pinView?.foodSpotDetailDelegate = self
             return pinView
         }
         return nil
     }
     
-    @objc func getDirections(){
+    func getDirections(){
         if let selectedPin = selectedPlacemark {
             let mapItem = MKMapItem(placemark: selectedPin)
             let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
@@ -254,5 +240,21 @@ extension FindSpotsViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
+    }
+}
+
+extension FindSpotsViewController: FoodSpotDetailViewDelegate, VenueDetailViewDelegate {
+    
+    func directionsRequestedFor(_ venue: Venue) {
+        let coordinate = CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lng)
+        let placemark = MKPlacemark(coordinate: coordinate)
+        selectedPlacemark = placemark
+        getDirections()
+    }
+    
+    func directionsRequestedFor(_ foodSpot: FoodSpot) {
+        let placemark = MKPlacemark(coordinate: foodSpot.location.coordinate)
+        selectedPlacemark = placemark
+        getDirections()
     }
 }

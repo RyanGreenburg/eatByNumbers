@@ -11,19 +11,40 @@ import MapKit
 
 class FoodSpotAnnotation: MKPointAnnotation {
     
-    var isFoodSpot: Bool
+    var foodSpot: FoodSpot
+    var location: CLLocationCoordinate2D {
+        return foodSpot.location.coordinate
+    }
     
-    init(isFoodSpot: Bool) {
-        self.isFoodSpot = isFoodSpot
+    init(foodSpot: FoodSpot) {
+        self.foodSpot = foodSpot
+    }
+    
+    var name: String {
+        return foodSpot.name
+    }
+    
+    var address: String {
+        return foodSpot.address
     }
 }
 
 
-class VenueSpotAnnotation: MKPointAnnotation {
+class VenueAnnotation: MKPointAnnotation {
     
-    var isVenue: Bool
+    var venue: Venue
+    var location: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lng)
+    }
     
-    init(isVenue: Bool) {
-        self.isVenue = isVenue
+    init(venue: Venue) {
+        self.venue = venue
+    }
+    
+    var name: String {
+        return venue.name ?? ""
+    }
+    var address: String {
+        return venue.location.address ?? ""
     }
 }

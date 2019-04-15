@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="wb5-cx-Cct" customClass="FoodSpotDetailView" customModule="eatByNumbers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WG0-Df-2nG">
+                    <rect key="frame" x="4" y="4" width="340" height="42"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(name)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLe-bL-KVf">
+                            <rect key="frame" x="0.0" y="0.0" width="170" height="42"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(score)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHo-tC-4II">
+                            <rect key="frame" x="170" y="0.0" width="170" height="42"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="408-oW-7TS">
+                    <rect key="frame" x="4" y="50" width="340" height="32"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(address)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRM-5b-TF8">
+                            <rect key="frame" x="0.0" y="0.0" width="170" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxb-1d-kre">
+                            <rect key="frame" x="170" y="0.0" width="170" height="32"/>
+                            <state key="normal" title="Directions"/>
+                            <connections>
+                                <action selector="directionsButtonTapped:" destination="wb5-cx-Cct" eventType="touchUpInside" id="53w-fm-ofG"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="WG0-Df-2nG" firstAttribute="top" secondItem="wb5-cx-Cct" secondAttribute="top" constant="4" id="6Fh-xk-Wyf"/>
+                <constraint firstItem="Gdd-eF-aFi" firstAttribute="bottom" secondItem="408-oW-7TS" secondAttribute="bottom" constant="4" id="MV9-iV-vri"/>
+                <constraint firstItem="408-oW-7TS" firstAttribute="top" secondItem="WG0-Df-2nG" secondAttribute="bottom" constant="4" id="NDC-Wl-kY1"/>
+                <constraint firstAttribute="trailing" secondItem="WG0-Df-2nG" secondAttribute="trailing" constant="4" id="W8T-44-e5Z"/>
+                <constraint firstItem="WG0-Df-2nG" firstAttribute="leading" secondItem="wb5-cx-Cct" secondAttribute="leading" constant="4" id="bdx-M2-fZZ"/>
+                <constraint firstItem="Gdd-eF-aFi" firstAttribute="trailing" secondItem="408-oW-7TS" secondAttribute="trailing" constant="4" id="mkQ-rB-pWH"/>
+                <constraint firstItem="408-oW-7TS" firstAttribute="leading" secondItem="Gdd-eF-aFi" secondAttribute="leading" constant="4" id="qtO-GM-eaG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Gdd-eF-aFi"/>
+            <connections>
+                <outlet property="addressLabel" destination="BRM-5b-TF8" id="Yte-QB-Oj8"/>
+                <outlet property="directionsButton" destination="Pxb-1d-kre" id="4Dc-ku-6dT"/>
+                <outlet property="nameLabel" destination="TLe-bL-KVf" id="eTq-AD-IgW"/>
+                <outlet property="scoreLabel" destination="bHo-tC-4II" id="T9S-ck-ch7"/>
+            </connections>
+            <point key="canvasLocation" x="-72" y="-224"/>
+        </view>
+    </objects>
+</document>

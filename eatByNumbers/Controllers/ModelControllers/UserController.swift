@@ -76,8 +76,6 @@ class UserController {
                 let user = User(record: record)
                 print("Fetched logged in user.")
                 self.loggedInUser = user
-                //  set user fav spots
-                self.userFoodSpots = self.loggedInUser?.favoriteSpots ?? []
                 completion(true)
             })
         }

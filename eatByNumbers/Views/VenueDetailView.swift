@@ -1,14 +1,15 @@
 //
-//  FoodSpotDetailView.swift
+//  VenueDetailView.swift
 //  eatByNumbers
 //
-//  Created by RYAN GREENBURG on 4/12/19.
+//  Created by RYAN GREENBURG on 4/15/19.
 //  Copyright © 2019 RYAN GREENBURG. All rights reserved.
 //
 
 import UIKit
 
-class FoodSpotDetailView: UIView {
+class VenueDetailView: UIView {
+
     
     // MARK: - Outlets
     @IBOutlet weak var nameLabel: UILabel!
@@ -18,8 +19,8 @@ class FoodSpotDetailView: UIView {
     
     
     // MARK: - Properties
-    var foodSpot: FoodSpot!
-    weak var delegate: FoodSpotDetailViewDelegate?
+    var venue: Venue!
+    weak var delegate: VenueDetailViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,29 +29,28 @@ class FoodSpotDetailView: UIView {
     // MARK: - Actions
     // call delegate method
     @IBAction func directionsButtonTapped(_ sender: Any) {
-        delegate?.directionsRequestedFor(foodSpot)
+        delegate?.directionsRequestedFor(venue)
     }
     
     
-    func configureWith(_ foodSpot: FoodSpot) {
-        self.foodSpot = foodSpot
+    func configureWith(_ venue: Venue) {
+        self.venue = venue
         // set outlet values here
-        nameLabel.text = foodSpot.name
-        addressLabel.text = foodSpot.address
-        scoreLabel.text = "\(foodSpot.usersFavoriteReferences.count)"
+        nameLabel.text = venue.name
+        addressLabel.text = venue.location.address
+        scoreLabel.text = ""
     }
     
     // MARK: - Hit test. We need to override this to detect hits in our custom callout.
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
         if let result = directionsButton.hitTest(convert(point, to: directionsButton), with: event) {
-            delegate?.directionsRequestedFor(foodSpot)
             return result
         }
         return nil
     }
 }
 
-protocol FoodSpotDetailViewDelegate: class {
-    func directionsRequestedFor(_ foodSpot: FoodSpot)
+protocol VenueDetailViewDelegate: class {
+    func directionsRequestedFor(_ venue: Venue)
 }

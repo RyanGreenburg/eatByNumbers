@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VenueDetailView" customModule="eatByNumbers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="422" height="201"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CwK-6G-PTe">
+                    <rect key="frame" x="4" y="48" width="414" height="42"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(name)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmS-OH-w3p">
+                            <rect key="frame" x="0.0" y="0.0" width="207" height="42"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(score)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRa-hY-Xak">
+                            <rect key="frame" x="207" y="0.0" width="207" height="42"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Llq-i0-nj2">
+                    <rect key="frame" x="4" y="94" width="414" height="69"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(address)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDG-8R-QgZ">
+                            <rect key="frame" x="0.0" y="0.0" width="207" height="69"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGx-Hm-vDf">
+                            <rect key="frame" x="207" y="0.0" width="207" height="69"/>
+                            <state key="normal" title="Directions"/>
+                            <connections>
+                                <action selector="directionsButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="xi7-Lj-sDM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Llq-i0-nj2" firstAttribute="top" secondItem="CwK-6G-PTe" secondAttribute="bottom" constant="4" id="ES3-ZL-LA8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Llq-i0-nj2" secondAttribute="trailing" constant="4" id="IAg-an-fao"/>
+                <constraint firstItem="Llq-i0-nj2" firstAttribute="top" secondItem="CwK-6G-PTe" secondAttribute="bottom" constant="4" id="IRk-FX-Qm5"/>
+                <constraint firstItem="CwK-6G-PTe" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="JNt-WE-tBn"/>
+                <constraint firstItem="Llq-i0-nj2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="eMs-SH-8i6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Llq-i0-nj2" secondAttribute="bottom" constant="4" id="pY3-JP-RcG"/>
+                <constraint firstItem="CwK-6G-PTe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="uUV-On-3en"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CwK-6G-PTe" secondAttribute="trailing" constant="4" id="yrn-EC-N6a"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="addressLabel" destination="CDG-8R-QgZ" id="4XO-a7-pXV"/>
+                <outlet property="directionsButton" destination="qGx-Hm-vDf" id="rQJ-H3-jKY"/>
+                <outlet property="nameLabel" destination="hmS-OH-w3p" id="2YT-5C-3hK"/>
+                <outlet property="scoreLabel" destination="FRa-hY-Xak" id="mcb-qH-by5"/>
+            </connections>
+            <point key="canvasLocation" x="343.47826086956525" y="-369.30803571428572"/>
+        </view>
+    </objects>
+</document>
