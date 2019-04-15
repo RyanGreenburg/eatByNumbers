@@ -30,7 +30,7 @@ class AlertHelper {
         let alertController = UIAlertController(title: title, message: text, preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         return alertController
     }

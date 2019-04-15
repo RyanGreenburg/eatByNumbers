@@ -1,18 +1,18 @@
 //
-//  FoodSpotAnnotationView.swift
+//  VenueAnnotationView.swift
 //  eatByNumbers
 //
-//  Created by RYAN GREENBURG on 4/9/19.
+//  Created by RYAN GREENBURG on 4/15/19.
 //  Copyright © 2019 RYAN GREENBURG. All rights reserved.
 //
 
 import UIKit
 import MapKit
 
-class FoodSpotAnnotationView: MKAnnotationView {
+class VenueAnnotationView: MKAnnotationView {
 
-    weak var customCalloutView: FoodSpotDetailView?
-    weak var foodSpotDetailDelegate: FoodSpotDetailViewDelegate?
+    weak var customCalloutView: VenueDetailView?
+    weak var venueDetailDelegate: VenueDetailViewDelegate?
     
     override var annotation: MKAnnotation? {
         willSet {
@@ -23,7 +23,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         self.canShowCallout = false
-        let image = UIImage(named: "foodSpotIcon")
+        let image = UIImage(named: "venueIcon")
         let resizedImage = image?.resizeImage(targetSize: CGSize(width: 50, height: 50))
         self.image = resizedImage
     }
@@ -31,7 +31,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.canShowCallout = false
-        let image = UIImage(named: "foodSpotIcon")
+        let image = UIImage(named: "venueIcon")
         let resizedImage = image?.resizeImage(targetSize: CGSize(width: 50, height: 50))
         self.image = resizedImage
     }
@@ -43,12 +43,12 @@ class FoodSpotAnnotationView: MKAnnotationView {
         if selected {
             customCalloutView?.removeFromSuperview()
             
-            if let newCustomCalloutView = loadFoodSpotDetailView() {
+            if let newCustomCalloutView = loadVenueDetailView() {
                 newCustomCalloutView.frame.origin.x -= newCustomCalloutView.frame.width / 2 - (self.frame.width / 2)
                 newCustomCalloutView.frame.origin.y -= newCustomCalloutView.frame.height
                 
                 self.addSubview(newCustomCalloutView)
-//                self.customCalloutView = newCustomCalloutView
+                self.customCalloutView = newCustomCalloutView
                 
                 if animated {
                     self.customCalloutView?.alpha = 0.0
@@ -74,15 +74,15 @@ class FoodSpotAnnotationView: MKAnnotationView {
         }
     }
     
-    func loadFoodSpotDetailView() -> FoodSpotDetailView? {
-        if let views = Bundle.main.loadNibNamed("FoodSpotCallout", owner: self, options: nil) as? [FoodSpotDetailView], views.count > 0 {
-            let foodSpotDetailView = views.first!
-            foodSpotDetailView.delegate = self.foodSpotDetailDelegate
-            if let foodSpotAnnotation = annotation as? FoodSpotAnnotation {
-                let foodSpot = foodSpotAnnotation.foodSpot
-                foodSpotDetailView.configureWith(foodSpot)
+    func loadVenueDetailView() -> VenueDetailView? {
+        if let views = Bundle.main.loadNibNamed("VenueCallout", owner: self, options: nil) as? [VenueDetailView], views.count > 0 {
+            let venueDetailView = views.first!
+            venueDetailView.delegate = self.venueDetailDelegate
+            if let venueAnnotation = annotation as? VenueAnnotation {
+                let venue = venueAnnotation.venue
+                venueDetailView.configureWith(venue)
             }
-            return foodSpotDetailView
+            return venueDetailView
         }
         return nil
     }
@@ -102,4 +102,3 @@ class FoodSpotAnnotationView: MKAnnotationView {
         customCalloutView?.removeFromSuperview()
     }
 }
-

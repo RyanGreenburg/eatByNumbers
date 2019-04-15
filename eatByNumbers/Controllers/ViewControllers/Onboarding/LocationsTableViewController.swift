@@ -75,22 +75,42 @@ extension LocationsTableViewController {
         let selectedItem = venues[indexPath.row]
         var mapItem: MKMapItem?
         
-        guard let mapView = mapView else { return }
-        
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = selectedItem.name
-        request.region = mapView.region
-        
-        let search = MKLocalSearch(request: request)
-        search.start { (response, error) in
-            if let error = error {
-                print("Error completing MKSearch : \(error) \n---\n\(error.localizedDescription)")
+        if let mapView = mapView {
+            
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = selectedItem.name
+            request.region = mapView.region
+            
+            let search = MKLocalSearch(request: request)
+            search.start { (response, error) in
+                if let error = error {
+                    print("Error completing MKSearch : \(error) \n---\n\(error.localizedDescription)")
+                }
+                guard let response = response else { return }
+                mapItem = response.mapItems.first
+                DispatchQueue.main.async {
+                    self.handleMapSearchDelegate?.dropPinZoomIn(mapItem!.placemark)
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
-            guard let response = response else { return }
-            mapItem = response.mapItems.first
-            DispatchQueue.main.async {
-                self.handleMapSearchDelegate?.dropPinZoomIn(mapItem!.placemark)
-                self.dismiss(animated: true, completion: nil)
+        } else {
+            guard let address = selectedItem.location.address,
+                let name = selectedItem.name
+                else { return }
+            let location = CLLocation(latitude: selectedItem.location.lat, longitude: selectedItem.location.lng)
+            let newFoodSpot = FoodSpot(name: name, address: address, location: location)
+            if UserController.shared.userFoodSpots.count < 10 {
+                UserController.shared.userFoodSpots.append(newFoodSpot)
+                FoodSpotController.shared.saveFoodSpot(withName: name, address: address, location: location) { (success) in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                }
+            } else {
+                let alert = AlertHelper.shared.createAlertControllerWithTitle("Favorite Spots are Full!", andText: "You've filled up all 10 of your favorite spots. Hit done to continue, or you can edit your favorite spots.")
+                present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -102,8 +122,6 @@ extension LocationsTableViewController: UISearchResultsUpdating {
             let searchTerm = searchController.searchBar.text else { return }
         
         let locationString = "\(location.latitude),\(location.longitude)"
-        
-        // remove searchTerm white space/punctuation?
         
         if searchTerm.count >= 3 {
             FoodSeachController.shared.suggestedCompletionSearchWith(searchTerm: searchTerm, location: locationString) { (foundVenues) in

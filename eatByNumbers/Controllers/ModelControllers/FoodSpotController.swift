@@ -105,6 +105,9 @@ class FoodSpotController {
             let foundSpots = records.compactMap( {FoodSpot(record: $0)} )
             print("Fetched all foodSpots")
             self.allFoodSpots = foundSpots
+            guard let userRef = UserController.shared.loggedInUser?.appleUserRef else { return }
+            let userFoodSpots = self.allFoodSpots.filter( { $0.usersFavoriteReferences.contains(userRef) })
+            UserController.shared.userFoodSpots = userFoodSpots
             completion(true)
         }
     }

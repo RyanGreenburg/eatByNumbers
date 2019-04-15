@@ -15,7 +15,7 @@ struct TopLevel: Codable {
 
 struct Response: Codable {
     let venues: [Venue]?
-    let groups: [Group]
+    let groups: [Group]?
     let minivenues: [Venue]?
     
 }

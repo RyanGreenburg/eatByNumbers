@@ -49,7 +49,7 @@ class FoodSeachController {
                 let decoder = JSONDecoder()
                 let venueDictionary = try decoder.decode(TopLevel.self, from: data)
                 var tempVenueArray: [Venue] = []
-                for item in venueDictionary.response.groups[0].items {
+                for item in venueDictionary.response.groups![0].items {
                     let venue = item.venue
                     tempVenueArray.append(venue)
                     completion(tempVenueArray)
@@ -86,7 +86,7 @@ class FoodSeachController {
             do {
                 let decoder = JSONDecoder()
                 let venueDictionary = try decoder.decode(TopLevel.self, from: data)
-                let suggestedVenues = venueDictionary.response.venues
+                let suggestedVenues = venueDictionary.response.minivenues
                 completion(suggestedVenues ?? [])
             } catch {
                 print("Error decoding venues : \(error.localizedDescription) \n---\n\(error)")
