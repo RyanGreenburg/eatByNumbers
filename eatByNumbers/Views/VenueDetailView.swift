@@ -37,8 +37,11 @@ class VenueDetailView: UIView {
         self.venue = venue
         // set outlet values here
         nameLabel.text = venue.name
+        nameLabel.textColor = Colors.white.color()
         addressLabel.text = venue.location.address
+        addressLabel.textColor = Colors.white.color()
         scoreLabel.text = ""
+        directionsButton.setTitleColor(Colors.lightBlue.color(), for: .normal)
     }
     
     // MARK: - Hit test. We need to override this to detect hits in our custom callout.

@@ -52,7 +52,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
                 
                 if animated {
                     self.customCalloutView?.alpha = 0.0
-                    UIView.animate(withDuration: 0.5) {
+                    UIView.animate(withDuration: 0.2) {
                         self.customCalloutView?.alpha = 1.0
                     }
                 }
@@ -60,7 +60,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
         } else {
             if customCalloutView != nil {
                 if animated {
-                    UIView.animate(withDuration: 0.5, animations: {
+                    UIView.animate(withDuration: 0.2, animations: {
                         self.customCalloutView?.alpha = 0.0
                     }) { (success) in
                         if success {
@@ -82,6 +82,8 @@ class FoodSpotAnnotationView: MKAnnotationView {
                 let foodSpot = foodSpotAnnotation.foodSpot
                 foodSpotDetailView.configureWith(foodSpot)
             }
+            foodSpotDetailView.layer.cornerRadius = foodSpotDetailView.frame.width / 10
+            foodSpotDetailView.backgroundColor = Colors.lightGray.color()
             return foodSpotDetailView
         }
         return nil

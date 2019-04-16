@@ -21,6 +21,7 @@ class FindSpotsViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var hungryButton: UIButton!
     @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var userButton: UIButton!
@@ -30,14 +31,7 @@ class FindSpotsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
-        centerButton.layer.cornerRadius = centerButton.frame.width / 2
-        suggestionButton.imageView?.clipsToBounds = true
-        centerButton.imageView?.clipsToBounds = true
-        suggestionButton.layer.masksToBounds = true
-        centerButton.layer.masksToBounds = true
-        centerButton.layer.shadowColor = Colors.darkGray.color().cgColor
-        suggestionButton.layer.shadowColor = Colors.darkGray.color().cgColor
+        setViews()
         mapView.register(VenueAnnotationView.self, forAnnotationViewWithReuseIdentifier: "venuePin")
         mapView.register(FoodSpotAnnotationView.self, forAnnotationViewWithReuseIdentifier: "foodSpotPin")
     }
@@ -45,6 +39,19 @@ class FindSpotsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationServices()
+    }
+    
+    func setViews() {
+        hungryButton.setTitleColor(Colors.white.color(), for: .normal)
+        hungryButton.backgroundColor = Colors.lightBlue.color()
+        hungryButton.layer.cornerRadius = hungryButton.frame.height / 4
+        segmentedControl.tintColor = Colors.lightBlue.color()
+        suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
+        centerButton.layer.cornerRadius = centerButton.frame.width / 2
+        suggestionButton.imageView?.clipsToBounds = true
+        centerButton.imageView?.clipsToBounds = true
+        suggestionButton.layer.masksToBounds = true
+        centerButton.layer.masksToBounds = true
     }
     
     func updateViews() {
@@ -74,6 +81,23 @@ class FindSpotsViewController: UIViewController {
     
     @IBAction func hungryButtonTapped(_ sender: Any) {
         updateViews()
+    }
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+        let foodSpots = findFoodSpotAnnotations(foodSpotItems)
+        let venues = findVenueAnnotations(venueItems)
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.removeAnnotations(mapView.annotations)
+            displayAnnotations(foodSpots, venues)
+        case 1:
+            mapView.removeAnnotations(mapView.annotations)
+            displayAnnotations(foodSpots, [])
+        case 2:
+            mapView.removeAnnotations(mapView.annotations)
+            displayAnnotations([], venues)
+        default:
+            return
+        }
     }
     
 // MARK: - Find Spots(FoodSpot)
@@ -113,9 +137,6 @@ class FindSpotsViewController: UIViewController {
             return foodSpotAnnotations.contains(where: { $0.coordinate.latitude == venueAnnotation.coordinate.latitude && $0.coordinate.longitude == venueAnnotation.coordinate.longitude }) == true ? false : true
         }
         filteredAnnotations += foodSpotAnnotations
-        print(filteredAnnotations.count)
-        print(foodSpotAnnotations.count)
-        print(venueAnnotations.count)
         mapView.addAnnotations(filteredAnnotations)
     }
 }

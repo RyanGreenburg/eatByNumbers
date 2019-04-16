@@ -12,6 +12,8 @@
 		62957FCE2264F6D500E70E4C /* VenueAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FCD2264F6D500E70E4C /* VenueAnnotationView.swift */; };
 		62957FD02264F6FF00E70E4C /* VenueDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FCF2264F6FF00E70E4C /* VenueDetailView.swift */; };
 		62957FD22264FA5C00E70E4C /* VenueCallout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62957FD12264FA5C00E70E4C /* VenueCallout.xib */; };
+		62957FD422662E0800E70E4C /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FD322662E0800E70E4C /* EditProfileTableViewController.swift */; };
+		62957FD6226666D100E70E4C /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62957FD5226666D100E70E4C /* States.swift */; };
 		62B8E11B2254FBE100196ED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E11A2254FBE100196ED9 /* AppDelegate.swift */; };
 		62B8E1202254FBE100196ED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E11E2254FBE100196ED9 /* Main.storyboard */; };
 		62B8E1222254FBE300196ED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E1212254FBE300196ED9 /* Assets.xcassets */; };
@@ -32,7 +34,6 @@
 		62B8E155225674BC00196ED9 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E154225674BC00196ED9 /* HomePageViewController.swift */; };
 		62B8E1572256B35E00196ED9 /* MapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62B8E1562256B35E00196ED9 /* MapView.storyboard */; };
 		62B8E15A2256BAE800196ED9 /* FindSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E1592256BAE800196ED9 /* FindSpotsViewController.swift */; };
-		62B8E15C2256BB8D00196ED9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E15B2256BB8D00196ED9 /* EditProfileViewController.swift */; };
 		62B8E15E2257AAED00196ED9 /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E15D2257AAED00196ED9 /* LocationsTableViewController.swift */; };
 		62B8E160225A5A5000196ED9 /* FoodSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E15F225A5A5000196ED9 /* FoodSearch.swift */; };
 		62B8E162225A5A9800196ED9 /* FoodSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E161225A5A9800196ED9 /* FoodSearchController.swift */; };
@@ -51,6 +52,8 @@
 		62957FCD2264F6D500E70E4C /* VenueAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAnnotationView.swift; sourceTree = "<group>"; };
 		62957FCF2264F6FF00E70E4C /* VenueDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailView.swift; sourceTree = "<group>"; };
 		62957FD12264FA5C00E70E4C /* VenueCallout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VenueCallout.xib; sourceTree = "<group>"; };
+		62957FD322662E0800E70E4C /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewController.swift; sourceTree = "<group>"; };
+		62957FD5226666D100E70E4C /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
 		62B8E1172254FBE100196ED9 /* eatByNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eatByNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62B8E11A2254FBE100196ED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62B8E11F2254FBE100196ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,7 +77,6 @@
 		62B8E154225674BC00196ED9 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		62B8E1562256B35E00196ED9 /* MapView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapView.storyboard; sourceTree = "<group>"; };
 		62B8E1592256BAE800196ED9 /* FindSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindSpotsViewController.swift; sourceTree = "<group>"; };
-		62B8E15B2256BB8D00196ED9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		62B8E15D2257AAED00196ED9 /* LocationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		62B8E15F225A5A5000196ED9 /* FoodSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearch.swift; sourceTree = "<group>"; };
 		62B8E161225A5A9800196ED9 /* FoodSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				62B8E1212254FBE300196ED9 /* Assets.xcassets */,
 				62B8E1232254FBE300196ED9 /* LaunchScreen.storyboard */,
 				62B8E1262254FBE300196ED9 /* Info.plist */,
+				62957FD5226666D100E70E4C /* States.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -219,7 +222,7 @@
 			children = (
 				62B8E154225674BC00196ED9 /* HomePageViewController.swift */,
 				62B8E1592256BAE800196ED9 /* FindSpotsViewController.swift */,
-				62B8E15B2256BB8D00196ED9 /* EditProfileViewController.swift */,
+				62957FD322662E0800E70E4C /* EditProfileTableViewController.swift */,
 			);
 			path = MainApp;
 			sourceTree = "<group>";
@@ -350,10 +353,11 @@
 				62B8E14B225654CC00196ED9 /* PhotoSelectorViewController.swift in Sources */,
 				62B8E1492256542000196ED9 /* NewUserViewController.swift in Sources */,
 				62957FD02264F6FF00E70E4C /* VenueDetailView.swift in Sources */,
+				62957FD422662E0800E70E4C /* EditProfileTableViewController.swift in Sources */,
 				62B8E162225A5A9800196ED9 /* FoodSearchController.swift in Sources */,
 				62B8E15E2257AAED00196ED9 /* LocationsTableViewController.swift in Sources */,
+				62957FD6226666D100E70E4C /* States.swift in Sources */,
 				62B8E1332254FC5100196ED9 /* User.swift in Sources */,
-				62B8E15C2256BB8D00196ED9 /* EditProfileViewController.swift in Sources */,
 				62B8E13C2255012C00196ED9 /* FoodSpotController.swift in Sources */,
 				62B8E17B225D3CD300196ED9 /* FoodSpotAnnotationView.swift in Sources */,
 				62957FCE2264F6D500E70E4C /* VenueAnnotationView.swift in Sources */,

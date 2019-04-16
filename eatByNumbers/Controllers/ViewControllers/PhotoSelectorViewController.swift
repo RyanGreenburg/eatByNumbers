@@ -16,13 +16,12 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
     
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var selectButton: UIButton!
-
+    @IBOutlet weak var buttonView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-        photoView.contentMode = .scaleAspectFill
-        photoView.clipsToBounds = true
-        photoView.layer.cornerRadius = photoView.frame.width / 2
+        setupViews()
     }
     
     @IBAction func selectButtonTapped(_ sender: Any) {
@@ -42,8 +41,6 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
         
         present(alert, animated: true, completion: nil)
     }
-    
-    
 }
 
 extension PhotoSelectorViewController: UIImagePickerControllerDelegate {
@@ -81,6 +78,25 @@ extension PhotoSelectorViewController: UIImagePickerControllerDelegate {
             photoView.image = pickedImage
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension PhotoSelectorViewController {
+    func setupViews() {
+        self.view.backgroundColor = .clear
+        if let photo = user?.photo {
+            photoView.image = photo
+        } else {
+            photoView.image = UIImage(named: "stockPhoto")
+        }
+        photoView.layer.cornerRadius = photoView.frame.width / 2
+        photoView.contentMode = .scaleAspectFill
+        photoView.clipsToBounds = true
+        buttonView.layer.cornerRadius = buttonView.frame.width / 2
+        buttonView.clipsToBounds = true
+        selectButton.backgroundColor = Colors.lightBlue.color()
+        selectButton.setTitleColor(Colors.white.color(), for: .normal)
+        selectButton.alpha = 0.75
     }
 }
 
