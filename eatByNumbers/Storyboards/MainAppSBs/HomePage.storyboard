@@ -96,6 +96,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3XR-55-cTc">
                             <connections>
                                 <action selector="editButtonTapped:" destination="Ze0-vD-TNe" id="CkR-2E-5Pz"/>
+                                <segue destination="pHc-nd-brA" kind="show" identifier="toEditVC" id="WVJ-wg-sth"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -128,6 +129,14 @@
             </objects>
             <point key="canvasLocation" x="180" y="179"/>
         </scene>
+        <!--EditProfile-->
+        <scene sceneID="IHJ-3Z-aOX">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="EditNavController" storyboardName="EditProfile" id="pHc-nd-brA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wRt-Lr-1V0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1649" y="-90"/>
+        </scene>
         <!--Photo Selector View Controller-->
         <scene sceneID="InV-l4-eoK">
             <objects>
@@ -155,6 +164,7 @@
                             <constraint firstItem="ukp-ft-ZxI" firstAttribute="bottom" secondItem="cv1-j3-xqL" secondAttribute="bottom" id="dIj-pt-OgW"/>
                             <constraint firstAttribute="bottom" secondItem="dCI-IH-YQS" secondAttribute="bottom" id="ffZ-cG-KCT"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="ANf-aU-Os4"/>
                     </view>
                     <connections>
                         <outlet property="photoView" destination="dCI-IH-YQS" id="0Xx-Yf-xfK"/>
@@ -163,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="biH-i1-k0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1577" y="-82"/>
+            <point key="canvasLocation" x="1616" y="179"/>
         </scene>
     </scenes>
 </document>

@@ -67,3 +67,9 @@ extension CKRecord {
         setValue(foodSpot.usersFavoriteReferences, forKey: FoodSpotConstants.referenceKey)
     }
 }
+
+extension FoodSpot: Equatable {
+    static func == (lhs: FoodSpot, rhs: FoodSpot) -> Bool {
+       return lhs.recordID == rhs.recordID
+    }
+}

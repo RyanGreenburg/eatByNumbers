@@ -21,6 +21,7 @@ class FindSpotsViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var hungryButton: UIButton!
     @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var userButton: UIButton!
@@ -75,6 +76,23 @@ class FindSpotsViewController: UIViewController {
     @IBAction func hungryButtonTapped(_ sender: Any) {
         updateViews()
     }
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+        let foodSpots = findFoodSpotAnnotations(foodSpotItems)
+        let venues = findVenueAnnotations(venueItems)
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.removeAnnotations(mapView.annotations)
+            displayAnnotations(foodSpots, venues)
+        case 1:
+            mapView.removeAnnotations(mapView.annotations)
+            displayAnnotations(foodSpots, [])
+        case 2:
+            mapView.removeAnnotations(mapView.annotations)
+            displayAnnotations([], venues)
+        default:
+            return
+        }
+    }
     
 // MARK: - Find Spots(FoodSpot)
     func findFoodSpotAnnotations(_ foodSpots: [FoodSpot]) -> [MKPointAnnotation] {
@@ -113,9 +131,6 @@ class FindSpotsViewController: UIViewController {
             return foodSpotAnnotations.contains(where: { $0.coordinate.latitude == venueAnnotation.coordinate.latitude && $0.coordinate.longitude == venueAnnotation.coordinate.longitude }) == true ? false : true
         }
         filteredAnnotations += foodSpotAnnotations
-        print(filteredAnnotations.count)
-        print(foodSpotAnnotations.count)
-        print(venueAnnotations.count)
         mapView.addAnnotations(filteredAnnotations)
     }
 }

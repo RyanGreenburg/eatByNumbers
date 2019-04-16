@@ -38,6 +38,9 @@
                                     <segment title="Eat10 Spots"/>
                                     <segment title="Other Spots"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentedControlChanged:" destination="zld-hk-xyn" eventType="valueChanged" id="ZXH-l4-gMh"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijH-dv-s4n">
                                 <rect key="frame" x="353" y="148" width="41" height="30"/>
@@ -89,6 +92,7 @@
                         <outlet property="centerButton" destination="vpn-qq-BKz" id="rey-MR-0RB"/>
                         <outlet property="hungryButton" destination="m4z-48-sB1" id="dDf-HR-UMo"/>
                         <outlet property="mapView" destination="rM2-8C-4ze" id="g25-nb-VkG"/>
+                        <outlet property="segmentedControl" destination="9mx-yK-sUt" id="Yc5-nY-cR3"/>
                         <outlet property="suggestionButton" destination="g8I-zr-bnz" id="Dd9-hG-gWj"/>
                         <outlet property="userButton" destination="ijH-dv-s4n" id="1cO-NU-AvP"/>
                     </connections>

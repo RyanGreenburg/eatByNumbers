@@ -35,14 +35,12 @@ class HomePageViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        guard let user = user,
-            let photo = profilePhoto,
-            let name = nameLabel.text
-            else { return }
-        
-        UserController.shared.update(user: user, withName: name, photo: photo, foodSpots: userFoodSpots) { (success) in
-            if success {
-                DispatchQueue.main.async {
+        guard let user = user else { return }
+        if userFoodSpots == UserController.shared.userFoodSpots {
+            dismiss(animated: true, completion: nil)
+        } else {
+            UserController.shared.update(user: user, with: userFoodSpots) { (success) in
+                if success {
                     self.dismiss(animated: true, completion: nil)
                 }
             }
@@ -50,19 +48,7 @@ class HomePageViewController: UIViewController {
     }
     
     @IBAction func editButtonTapped(_ sender: Any) {
-        let alert = AlertHelper.shared.actionableAlertController("Change Username", andText: "")
-        alert.addTextField { (textField) in
-            textField.placeholder = self.user?.username
-            if textField.text == "" {
-                alert.actions.last?.isEnabled = false
-            }
-        }
-        
-        present(alert, animated: true) {
-            DispatchQueue.main.async {
-                self.nameLabel.text = alert.textFields?.first?.text
-            }
-        }
+        // go to user edit page.
     }
     
     func setSearchController() {
@@ -95,7 +81,11 @@ class HomePageViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "toEditVC" {
+            let destinationVC = segue.destination as? EditProfileTableViewController
+            destinationVC?.user = self.user
+            destinationVC?.foodSpots = self.userFoodSpots
+        }
     }
 }
 
