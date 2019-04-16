@@ -11,11 +11,10 @@ import UIKit
 class HomePageViewController: UIViewController {
     
     var user: User?
-    var profilePhoto: UIImage?
     var resultsController: UISearchController?
     var userFoodSpots: [FoodSpot] = []
     
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
@@ -29,8 +28,8 @@ class HomePageViewController: UIViewController {
         setSearchController()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateViews()
     }
     
@@ -72,7 +71,10 @@ class HomePageViewController: UIViewController {
             let photo = UserController.shared.loggedInUser?.photo
             else { return }
         self.user = user
-        self.profilePhoto = photo
+        self.photoView.image = photo
+        photoView.contentMode = .scaleAspectFill
+        photoView.clipsToBounds = true
+        photoView.layer.cornerRadius = photoView.frame.width / 2
         nameLabel.text = user.username
         userFoodSpots = UserController.shared.userFoodSpots
         tableView.reloadData()
@@ -110,12 +112,5 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
             userFoodSpots.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-    }
-}
-
-// MARK: - PhotoSelect Delegate
-extension HomePageViewController: PhotoSelectorViewControllerDelegate {
-    func photoSelectorViewControllerSelected(image: UIImage) {
-        self.profilePhoto = image
     }
 }

@@ -22,6 +22,7 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
         foundFoodSpotsLabel.text = "Working"
         foundUserLabel.text = "Working"
     }
@@ -96,10 +97,18 @@ class InitialViewController: UIViewController {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "MapView", bundle: nil)
             let navigationController = storyboard.instantiateViewController(withIdentifier: "FindSpotsVC")
-            
-            
-            
             self.present(navigationController, animated: true, completion: nil)
         }
+    }
+}
+
+extension InitialViewController {
+    func setupViews() {
+        activityIndicator.color = Colors.lightBlue.color()
+        self.view.backgroundColor = Colors.lightGray.color()
+        fetchingUserLabel.textColor = Colors.white.color()
+        fetchingFoodSpotsLabel.textColor = Colors.white.color()
+        foundUserLabel.textColor = Colors.lightBlue.color()
+        foundFoodSpotsLabel.textColor = Colors.lightBlue.color()
     }
 }

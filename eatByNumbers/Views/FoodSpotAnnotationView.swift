@@ -83,6 +83,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
                 foodSpotDetailView.configureWith(foodSpot)
             }
             foodSpotDetailView.layer.cornerRadius = foodSpotDetailView.frame.width / 10
+            foodSpotDetailView.backgroundColor = Colors.lightGray.color()
             return foodSpotDetailView
         }
         return nil

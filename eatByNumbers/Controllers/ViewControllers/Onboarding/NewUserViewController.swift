@@ -20,14 +20,19 @@ class NewUserViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var allowLocationButton: UIButton!
+    @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var addPhotoLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
         usernameTextField.delegate = self
+        
     }
     
     // MARK: - Actions
-    
     @IBAction func allowLocationButtonTapped(_ sender: Any) {
         locationManager.requestWhenInUseAuthorization()
     }
@@ -45,6 +50,10 @@ class NewUserViewController: UIViewController {
         }
     }
     
+    @IBAction func skipButtonTapped(_ sender: Any) {
+        // save no user to user defaults
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "photoSelectSegue" {
@@ -54,6 +63,9 @@ class NewUserViewController: UIViewController {
         if segue.identifier == "toSelectSpotsVC" {
             let destinationVC = segue.destination as? SelectSpotsViewController
             destinationVC?.user = user
+        }
+        if segue.identifier == "toMapVC" {
+            let _ = segue.destination as? FindSpotsViewController
         }
     }
 }
@@ -70,5 +82,25 @@ extension NewUserViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension NewUserViewController {
+    func setupViews() {
+        self.view.backgroundColor = Colors.lightGray.color()
+        allowLocationButton.backgroundColor = Colors.lightBlue.color()
+        allowLocationButton.setTitleColor(Colors.white.color(), for: .normal)
+        allowLocationButton.layer.cornerRadius = allowLocationButton.frame.height / 4
+        usernameLabel.textColor = Colors.white.color()
+        addPhotoLabel.textColor = Colors.white.color()
+        skipButton.backgroundColor = Colors.lightBlue.color()
+        skipButton.setTitleColor(Colors.darkGray.color(), for: .normal)
+        skipButton.layer.cornerRadius = skipButton.frame.height / 4
+        nextButton.backgroundColor = Colors.lightBlue.color()
+        nextButton.setTitleColor(Colors.white.color(), for: .normal)
+        nextButton.layer.cornerRadius = nextButton.frame.height / 4
+        usernameTextField.backgroundColor = Colors.white.color()
+        usernameTextField.textColor = Colors.darkGray.color()
+        containerView.layer.cornerRadius = containerView.frame.width / 2
     }
 }

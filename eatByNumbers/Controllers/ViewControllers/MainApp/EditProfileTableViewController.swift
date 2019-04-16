@@ -23,8 +23,10 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTextfField.delegate = self
         guard let user = user else { return }
         usernameTextfField.text = user.username
+        containerView.layer.cornerRadius = containerView.frame.width / 2
     }
 
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -35,7 +37,9 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
         
         UserController.shared.update(user: user, withName: name, photo: photo, foodSpots: foodSpots) { (success) in
             if success {
-                self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
@@ -47,7 +51,9 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (delete) in
             UserController.shared.delete(user: user, completion: { (success) in
                 if success {
-                    self.restartApp()
+                    DispatchQueue.main.async {
+                        self.restartApp()
+                    }
                 }
             })
         }
@@ -91,5 +97,12 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
                 window.rootViewController = navControl
             }
         }
+    }
+}
+
+extension EditProfileTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        usernameTextfField.resignFirstResponder()
+        return true
     }
 }

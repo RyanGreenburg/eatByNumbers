@@ -234,7 +234,6 @@ protocol HandleMapSearch {
 }
 
 // MARK: - TableView DataSource/Delegate
-
 extension SelectSpotsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -77,22 +77,30 @@ extension LocationsTableViewController {
         
         if let mapView = mapView {
             
-            let request = MKLocalSearch.Request()
-            request.naturalLanguageQuery = selectedItem.name
-            request.region = mapView.region
+            let coordinate = CLLocationCoordinate2D(latitude: selectedItem.location.lat, longitude: selectedItem.location.lng)
             
-            let search = MKLocalSearch(request: request)
-            search.start { (response, error) in
-                if let error = error {
-                    print("Error completing MKSearch : \(error) \n---\n\(error.localizedDescription)")
-                }
-                guard let response = response else { return }
-                mapItem = response.mapItems.first
-                DispatchQueue.main.async {
-                    self.handleMapSearchDelegate?.dropPinZoomIn(mapItem!.placemark)
-                    self.dismiss(animated: true, completion: nil)
-                }
+            let placemark = MKPlacemark(coordinate: coordinate)
+            DispatchQueue.main.async {
+                self.handleMapSearchDelegate?.dropPinZoomIn(placemark)
+                self.dismiss(animated: true, completion: nil)
             }
+            
+//            let request = MKLocalSearch.Request()
+//            request.naturalLanguageQuery = selectedItem.name
+//            request.region = mapView.region
+//
+//            let search = MKLocalSearch(request: request)
+//            search.start { (response, error) in
+//                if let error = error {
+//                    print("Error completing MKSearch : \(error) \n---\n\(error.localizedDescription)")
+//                }
+//                guard let response = response else { return }
+//                mapItem = response.mapItems.first
+//                DispatchQueue.main.async {
+//                    self.handleMapSearchDelegate?.dropPinZoomIn(mapItem!.placemark)
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            }
         } else {
             guard let address = selectedItem.location.address,
                 let name = selectedItem.name

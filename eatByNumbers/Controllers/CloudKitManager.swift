@@ -60,7 +60,7 @@ class CloudKitManager {
         operation.qualityOfService = .userInteractive
         operation.modifyRecordsCompletionBlock = { (_, _, error) in
             if let error = error {
-                print("Error deleting record from CloudKit : \(error.localizedDescription)")
+                print("Error deleting record from CloudKit : \(error.localizedDescription) \n---\n \(error)")
                 completion(error)
             }
             completion(nil)

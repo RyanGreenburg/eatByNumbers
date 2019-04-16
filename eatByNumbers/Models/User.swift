@@ -94,3 +94,9 @@ extension CKRecord {
         setValue(user.appleUserRef, forKey: UserConstants.appleUserRefKey)
     }
 }
+
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.recordID == rhs.recordID
+    }
+}

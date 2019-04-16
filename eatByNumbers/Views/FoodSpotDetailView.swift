@@ -36,8 +36,12 @@ class FoodSpotDetailView: UIView {
         self.foodSpot = foodSpot
         // set outlet values here
         nameLabel.text = foodSpot.name
+        nameLabel.textColor = Colors.white.color()
         addressLabel.text = foodSpot.address
+        addressLabel.textColor = Colors.white.color()
         scoreLabel.text = "\(foodSpot.usersFavoriteReferences.count)"
+        scoreLabel.textColor = Colors.white.color()
+        directionsButton.setTitleColor(Colors.lightBlue.color(), for: .normal)
     }
     
     // MARK: - Hit test. We need to override this to detect hits in our custom callout.

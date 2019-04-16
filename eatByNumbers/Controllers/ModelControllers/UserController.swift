@@ -83,31 +83,16 @@ class UserController {
     
     // update
     func update(user: User, withName name: String, photo: UIImage, foodSpots: [FoodSpot], completion: @escaping (Bool) -> Void) {
-        CKContainer.default().fetchUserRecordID { (recordID, error) in
+        user.photo = photo
+        user.username = name
+        user.favoriteSpots = foodSpots
+        
+        let updateRecord = CKRecord(user: user)
+        
+        CloudKitManager.shared.update(record: updateRecord) { (error) in
             if let error = error {
-                print("Error fetching user AppleID : \(error.localizedDescription)")
-                completion(false)
+                print("Error updating user : \(error.localizedDescription) \n---\n \(error)")
             }
-            guard let recordID = recordID else { completion(false) ; return }
-            
-            let reference = CKRecord.Reference(recordID: recordID, action: .deleteSelf)
-            let userToUpdate = User(username: name, photo: photo, favoriteSpots: foodSpots, appleUserRef: reference)
-            
-            let userRecord = CKRecord(user: userToUpdate)
-            
-            CloudKitManager.shared.save(record: userRecord, completion: { (record, error) in
-                if let error = error {
-                    print("Error saving new user to CloudKit : \(error.localizedDescription)")
-                    completion(false)
-                }
-                guard let record = record,
-                let user = User(record: record) else { completion(false) ; return }
-                self.loggedInUser = user
-                //  set user fav spots
-                guard let foodSpots = self.loggedInUser?.favoriteSpots else { return }
-                self.userFoodSpots = foodSpots
-                completion(true)
-            })
         }
     }
     
@@ -154,7 +139,8 @@ class UserController {
             
             CloudKitManager.shared.delete(record: recordID, completion: { (error) in
                 if let error = error {
-                    print("Error deleting user from CloudKit : \(error.localizedDescription)")
+                    print("Error deleting user from CloudKit : \(error.localizedDescription) \n---\n \(error)")
+                    completion(false)
                 }
                 self.loggedInUser = nil
                 self.userFoodSpots = []

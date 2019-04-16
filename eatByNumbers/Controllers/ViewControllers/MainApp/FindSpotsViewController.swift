@@ -31,14 +31,7 @@ class FindSpotsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
-        centerButton.layer.cornerRadius = centerButton.frame.width / 2
-        suggestionButton.imageView?.clipsToBounds = true
-        centerButton.imageView?.clipsToBounds = true
-        suggestionButton.layer.masksToBounds = true
-        centerButton.layer.masksToBounds = true
-        centerButton.layer.shadowColor = Colors.darkGray.color().cgColor
-        suggestionButton.layer.shadowColor = Colors.darkGray.color().cgColor
+        setViews()
         mapView.register(VenueAnnotationView.self, forAnnotationViewWithReuseIdentifier: "venuePin")
         mapView.register(FoodSpotAnnotationView.self, forAnnotationViewWithReuseIdentifier: "foodSpotPin")
     }
@@ -46,6 +39,19 @@ class FindSpotsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationServices()
+    }
+    
+    func setViews() {
+        hungryButton.setTitleColor(Colors.white.color(), for: .normal)
+        hungryButton.backgroundColor = Colors.lightBlue.color()
+        hungryButton.layer.cornerRadius = hungryButton.frame.height / 4
+        segmentedControl.tintColor = Colors.lightBlue.color()
+        suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
+        centerButton.layer.cornerRadius = centerButton.frame.width / 2
+        suggestionButton.imageView?.clipsToBounds = true
+        centerButton.imageView?.clipsToBounds = true
+        suggestionButton.layer.masksToBounds = true
+        centerButton.layer.masksToBounds = true
     }
     
     func updateViews() {
