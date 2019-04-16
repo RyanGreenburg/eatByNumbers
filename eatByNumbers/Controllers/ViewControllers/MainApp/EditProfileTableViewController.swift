@@ -21,8 +21,6 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let user = user else { return }
@@ -49,7 +47,7 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (delete) in
             UserController.shared.delete(user: user, completion: { (success) in
                 if success {
-                    // restart the app
+                    self.restartApp()
                 }
             })
         }
@@ -68,5 +66,30 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     
     @IBAction func backButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "photoSelectSegue" {
+            let destinationVC = segue.destination as? PhotoSelectorViewController
+            destinationVC?.delegate = self
+            destinationVC?.user = user
+        }
+    }
+    
+    func restartApp() {
+        let viewController = InitialViewController()
+        let navControl = UINavigationController(rootViewController: viewController)
+        
+        guard let window = UIApplication.shared.keyWindow,
+            let rootViewController = window.rootViewController else { return }
+        
+        navControl.view.frame = rootViewController.view.frame
+        navControl.view.layoutIfNeeded()
+        
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil) { (success) in
+            if success {
+                window.rootViewController = navControl
+            }
+        }
     }
 }

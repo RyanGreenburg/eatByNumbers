@@ -80,7 +80,7 @@
                                                         <constraint firstAttribute="height" constant="200" id="B9O-uZ-afC"/>
                                                     </constraints>
                                                     <connections>
-                                                        <segue destination="Pbj-uU-j0A" kind="embed" id="imm-Hm-i9v"/>
+                                                        <segue destination="Pbj-uU-j0A" kind="embed" identifier="photoSelectSegue" id="imm-Hm-i9v"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>

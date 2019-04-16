@@ -85,9 +85,7 @@ class SelectSpotsViewController: UIViewController {
         if foodSpots.count == 0 {
             goToHomePage()
         } else {
-            guard let user = user,
-                let photo = user.photo
-                else { return }
+            guard let user = user else { return }
             
             UserController.shared.update(user: user, with: foodSpots) { (success) in
                 if success {
@@ -125,8 +123,9 @@ extension SelectSpotsViewController: MKMapViewDelegate, UINavigationControllerDe
             setupLocationManager()
             checkLocationAuthorization()
         } else {
-            // show error alert
+            let alert = AlertHelper.shared.blankAlertController("No Location Found", andText: "Eat10 was unable to find your current location. They key features of this app rely on the user's location. Please check settings to see if Location Services are enabled.")
             
+            present(alert, animated: true, completion: nil)
         }
     }
     
