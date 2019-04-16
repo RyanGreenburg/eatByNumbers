@@ -14,6 +14,7 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     var photo: UIImage?
     var foodSpots = UserController.shared.userFoodSpots
 
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var usernameTextfField: UITextField!
@@ -63,5 +64,9 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     
     func photoSelectorViewControllerSelected(image: UIImage) {
         self.photo = image
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -55,7 +55,7 @@
             </objects>
             <point key="canvasLocation" x="2565" y="802"/>
         </scene>
-        <!--Edit Profile Table View Controller-->
+        <!--Edit Profile-->
         <scene sceneID="ddt-JF-fwT">
             <objects>
                 <tableViewController storyboardIdentifier="EditProfileVC" id="gZs-Ik-Aea" customClass="EditProfileTableViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
@@ -179,8 +179,15 @@
                             <outlet property="delegate" destination="gZs-Ik-Aea" id="bE4-zE-ER8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="pic-iC-SzL"/>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="xIN-M3-ySl">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="eqE-FE-EGf">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="gZs-Ik-Aea" id="8zy-21-Ec1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="eqE-FE-EGf" id="IJ9-EA-eQD"/>
                         <outlet property="containerView" destination="fTH-ck-eTX" id="kxn-F8-eZ5"/>
                         <outlet property="deleteButton" destination="klp-uw-6Kw" id="L9X-TL-eix"/>
                         <outlet property="saveButton" destination="W71-kI-Rbe" id="Zcm-If-Q2D"/>

@@ -52,7 +52,7 @@ class VenueAnnotationView: MKAnnotationView {
                 
                 if animated {
                     self.customCalloutView?.alpha = 0.0
-                    UIView.animate(withDuration: 0.5) {
+                    UIView.animate(withDuration: 0.2) {
                         self.customCalloutView?.alpha = 1.0
                     }
                 }
@@ -60,7 +60,7 @@ class VenueAnnotationView: MKAnnotationView {
         } else {
             if customCalloutView != nil {
                 if animated {
-                    UIView.animate(withDuration: 0.5, animations: {
+                    UIView.animate(withDuration: 0.2, animations: {
                         self.customCalloutView?.alpha = 0.0
                     }) { (success) in
                         if success {
@@ -82,6 +82,7 @@ class VenueAnnotationView: MKAnnotationView {
                 let venue = venueAnnotation.venue
                 venueDetailView.configureWith(venue)
             }
+            venueDetailView.layer.cornerRadius = venueDetailView.frame.width / 10
             return venueDetailView
         }
         return nil

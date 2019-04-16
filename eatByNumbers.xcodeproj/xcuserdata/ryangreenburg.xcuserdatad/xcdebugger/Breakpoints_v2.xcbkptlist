@@ -58,7 +58,7 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/Onboarding/LocationsTableViewController.swift"
-                  timestampString = "577123753.490525"
+                  timestampString = "577125450.193488"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "127"
@@ -73,7 +73,7 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/Onboarding/LocationsTableViewController.swift"
-                  timestampString = "577123753.4925489"
+                  timestampString = "577125450.195803"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "129"
@@ -96,22 +96,6 @@
             startingLineNumber = "96"
             endingLineNumber = "96"
             landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-            timestampString = "577123753.201854"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
