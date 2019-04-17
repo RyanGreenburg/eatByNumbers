@@ -41,9 +41,9 @@ class NewUserViewController: UIViewController {
         guard let name = usernameTextField.text, !name.isEmpty,
             let photo = profilePhoto else { return }
         
-        let newUser = User(username: name, photo: photo, favoriteSpots: nil, appleUserRef: nil)
+        let newUser = User(username: name, photo: photo, favoriteSpotsRefs: nil, appleUserRef: nil)
         user = newUser
-        UserController.shared.createUserWith(name: name, photo: photo, foodSpots: nil) { (success) in
+        UserController.shared.createUserWith(name: name, photo: photo, foodSpotsRefs: nil) { (success) in
             if success {
                 print("User Created Successfully")
             }

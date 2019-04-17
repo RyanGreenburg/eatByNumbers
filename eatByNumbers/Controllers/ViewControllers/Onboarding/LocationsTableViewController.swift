@@ -73,41 +73,26 @@ extension LocationsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = venues[indexPath.row]
-        var mapItem: MKMapItem?
         
-        if let mapView = mapView {
+        if mapView != nil {
             
             let coordinate = CLLocationCoordinate2D(latitude: selectedItem.location.lat, longitude: selectedItem.location.lng)
             
             let placemark = MKPlacemark(coordinate: coordinate)
             DispatchQueue.main.async {
-                self.handleMapSearchDelegate?.dropPinZoomIn(placemark)
+                self.handleMapSearchDelegate?.dropPinZoomIn(placemark, selectedItem)
                 self.dismiss(animated: true, completion: nil)
             }
-            
-//            let request = MKLocalSearch.Request()
-//            request.naturalLanguageQuery = selectedItem.name
-//            request.region = mapView.region
-//
-//            let search = MKLocalSearch(request: request)
-//            search.start { (response, error) in
-//                if let error = error {
-//                    print("Error completing MKSearch : \(error) \n---\n\(error.localizedDescription)")
-//                }
-//                guard let response = response else { return }
-//                mapItem = response.mapItems.first
-//                DispatchQueue.main.async {
-//                    self.handleMapSearchDelegate?.dropPinZoomIn(mapItem!.placemark)
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//            }
         } else {
             guard let address = selectedItem.location.address,
                 let name = selectedItem.name
                 else { return }
             let location = CLLocation(latitude: selectedItem.location.lat, longitude: selectedItem.location.lng)
             let newFoodSpot = FoodSpot(name: name, address: address, location: location)
-            if UserController.shared.userFoodSpots.count < 10 {
+            let filtered = UserController.shared.userFoodSpots.filter { $0.recordID == newFoodSpot.recordID }
+            
+            if UserController.shared.userFoodSpots.count < 10 && filtered.count != 0 {
+                
                 UserController.shared.userFoodSpots.append(newFoodSpot)
                 FoodSpotController.shared.saveFoodSpot(withName: name, address: address, location: location) { (success) in
                     if success {
@@ -117,7 +102,7 @@ extension LocationsTableViewController {
                     }
                 }
             } else {
-                let alert = AlertHelper.shared.createAlertControllerWithTitle("Favorite Spots are Full!", andText: "You've filled up all 10 of your favorite spots. Hit done to continue, or you can edit your favorite spots.")
+                let alert = AlertHelper.shared.createAlertControllerWithTitle("Oh No!", andText: "You've filled up all 10 of your favorite spots or this spot is already on your list.")
                 present(alert, animated: true, completion: nil)
             }
         }

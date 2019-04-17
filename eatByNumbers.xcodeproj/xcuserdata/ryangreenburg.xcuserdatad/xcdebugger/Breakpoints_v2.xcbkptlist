@@ -9,157 +9,93 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ViewControllers/Onboarding/LocationsTableViewController.swift"
-            timestampString = "577138667.761888"
+            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
+            timestampString = "577231086.553656"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "saveButtonTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "eatByNumbers/Controllers/ModelControllers/UserController.swift"
+            timestampString = "577231086.554067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "remove(foodSpot:fromUser:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "eatByNumbers/Controllers/ModelControllers/UserController.swift"
+            timestampString = "577231086.554135"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "remove(foodSpot:fromUser:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "eatByNumbers.UserController.remove(foodSpot: eatByNumbers.FoodSpot, fromUser: eatByNumbers.User, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "eatByNumbers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ModelControllers/UserController.swift"
+                  timestampString = "577230382.473348"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.CKReference) -&gt; Swift.Bool in eatByNumbers.UserController.remove(foodSpot: eatByNumbers.FoodSpot, fromUser: eatByNumbers.User, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "eatByNumbers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ModelControllers/UserController.swift"
+                  timestampString = "577230382.475334"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/FindSpotsViewController.swift"
+            timestampString = "577231086.554198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "135"
             endingLineNumber = "135"
-            landmarkName = "updateSearchResults(for:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "eatByNumbers.LocationsTableViewController.updateSearchResults(for: __C.UISearchController) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/Onboarding/LocationsTableViewController.swift"
-                  timestampString = "577145541.5341181"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
-                  offsetFromSymbolStart = "1076">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Array&lt;eatByNumbers.Venue&gt;) -&gt; () in eatByNumbers.LocationsTableViewController.updateSearchResults(for: __C.UISearchController) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/Onboarding/LocationsTableViewController.swift"
-                  timestampString = "577145541.5360481"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
-                  offsetFromSymbolStart = "184">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-            timestampString = "577145541.3646131"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "saveButtonTapped(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "eatByNumbers.EditProfileTableViewController.saveButtonTapped(Any) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-                  timestampString = "577145541.650009"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "724">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in eatByNumbers.EditProfileTableViewController.saveButtonTapped(Any) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-                  timestampString = "577145541.6520391"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "168">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-            timestampString = "577145541.364697"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "deleteButtonTapped(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in eatByNumbers.EditProfileTableViewController.deleteButtonTapped(Any) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-                  timestampString = "577145541.657143"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "140">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in eatByNumbers.EditProfileTableViewController.deleteButtonTapped(Any) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-                  timestampString = "577145541.6591181"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "168">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ModelControllers/UserController.swift"
-            timestampString = "577141906.994366"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "update(user:withName:photo:foodSpots:completion:)"
+            landmarkName = "displayAnnotations(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/CloudKitManager.swift"
-            timestampString = "577141906.994439"
+            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/FindSpotsViewController.swift"
+            timestampString = "577231086.554247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "update(record:completion:)"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "displayAnnotations(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -185,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/EditProfileTableViewController.swift"
-            timestampString = "577145541.364822"
+            filePath = "eatByNumbers/Controllers/ViewControllers/Onboarding/LocationsTableViewController.swift"
+            timestampString = "577231086.554296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "saveButtonTapped(_:)"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -201,61 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ModelControllers/UserController.swift"
-            timestampString = "577141951.629447"
+            filePath = "eatByNumbers/Controllers/ViewControllers/MainApp/HomePageViewController.swift"
+            timestampString = "577231086.554347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "update(user:withName:photo:foodSpots:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "eatByNumbers.UserController.update(user: eatByNumbers.User, withName: Swift.String, photo: __C.UIImage, foodSpots: Swift.Array&lt;eatByNumbers.FoodSpot&gt;, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ModelControllers/UserController.swift"
-                  timestampString = "577145541.676563"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "456">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in eatByNumbers.UserController.update(user: eatByNumbers.User, withName: Swift.String, photo: __C.UIImage, foodSpots: Swift.Array&lt;eatByNumbers.FoodSpot&gt;, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "eatByNumbers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ModelControllers/UserController.swift"
-                  timestampString = "577145541.6784149"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "112">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ViewControllers/PhotoSelectorViewController.swift"
-            timestampString = "577145541.3649"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -265,13 +153,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ViewControllers/Onboarding/NewUserViewController.swift"
-            timestampString = "577145541.365302"
+            filePath = "eatByNumbers/Models/User.swift"
+            timestampString = "577231086.5543979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "prepare(for:sender:)"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "init(record:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

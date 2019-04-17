@@ -12,7 +12,7 @@ class HomePageViewController: UIViewController {
     
     var user: User?
     var resultsController: UISearchController?
-    var userFoodSpots: [FoodSpot] = []
+    var userFoodSpots: [FoodSpot] = [] 
     
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -34,16 +34,7 @@ class HomePageViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        guard let user = user else { return }
-        if userFoodSpots == UserController.shared.userFoodSpots {
-            dismiss(animated: true, completion: nil)
-        } else {
-            UserController.shared.update(user: user, with: userFoodSpots) { (success) in
-                if success {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-        }
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func editButtonTapped(_ sender: Any) {
@@ -109,8 +100,16 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let spotToRemove = userFoodSpots[indexPath.row]
             userFoodSpots.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if let user = user {
+                UserController.shared.remove(foodSpot: spotToRemove, fromUser: user) { (success) in
+                    if success {
+                        UserController.shared.userFoodSpots = self.userFoodSpots
+                    }
+                }
+            }
         }
     }
 }

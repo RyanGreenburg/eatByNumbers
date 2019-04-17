@@ -26,7 +26,7 @@ class UserController {
     // MARK: - CRUD
     
     // create
-    func createUserWith(name: String, photo: UIImage, foodSpots: [FoodSpot]?, completion: @escaping (Bool) -> Void) {
+    func createUserWith(name: String, photo: UIImage, foodSpotsRefs: [CKRecord.Reference]?, completion: @escaping (Bool) -> Void) {
         CKContainer.default().fetchUserRecordID { (recordID, error) in
             if let error = error {
                 print("Error fetching user AppleID : \(error.localizedDescription)")
@@ -36,7 +36,7 @@ class UserController {
                 else { completion(false) ; return }
             
             let reference = CKRecord.Reference(recordID: recordID, action: .deleteSelf)
-            let newUser = User(username: name, photo: photo, favoriteSpots: foodSpots, appleUserRef: reference)
+            let newUser = User(username: name, photo: photo, favoriteSpotsRefs: foodSpotsRefs, appleUserRef: reference)
             
             let userRecord = CKRecord(user: newUser)
             
@@ -76,6 +76,7 @@ class UserController {
                 let user = User(record: record)
                 print("Fetched logged in user.")
                 self.loggedInUser = user
+                
                 completion(true)
             })
         }
@@ -92,60 +93,70 @@ class UserController {
         CloudKitManager.shared.update(record: updateRecord) { (error) in
             if let error = error {
                 print("Error updating user : \(error.localizedDescription) \n---\n \(error)")
+                completion(false)
+                return
             }
+            completion(true)
         }
     }
     
-    func update(user: User, with foodSpots: [FoodSpot], completion: @escaping (Bool) -> Void) {
-        CKContainer.default().fetchUserRecordID { (recordID, error) in
+    func update(user: User, with foodSpotRef: CKRecord.Reference, completion: @escaping (Bool) -> Void) {
+        
+        var userFoodSpotRefs = user.favoriteSpotsRefs ?? []
+        userFoodSpotRefs.append(foodSpotRef)
+        user.favoriteSpotsRefs = userFoodSpotRefs
+        
+        let updateRecord = CKRecord(user: user)
+        
+        CloudKitManager.shared.update(record: updateRecord) { (error) in
             if let error = error {
-                print("Error fetching user AppleID : \(error.localizedDescription)")
+                print("Error updating user : \(error.localizedDescription) \n---\n \(error)")
                 completion(false)
+                return
             }
-            guard let photo = user.photo,
-                let recordID = recordID
-                else { completion(false) ; return }
-            
-            let reference = CKRecord.Reference(recordID: recordID, action: .deleteSelf)
-            let userToUpdate = User(username: user.username, photo: photo, favoriteSpots: foodSpots, appleUserRef: reference)
-            
-            let userRecord = CKRecord(user: userToUpdate)
-            
-            CloudKitManager.shared.save(record: userRecord, completion: { (record, error) in
-                if let error = error {
-                    print("Error saving new user to CloudKit : \(error.localizedDescription)")
-                    completion(false)
+            completion(true)
+        }
+    }
+    
+    func remove(foodSpot: FoodSpot, fromUser user: User, completion: @escaping (Bool) -> Void) {
+        guard let userFoodSpotRefs = user.favoriteSpotsRefs else { return }
+        
+        let foodSpotID = foodSpot.recordID
+        let filtered = userFoodSpotRefs.filter{ $0.recordID != foodSpotID }
+        user.favoriteSpotsRefs = filtered
+        
+        let updateRecord = CKRecord(user: user)
+        
+        CloudKitManager.shared.update(record: updateRecord) { (error) in
+            if let error = error {
+                print("Error updating user : \(error.localizedDescription) \n---\n \(error)")
+                completion(false)
+                return
+            }
+            print("FoodSpot removed from user successfully")
+            FoodSpotController.shared.remove(user: user, fromFoodSpot: foodSpot, completion: { (success) in
+                if success {
+                    print("User removed from foodSpot successfully")
                 }
-                guard let record = record,
-                    let user = User(record: record) else { completion(false) ; return }
-                self.loggedInUser = user
-                //  set user fav spots
-                guard let foodSpots = self.loggedInUser?.favoriteSpots else { return }
-                self.userFoodSpots = foodSpots
-                completion(true)
             })
+            
+            completion(true)
         }
     }
     
     // delete
     func delete(user: User, completion: @escaping (Bool) -> Void) {
-        CKContainer.default().fetchUserRecordID { (recordID, error) in
+        
+        let recordID = user.recordID
+        
+        CloudKitManager.shared.delete(record: recordID, completion: { (error) in
             if let error = error {
-                print("Error fetching user AppleID : \(error.localizedDescription)")
+                print("Error deleting user from CloudKit : \(error.localizedDescription) \n---\n \(error)")
                 completion(false)
             }
-            
-            guard let recordID = recordID else { completion(false) ; return }
-            
-            CloudKitManager.shared.delete(record: recordID, completion: { (error) in
-                if let error = error {
-                    print("Error deleting user from CloudKit : \(error.localizedDescription) \n---\n \(error)")
-                    completion(false)
-                }
-                self.loggedInUser = nil
-                self.userFoodSpots = []
-                completion(true)
-            })
-        }
+            self.loggedInUser = nil
+            self.userFoodSpots = []
+            completion(true)
+        })
     }
 }

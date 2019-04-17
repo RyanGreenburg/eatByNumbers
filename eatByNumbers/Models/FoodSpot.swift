@@ -59,7 +59,7 @@ struct FoodSpotConstants {
 extension CKRecord {
     
     convenience init(foodSpot: FoodSpot) {
-        self.init(recordType: FoodSpotConstants.typeKey)
+        self.init(recordType: FoodSpotConstants.typeKey, recordID: foodSpot.recordID)
         
         setValue(foodSpot.name, forKey: FoodSpotConstants.nameKey)
         setValue(foodSpot.address, forKey: FoodSpotConstants.addressKey)

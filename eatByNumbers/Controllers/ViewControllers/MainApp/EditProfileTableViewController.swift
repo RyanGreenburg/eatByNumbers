@@ -25,6 +25,7 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
         super.viewDidLoad()
         usernameTextfField.delegate = self
         guard let user = user else { return }
+        photo = user.photo
         usernameTextfField.text = user.username
         containerView.layer.cornerRadius = containerView.frame.width / 2
     }
@@ -38,7 +39,7 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
         UserController.shared.update(user: user, withName: name, photo: photo, foodSpots: foodSpots) { (success) in
             if success {
                 DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         }
@@ -83,7 +84,7 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     }
     
     func restartApp() {
-        let viewController = InitialViewController()
+        let viewController = NewUserViewController()
         let navControl = UINavigationController(rootViewController: viewController)
         
         guard let window = UIApplication.shared.keyWindow,

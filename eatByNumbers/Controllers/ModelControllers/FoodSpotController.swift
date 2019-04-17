@@ -37,38 +37,41 @@ class FoodSpotController {
         let query = CKQuery(recordType: FoodSpotConstants.typeKey, predicate: predicate)
         CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
-                print("Error fetcing record for foodSpot : \(error.localizedDescription)")
+                print("Error fetching record for foodSpot : \(error.localizedDescription)")
                 completion(false)
             }
             guard let records = records else { completion(false) ; return }
             
             if records.isEmpty {
-                CKContainer.default().fetchUserRecordID { (recordID, error) in
+                guard let recordID = UserController.shared.loggedInUser?.recordID else { completion(false) ; return }
+                
+                let reference = [CKRecord.Reference(recordID: recordID, action: .deleteSelf)]
+                let newFoodSpot = FoodSpot(name: name, address: address, location: location, usersFavoriteReferences: reference)
+                
+                let foodSpotRecord = CKRecord(foodSpot: newFoodSpot)
+                
+                CloudKitManager.shared.save(record: foodSpotRecord, completion: { (record, error) in
                     if let error = error {
-                        print("Error fetcing user Apple ID : \(error.localizedDescription)")
+                        print("Error saving Food Spot to CloudKit : \(error.localizedDescription)")
                         completion(false)
                     }
                     
-                    guard let recordID = recordID else { completion(false) ; return }
+                    guard let record = record,
+                        let foodSpot = FoodSpot(record: record) else { completion(false) ; return }
+                    self.allFoodSpots.append(foodSpot)
                     
-                    let reference = [CKRecord.Reference(recordID: recordID, action: .deleteSelf)]
-                    let newFoodSpot = FoodSpot(name: name, address: address, location: location, usersFavoriteReferences: reference)
+                    let foodSpotRef = reference.first!
+                    UserController.shared.loggedInUser?.favoriteSpotsRefs?.append(foodSpotRef)
                     
-                    let foodSpotRecord = CKRecord(foodSpot: newFoodSpot)
-                    
-                    CloudKitManager.shared.save(record: foodSpotRecord, completion: { (record, error) in
-                        if let error = error {
-                            print("Error saving Food Spot to CloudKit : \(error.localizedDescription)")
-                            completion(false)
-                        }
-                        
-                        guard let record = record,
-                            let foodSpot = FoodSpot(record: record) else { completion(false) ; return }
-                        
-                        self.allFoodSpots.append(foodSpot)
-                        completion(true)
-                    })
-                }
+                    if let user = UserController.shared.loggedInUser {
+                        UserController.shared.update(user: user, with: foodSpotRef, completion: { (success) in
+                            if success {
+                                print("Added foodSpot Reference to User successfully")
+                            }
+                        })
+                    }
+                    completion(true)
+                })
             } else {
                 let foodSpot = FoodSpot(record: records.first!)
                 guard let user = UserController.shared.loggedInUser else { completion(false) ; return }
@@ -83,7 +86,7 @@ class FoodSpotController {
                             print("Error saving record to foodSpot : \(error.localizedDescription)")
                             completion(false)
                         }
-                        guard let record = record else { completion(false) ; return }
+                        guard record != nil else { completion(false) ; return }
                         completion(true)
                     })
                 }
@@ -105,42 +108,28 @@ class FoodSpotController {
             let foundSpots = records.compactMap( {FoodSpot(record: $0)} )
             print("Fetched all foodSpots")
             self.allFoodSpots = foundSpots
-            guard let userRef = UserController.shared.loggedInUser?.appleUserRef else { return }
-            let userFoodSpots = self.allFoodSpots.filter( { $0.usersFavoriteReferences.contains(userRef) })
+            guard let userRecordID = UserController.shared.loggedInUser?.recordID else { return }
+            let userFoodSpots = self.allFoodSpots.filter{( $0.usersFavoriteReferences.contains{( $0.recordID == userRecordID)} )}
+            
             UserController.shared.userFoodSpots = userFoodSpots
             completion(true)
         }
     }
     
     // update
-    func update(foodSpot: FoodSpot, withName name: String, address: String, location: CLLocation, completion: @escaping (Bool) -> Void) {
-        //remove food spot from array?
+    func remove(user: User, fromFoodSpot foodSpot: FoodSpot, completion: @escaping (Bool) -> Void) {
+        let foodSpotRefs = foodSpot.usersFavoriteReferences
+        let filteredRefs = foodSpotRefs.filter { $0 != CKRecord.Reference(recordID: user.recordID, action: .none) }
+        foodSpot.usersFavoriteReferences = filteredRefs
         
-        CKContainer.default().fetchUserRecordID { (recordID, error) in
+        let updateRecord = CKRecord(foodSpot: foodSpot)
+        
+        CloudKitManager.shared.update(record: updateRecord) { (error) in
             if let error = error {
-                print("Error fetcing user Apple ID : \(error.localizedDescription)")
+                print("Error updating record : \(error.localizedDescription)")
                 completion(false)
             }
-            
-            guard let recordID = recordID else { completion(false) ; return }
-            
-            let reference = [CKRecord.Reference(recordID: recordID, action: .deleteSelf)]
-            let newFoodSpot = FoodSpot(name: name, address: address, location: location, usersFavoriteReferences: reference)
-            
-            let foodSpotRecord = CKRecord(foodSpot: newFoodSpot)
-            
-            CloudKitManager.shared.save(record: foodSpotRecord, completion: { (record, error) in
-                if let error = error {
-                    print("Error saving Food Spot to CloudKit : \(error.localizedDescription)")
-                    completion(false)
-                }
-                
-                guard let record = record,
-                    let foodSpot = FoodSpot(record: record) else { completion(false) ; return }
-                
-                self.allFoodSpots.append(foodSpot)
-                completion(true)
-            })
+            completion(true)
         }
     }
     

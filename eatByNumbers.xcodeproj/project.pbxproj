@@ -24,7 +24,6 @@
 		62B8E13A2255010B00196ED9 /* FoodSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E1392255010B00196ED9 /* FoodSpot.swift */; };
 		62B8E13C2255012C00196ED9 /* FoodSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E13B2255012C00196ED9 /* FoodSpotController.swift */; };
 		62B8E13E2255196100196ED9 /* SelectSpotsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E13D2255196100196ED9 /* SelectSpotsViewController.swift */; };
-		62B8E14322551FE600196ED9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E14222551FE600196ED9 /* MapViewController.swift */; };
 		62B8E145225523DC00196ED9 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E144225523DC00196ED9 /* AlertController.swift */; };
 		62B8E14722553ED700196ED9 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E14622553ED700196ED9 /* CloudKitManager.swift */; };
 		62B8E1492256542000196ED9 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8E1482256542000196ED9 /* NewUserViewController.swift */; };
@@ -67,7 +66,6 @@
 		62B8E1392255010B00196ED9 /* FoodSpot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSpot.swift; sourceTree = "<group>"; };
 		62B8E13B2255012C00196ED9 /* FoodSpotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSpotController.swift; sourceTree = "<group>"; };
 		62B8E13D2255196100196ED9 /* SelectSpotsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSpotsViewController.swift; sourceTree = "<group>"; };
-		62B8E14222551FE600196ED9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		62B8E144225523DC00196ED9 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		62B8E14622553ED700196ED9 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		62B8E1482256542000196ED9 /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 		62B8E13F2255196F00196ED9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				62B8E14222551FE600196ED9 /* MapViewController.swift */,
 				62B8E14A225654CC00196ED9 /* PhotoSelectorViewController.swift */,
 				62B8E1582256BAB500196ED9 /* Onboarding */,
 				62B8E17C225D3DEE00196ED9 /* MainApp */,
@@ -368,7 +365,6 @@
 				62B8E155225674BC00196ED9 /* HomePageViewController.swift in Sources */,
 				62F90A8F2260E80D004179F3 /* FoodSpotDetailView.swift in Sources */,
 				62B8E13A2255010B00196ED9 /* FoodSpot.swift in Sources */,
-				62B8E14322551FE600196ED9 /* MapViewController.swift in Sources */,
 				62B8E179225D38C800196ED9 /* AnnotationExtensions.swift in Sources */,
 				62B8E14722553ED700196ED9 /* CloudKitManager.swift in Sources */,
 			);

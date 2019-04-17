@@ -136,6 +136,7 @@ class FindSpotsViewController: UIViewController {
         var filteredAnnotations = venueAnnotations.filter { (venueAnnotation) -> Bool in
             return foodSpotAnnotations.contains(where: { $0.coordinate.latitude == venueAnnotation.coordinate.latitude && $0.coordinate.longitude == venueAnnotation.coordinate.longitude }) == true ? false : true
         }
+        
         filteredAnnotations += foodSpotAnnotations
         mapView.addAnnotations(filteredAnnotations)
     }
