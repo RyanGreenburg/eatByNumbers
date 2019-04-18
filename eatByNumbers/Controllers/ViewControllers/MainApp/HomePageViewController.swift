@@ -104,10 +104,8 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
             userFoodSpots.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             if let user = user {
-                UserController.shared.remove(foodSpot: spotToRemove, fromUser: user) { (success) in
-                    if success {
-                        UserController.shared.userFoodSpots = self.userFoodSpots
-                    }
+                FoodSpotController.shared.remove(user: user, fromFoodSpot: spotToRemove) { (success) in
+                    UserController.shared.userFoodSpots = self.userFoodSpots
                 }
             }
         }

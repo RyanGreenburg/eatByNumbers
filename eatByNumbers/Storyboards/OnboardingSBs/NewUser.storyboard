@@ -76,7 +76,6 @@
                                 <connections>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v5b-OG-2FO"/>
                                     <action selector="skipButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cFP-tO-afk"/>
-                                    <segue destination="4eU-xY-hgy" kind="show" identifier="toMapVC" id="Q1o-lF-Dff"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -194,14 +193,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaA-jB-3gJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1931" y="157"/>
-        </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="Slm-TA-Mob">
-            <objects>
-                <viewControllerPlaceholder id="4eU-xY-hgy" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ISW-ds-ywL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1917" y="214"/>
         </scene>
     </scenes>
 </document>

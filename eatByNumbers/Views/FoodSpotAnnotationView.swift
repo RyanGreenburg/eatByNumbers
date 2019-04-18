@@ -48,7 +48,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
                 newCustomCalloutView.frame.origin.y -= newCustomCalloutView.frame.height
                 
                 self.addSubview(newCustomCalloutView)
-//                self.customCalloutView = newCustomCalloutView
+                self.customCalloutView = newCustomCalloutView
                 
                 if animated {
                     self.customCalloutView?.alpha = 0.0
@@ -82,7 +82,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
                 let foodSpot = foodSpotAnnotation.foodSpot
                 foodSpotDetailView.configureWith(foodSpot)
             }
-            foodSpotDetailView.layer.cornerRadius = foodSpotDetailView.frame.width / 10
+            foodSpotDetailView.layer.cornerRadius = foodSpotDetailView.frame.height / 4
             foodSpotDetailView.backgroundColor = Colors.lightGray.color()
             return foodSpotDetailView
         }

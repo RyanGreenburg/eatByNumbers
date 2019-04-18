@@ -27,9 +27,12 @@ class NewUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         usernameTextField.delegate = self
-        
+        setupViews()
     }
     
     // MARK: - Actions
@@ -51,7 +54,10 @@ class NewUserViewController: UIViewController {
     }
     
     @IBAction func skipButtonTapped(_ sender: Any) {
-        // save no user to user defaults
+        let storyboard = UIStoryboard(name: "MapView", bundle: nil)
+        guard let viewController = storyboard.instantiateInitialViewController() else { return }
+        
+        present(viewController, animated: true, completion: nil)
     }
     
     // MARK: - Navigation

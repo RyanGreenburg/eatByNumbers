@@ -59,17 +59,18 @@ class FoodSpotController {
                     guard let record = record,
                         let foodSpot = FoodSpot(record: record) else { completion(false) ; return }
                     self.allFoodSpots.append(foodSpot)
+                    UserController.shared.userFoodSpots.append(foodSpot)
                     
-                    let foodSpotRef = reference.first!
-                    UserController.shared.loggedInUser?.favoriteSpotsRefs?.append(foodSpotRef)
-                    
-                    if let user = UserController.shared.loggedInUser {
-                        UserController.shared.update(user: user, with: foodSpotRef, completion: { (success) in
-                            if success {
-                                print("Added foodSpot Reference to User successfully")
-                            }
-                        })
-                    }
+//                    let foodSpotRef = reference.first!
+//                    UserController.shared.loggedInUser?.favoriteSpotsRefs?.append(foodSpotRef)
+//
+//                    if let user = UserController.shared.loggedInUser {
+//                        UserController.shared.update(user: user, with: foodSpotRef, completion: { (success) in
+//                            if success {
+//                                print("Added foodSpot Reference to User successfully")
+//                            }
+//                        })
+//                    }
                     completion(true)
                 })
             } else {
@@ -104,7 +105,7 @@ class FoodSpotController {
                 print("Error fetching Food Spots from CloudKit : \(error.localizedDescription)")
                 completion(false)
             }
-            guard let records = records else { return }
+            guard let records = records else { completion(false) ; return }
             let foundSpots = records.compactMap( {FoodSpot(record: $0)} )
             print("Fetched all foodSpots")
             self.allFoodSpots = foundSpots
@@ -119,7 +120,7 @@ class FoodSpotController {
     // update
     func remove(user: User, fromFoodSpot foodSpot: FoodSpot, completion: @escaping (Bool) -> Void) {
         let foodSpotRefs = foodSpot.usersFavoriteReferences
-        let filteredRefs = foodSpotRefs.filter { $0 != CKRecord.Reference(recordID: user.recordID, action: .none) }
+        let filteredRefs = foodSpotRefs.filter { $0.recordID != user.recordID }
         foodSpot.usersFavoriteReferences = filteredRefs
         
         let updateRecord = CKRecord(foodSpot: foodSpot)

@@ -91,7 +91,7 @@ extension LocationsTableViewController {
             let newFoodSpot = FoodSpot(name: name, address: address, location: location)
             let filtered = UserController.shared.userFoodSpots.filter { $0.recordID == newFoodSpot.recordID }
             
-            if UserController.shared.userFoodSpots.count < 10 && filtered.count != 0 {
+            if UserController.shared.userFoodSpots.count < 10 && filtered.count == 0 {
                 
                 UserController.shared.userFoodSpots.append(newFoodSpot)
                 FoodSpotController.shared.saveFoodSpot(withName: name, address: address, location: location) { (success) in

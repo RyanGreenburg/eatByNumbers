@@ -45,7 +45,7 @@ class FindSpotsViewController: UIViewController {
         hungryButton.setTitleColor(Colors.white.color(), for: .normal)
         hungryButton.backgroundColor = Colors.lightBlue.color()
         hungryButton.layer.cornerRadius = hungryButton.frame.height / 4
-        segmentedControl.tintColor = Colors.lightBlue.color()
+        segmentedControl.tintColor = Colors.lightGray.color()
         suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
         centerButton.layer.cornerRadius = centerButton.frame.width / 2
         suggestionButton.imageView?.clipsToBounds = true
@@ -70,9 +70,24 @@ class FindSpotsViewController: UIViewController {
     }
     
     @IBAction func userButtonTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-        guard let viewController = storyboard.instantiateInitialViewController() else { return }
-        present(viewController, animated: true, completion: nil)
+        if UserController.shared.loggedInUser != nil {
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            guard let viewController = storyboard.instantiateInitialViewController() else { return }
+            present(viewController, animated: true, completion: nil)
+        } else {
+            let alert = AlertHelper.shared.blankAlertController("Create a Profile", andText: "To add your own favorite spots, you need to create a User Profile.")
+            
+            let goBack = UIAlertAction(title: "Go Back", style: .default) { (_) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(goBack)
+            alert.addAction(cancel)
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func centerButtonTapped(_ sender: Any) {
@@ -120,7 +135,6 @@ class FindSpotsViewController: UIViewController {
     func findVenueAnnotations(_ venues: [Venue]) -> [MKPointAnnotation] {
         var annotations: [MKPointAnnotation] = []
         for item in venues {
-            // custom annotation?
             let annotation = VenueAnnotation(venue: item)
             annotation.coordinate = CLLocationCoordinate2D(latitude: item.location.lat, longitude: item.location.lng)
             annotation.title = item.name
@@ -133,8 +147,9 @@ class FindSpotsViewController: UIViewController {
     }
     
     func displayAnnotations(_ foodSpotAnnotations: [MKPointAnnotation], _ venueAnnotations: [MKPointAnnotation]) {
+        
         var filteredAnnotations = venueAnnotations.filter { (venueAnnotation) -> Bool in
-            return foodSpotAnnotations.contains(where: { $0.coordinate.latitude == venueAnnotation.coordinate.latitude && $0.coordinate.longitude == venueAnnotation.coordinate.longitude }) == true ? false : true
+            return foodSpotAnnotations.contains(where: { $0.title == venueAnnotation.title && $0.subtitle == venueAnnotation.subtitle }) == true ? false : true
         }
         
         filteredAnnotations += foodSpotAnnotations

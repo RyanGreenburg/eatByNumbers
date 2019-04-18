@@ -255,3 +255,13 @@ extension SelectSpotsViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 }
+
+extension SelectSpotsViewController {
+    func setViews() {
+        tableView.backgroundColor = .clear
+        self.view.backgroundColor = Colors.lightGray.color()
+        tableView.tableFooterView = UIView()
+        tableView.tableFooterView?.backgroundColor = .clear
+        
+    }
+}
