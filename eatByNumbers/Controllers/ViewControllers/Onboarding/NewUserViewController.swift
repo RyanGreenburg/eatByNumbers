@@ -27,9 +27,12 @@ class NewUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         usernameTextField.delegate = self
-        
+        setupViews()
     }
     
     // MARK: - Actions
@@ -41,9 +44,9 @@ class NewUserViewController: UIViewController {
         guard let name = usernameTextField.text, !name.isEmpty,
             let photo = profilePhoto else { return }
         
-        let newUser = User(username: name, photo: photo, favoriteSpots: nil, appleUserRef: nil)
+        let newUser = User(username: name, photo: photo, favoriteSpotsRefs: nil, appleUserRef: nil)
         user = newUser
-        UserController.shared.createUserWith(name: name, photo: photo, foodSpots: nil) { (success) in
+        UserController.shared.createUserWith(name: name, photo: photo, foodSpotsRefs: nil) { (success) in
             if success {
                 print("User Created Successfully")
             }
@@ -51,7 +54,10 @@ class NewUserViewController: UIViewController {
     }
     
     @IBAction func skipButtonTapped(_ sender: Any) {
-        // save no user to user defaults
+        let storyboard = UIStoryboard(name: "MapView", bundle: nil)
+        guard let viewController = storyboard.instantiateInitialViewController() else { return }
+        
+        present(viewController, animated: true, completion: nil)
     }
     
     // MARK: - Navigation

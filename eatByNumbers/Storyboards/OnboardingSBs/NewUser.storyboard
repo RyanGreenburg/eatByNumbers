@@ -76,7 +76,6 @@
                                 <connections>
                                     <action selector="nextButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v5b-OG-2FO"/>
                                     <action selector="skipButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cFP-tO-afk"/>
-                                    <segue destination="4eU-xY-hgy" kind="show" identifier="toMapVC" id="Q1o-lF-Dff"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -123,6 +122,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ukc-Lg-vXP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.058823529409999999" green="0.058823529409999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -194,14 +197,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaA-jB-3gJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1931" y="157"/>
-        </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="Slm-TA-Mob">
-            <objects>
-                <viewControllerPlaceholder id="4eU-xY-hgy" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ISW-ds-ywL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1917" y="214"/>
         </scene>
     </scenes>
 </document>

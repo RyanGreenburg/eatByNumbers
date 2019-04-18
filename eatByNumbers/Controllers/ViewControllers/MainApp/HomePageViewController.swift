@@ -12,7 +12,7 @@ class HomePageViewController: UIViewController {
     
     var user: User?
     var resultsController: UISearchController?
-    var userFoodSpots: [FoodSpot] = []
+    var userFoodSpots: [FoodSpot] = [] 
     
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -26,6 +26,7 @@ class HomePageViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         setSearchController()
+        setViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,16 +35,7 @@ class HomePageViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        guard let user = user else { return }
-        if userFoodSpots == UserController.shared.userFoodSpots {
-            dismiss(animated: true, completion: nil)
-        } else {
-            UserController.shared.update(user: user, with: userFoodSpots) { (success) in
-                if success {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-        }
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func editButtonTapped(_ sender: Any) {
@@ -79,6 +71,14 @@ class HomePageViewController: UIViewController {
         userFoodSpots = UserController.shared.userFoodSpots
         tableView.reloadData()
     }
+    
+    func setViews() {
+        self.view.backgroundColor = Colors.lightGray.color()
+        tableView.tableFooterView = UIView()
+        tableView.tableFooterView?.backgroundColor = .clear
+        tableView.backgroundColor = .clear
+        nameLabel.textColor = Colors.white.color()
+    }
 
     
     // MARK: - Navigation
@@ -109,8 +109,14 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let spotToRemove = userFoodSpots[indexPath.row]
             userFoodSpots.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if let user = user {
+                FoodSpotController.shared.remove(user: user, fromFoodSpot: spotToRemove) { (success) in
+                    UserController.shared.userFoodSpots = self.userFoodSpots
+                }
+            }
         }
     }
 }

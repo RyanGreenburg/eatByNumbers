@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VoV-ag-avX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zld-hk-xyn">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rM2-8C-4ze">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-zr-bnz">
-                                <rect key="frame" x="20" y="138" width="50" height="50"/>
+                                <rect key="frame" x="20" y="94" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="9Ta-1b-gMl"/>
                                     <constraint firstAttribute="width" secondItem="g8I-zr-bnz" secondAttribute="height" multiplier="1:1" id="Dny-NB-XPe"/>
@@ -43,14 +43,22 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijH-dv-s4n">
-                                <rect key="frame" x="353" y="148" width="41" height="30"/>
-                                <state key="normal" title="(user)"/>
+                                <rect key="frame" x="344" y="94" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.32636776566505432" green="0.68799835443496704" blue="0.90986216068267822" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Qcs-CZ-Fts"/>
+                                    <constraint firstAttribute="width" secondItem="ijH-dv-s4n" secondAttribute="height" multiplier="1:1" id="YoO-OX-TDy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="MY FAVES">
+                                    <color key="titleColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="userButtonTapped:" destination="zld-hk-xyn" eventType="touchUpInside" id="cnQ-1L-iCb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpn-qq-BKz">
-                                <rect key="frame" x="344" y="191" width="50" height="50"/>
+                                <rect key="frame" x="344" y="157" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vpn-qq-BKz" secondAttribute="height" multiplier="1:1" id="KRy-2p-d5Q"/>
                                     <constraint firstAttribute="width" constant="50" id="ZqW-rY-f3R"/>
@@ -77,7 +85,7 @@
                             <constraint firstItem="9mx-yK-sUt" firstAttribute="centerX" secondItem="KNi-8b-blk" secondAttribute="centerX" id="GrX-Jj-ekW"/>
                             <constraint firstItem="ijH-dv-s4n" firstAttribute="centerY" secondItem="g8I-zr-bnz" secondAttribute="centerY" id="KV3-al-IRR"/>
                             <constraint firstItem="Yx0-wB-yZR" firstAttribute="trailing" secondItem="ijH-dv-s4n" secondAttribute="trailing" constant="20" id="alB-aM-HFn"/>
-                            <constraint firstItem="rM2-8C-4ze" firstAttribute="bottom" secondItem="KNi-8b-blk" secondAttribute="bottom" constant="-34" id="bCS-35-j9S"/>
+                            <constraint firstItem="rM2-8C-4ze" firstAttribute="bottom" secondItem="KNi-8b-blk" secondAttribute="bottom" id="bCS-35-j9S"/>
                             <constraint firstItem="m4z-48-sB1" firstAttribute="top" secondItem="9mx-yK-sUt" secondAttribute="bottom" constant="20" id="eC2-T5-mV2"/>
                             <constraint firstItem="vpn-qq-BKz" firstAttribute="top" secondItem="ijH-dv-s4n" secondAttribute="bottom" constant="13" id="hU4-Sk-r6L"/>
                             <constraint firstItem="m4z-48-sB1" firstAttribute="trailing" secondItem="9mx-yK-sUt" secondAttribute="trailing" id="ht5-E4-fFQ"/>
@@ -102,24 +110,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8i-IX-o9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="918.84057971014499" y="156.69642857142856"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dH1-RO-gId">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VoV-ag-avX" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KDp-eM-Q2W">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="zld-hk-xyn" kind="relationship" relationship="rootViewController" id="aza-Ng-UzO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eNO-sb-3Ko" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="8.6956521739130448" y="156.69642857142856"/>
         </scene>
     </scenes>
     <resources>

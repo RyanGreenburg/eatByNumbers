@@ -69,6 +69,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b3h-Kj-350"/>
                     </view>
+                    <navigationItem key="navigationItem" id="TTq-FT-j3o"/>
                     <connections>
                         <outlet property="activityIndicator" destination="ioR-Oy-0rg" id="6dT-xp-3fv"/>
                         <outlet property="fetchingFoodSpotsLabel" destination="QP6-bF-ZBj" id="VUb-2G-U7D"/>
@@ -79,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWS-S8-jar" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-810" y="138"/>
+            <point key="canvasLocation" x="100.00000000000001" y="137.94642857142856"/>
         </scene>
     </scenes>
 </document>

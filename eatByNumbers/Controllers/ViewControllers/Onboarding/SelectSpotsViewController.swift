@@ -15,16 +15,16 @@ class SelectSpotsViewController: UIViewController {
     var foodSpots: [FoodSpot] = []
     
     var resultsController: UISearchController?
-    var selectedPlacemark: MKPlacemark?
+    var selectedVenue: Venue?
     var locationManager: CLLocationManager {
         return UserController.shared.userLocationManager ?? CLLocationManager()
     }
     
     var regionInMeters: Double = 1000
     
+    @IBOutlet weak var selectSpotsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var showMapButton: UIButton!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
     
@@ -36,6 +36,7 @@ class SelectSpotsViewController: UIViewController {
         tableView.dataSource = self
         setSearchController()
         checkLocationServices()
+        setViews()
     }
 
     func setSearchController() {
@@ -57,11 +58,14 @@ class SelectSpotsViewController: UIViewController {
     }
     
     @objc func addFavorite() {
-        guard let placemark = selectedPlacemark,
-            let location = placemark.location else { return }
-        let name = placemark.name ?? ""
-        let address = parseAddress(selectedItem: placemark)
+        guard let venue = selectedVenue,
+            let name = venue.name,
+            let address = venue.location.address
+            else { return }
+        let location = CLLocation(latitude: venue.location.lat, longitude: venue.location.lng)
+        
         let newFoodSpot = FoodSpot(name: name, address: address, location: location)
+        
         if foodSpots.count < 10 {
             foodSpots.append(newFoodSpot)
         } else {
@@ -82,35 +86,14 @@ class SelectSpotsViewController: UIViewController {
     
     @IBAction func doneBarButtonTapped(_ sender: Any) {
         
-        if foodSpots.count == 0 {
-            goToHomePage()
-        } else {
-            guard let user = user else { return }
-            
-            UserController.shared.update(user: user, with: foodSpots) { (success) in
-                if success {
-                    self.goToHomePage()
-                }
-            }
-        }
+        goToHomePage()
     }
     
     func goToHomePage() {
-        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        let storyboard = UIStoryboard(name: "MapView", bundle: nil)
         guard let viewController = storyboard.instantiateInitialViewController() else { return }
         
         present(viewController, animated: true, completion: nil)
-    }
-    
-    // NEED TO COLLAPSE MAP NOT JUST HIDE IT
-    @IBAction func showMapButtonTapped(_ sender: Any) {
-        if mapView.isHidden == false {
-            mapView.isHidden = true
-            showMapButton.backgroundColor = .green
-        } else {
-            mapView.isHidden = false
-            showMapButton.backgroundColor = .red
-        }
     }
 }
 
@@ -213,14 +196,13 @@ extension SelectSpotsViewController: CLLocationManagerDelegate {
 
 extension SelectSpotsViewController: HandleMapSearch {
     
-    func dropPinZoomIn(_ placemark: MKPlacemark) {
-        selectedPlacemark = placemark
+    func dropPinZoomIn(_ placemark: MKPlacemark, _ venue: Venue) {
+        selectedVenue = venue
         mapView.removeAnnotations(mapView.annotations)
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
-        let address = parseAddress(selectedItem: placemark)
-        annotation.subtitle = address
+        annotation.title = venue.name
+        annotation.subtitle = venue.location.address
     
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
@@ -230,7 +212,7 @@ extension SelectSpotsViewController: HandleMapSearch {
 }
 
 protocol HandleMapSearch {
-    func dropPinZoomIn(_ placemark: MKPlacemark)
+    func dropPinZoomIn(_ placemark: MKPlacemark, _ venue: Venue)
 }
 
 // MARK: - TableView DataSource/Delegate
@@ -246,8 +228,22 @@ extension SelectSpotsViewController: UITableViewDelegate, UITableViewDataSource 
         let location = foodSpots[indexPath.row]
         
         cell.textLabel?.text = location.name
+        cell.textLabel?.textColor = Colors.white.color()
         cell.detailTextLabel?.text = location.address
+        cell.detailTextLabel?.textColor = Colors.white.color()
+        
+        cell.backgroundColor = .clear
         
         return cell
+    }
+}
+
+extension SelectSpotsViewController {
+    func setViews() {
+        tableView.backgroundColor = .clear
+        self.view.backgroundColor = Colors.lightGray.color()
+        tableView.tableFooterView = UIView()
+        tableView.tableFooterView?.backgroundColor = .clear
+        selectSpotsLabel.textColor = Colors.white.color()
     }
 }

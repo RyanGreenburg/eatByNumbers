@@ -23,8 +23,14 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViews()
         usernameTextfField.delegate = self
+        updateViews()
+    }
+    
+    func updateViews() {
         guard let user = user else { return }
+        photo = user.photo
         usernameTextfField.text = user.username
         containerView.layer.cornerRadius = containerView.frame.width / 2
     }
@@ -38,7 +44,7 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
         UserController.shared.update(user: user, withName: name, photo: photo, foodSpots: foodSpots) { (success) in
             if success {
                 DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         }
@@ -83,18 +89,18 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
     }
     
     func restartApp() {
-        let viewController = InitialViewController()
-        let navControl = UINavigationController(rootViewController: viewController)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        guard let viewController = storyBoard.instantiateInitialViewController() else { return }
         
         guard let window = UIApplication.shared.keyWindow,
             let rootViewController = window.rootViewController else { return }
         
-        navControl.view.frame = rootViewController.view.frame
-        navControl.view.layoutIfNeeded()
+        viewController.view.frame = rootViewController.view.frame
+        viewController.view.layoutIfNeeded()
         
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil) { (success) in
             if success {
-                window.rootViewController = navControl
+                window.rootViewController = viewController
             }
         }
     }
@@ -104,5 +110,17 @@ extension EditProfileTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         usernameTextfField.resignFirstResponder()
         return true
+    }
+}
+
+extension EditProfileTableViewController {
+    func setViews() {
+        tableView.backgroundColor = Colors.lightGray.color()
+        saveButton.backgroundColor = Colors.lightBlue.color()
+        saveButton.setTitleColor(Colors.white.color(), for: .normal)
+        saveButton.layer.cornerRadius = saveButton.frame.height / 4
+        deleteButton.setTitleColor(.red, for: .normal)
+        deleteButton.backgroundColor = Colors.darkBlue.color()
+        deleteButton.layer.cornerRadius = deleteButton.frame.height / 4
     }
 }

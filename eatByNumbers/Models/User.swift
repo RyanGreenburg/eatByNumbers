@@ -14,6 +14,7 @@ class User {
     var username: String
     var photoData: Data?
     var favoriteSpots: [FoodSpot]?
+    var favoriteSpotsRefs: [CKRecord.Reference]?
     var appleUserRef: CKRecord.Reference?
     var recordID: CKRecord.ID
     
@@ -41,9 +42,9 @@ class User {
         }
     }
     
-    init(username: String, photo: UIImage, favoriteSpots: [FoodSpot]?, appleUserRef: CKRecord.Reference?, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(username: String, photo: UIImage, favoriteSpotsRefs: [CKRecord.Reference]?, appleUserRef: CKRecord.Reference?, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.username = username
-        self.favoriteSpots = favoriteSpots
+        self.favoriteSpotsRefs = favoriteSpotsRefs
         self.appleUserRef = appleUserRef
         self.recordID = recordID
         self.photo = photo
@@ -58,7 +59,7 @@ class User {
         self.username = username
         self.appleUserRef = appleUserRef
         self.recordID = record.recordID
-        self.favoriteSpots = record[UserConstants.favoriteSpotsKey] as? [FoodSpot]
+        self.favoriteSpotsRefs = record[UserConstants.favoriteSpotsRefKey] as? [CKRecord.Reference]
         
         do {
             try self.photoData = Data(contentsOf: imageAsset.fileURL!)
@@ -77,7 +78,7 @@ struct UserConstants {
     
     static let photoKey = "photo"
     
-    static let favoriteSpotsKey = "favoriteSpots"
+    static let favoriteSpotsRefKey = "favoriteSpotsRef"
     
     static let appleUserRefKey = "appleUserRef"
 }
@@ -90,7 +91,7 @@ extension CKRecord {
         
         setValue(user.username, forKey: UserConstants.usernameKey)
         setValue(user.imageAsset, forKey: UserConstants.photoKey)
-        setValue(user.favoriteSpots, forKey: UserConstants.favoriteSpotsKey)
+        setValue(user.favoriteSpotsRefs, forKey: UserConstants.favoriteSpotsRefKey)
         setValue(user.appleUserRef, forKey: UserConstants.appleUserRefKey)
     }
 }

@@ -16,16 +16,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WG0-Df-2nG">
-                    <rect key="frame" x="8" y="4" width="284" height="24"/>
+                    <rect key="frame" x="15" y="15" width="270" height="24"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(name)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLe-bL-KVf">
-                            <rect key="frame" x="0.0" y="0.0" width="142" height="24"/>
+                            <rect key="frame" x="0.0" y="0.0" width="135" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(score)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHo-tC-4II">
-                            <rect key="frame" x="142" y="0.0" width="142" height="24"/>
+                            <rect key="frame" x="135" y="0.0" width="135" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -33,16 +33,16 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="408-oW-7TS">
-                    <rect key="frame" x="8" y="32" width="284" height="80"/>
+                    <rect key="frame" x="15" y="43" width="270" height="58"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(address)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRM-5b-TF8">
-                            <rect key="frame" x="0.0" y="0.0" width="142" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="135" height="58"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxb-1d-kre">
-                            <rect key="frame" x="142" y="0.0" width="142" height="80"/>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxb-1d-kre">
+                            <rect key="frame" x="135" y="0.0" width="135" height="58"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="Directions"/>
                             <connections>
@@ -54,13 +54,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="WG0-Df-2nG" firstAttribute="top" secondItem="wb5-cx-Cct" secondAttribute="top" constant="4" id="6Fh-xk-Wyf"/>
-                <constraint firstItem="Gdd-eF-aFi" firstAttribute="bottom" secondItem="408-oW-7TS" secondAttribute="bottom" constant="4" id="MV9-iV-vri"/>
+                <constraint firstItem="WG0-Df-2nG" firstAttribute="top" secondItem="wb5-cx-Cct" secondAttribute="top" constant="15" id="6Fh-xk-Wyf"/>
+                <constraint firstItem="Gdd-eF-aFi" firstAttribute="bottom" secondItem="408-oW-7TS" secondAttribute="bottom" constant="15" id="MV9-iV-vri"/>
                 <constraint firstItem="408-oW-7TS" firstAttribute="top" secondItem="WG0-Df-2nG" secondAttribute="bottom" constant="4" id="NDC-Wl-kY1"/>
-                <constraint firstAttribute="trailing" secondItem="WG0-Df-2nG" secondAttribute="trailing" constant="8" id="W8T-44-e5Z"/>
-                <constraint firstItem="WG0-Df-2nG" firstAttribute="leading" secondItem="wb5-cx-Cct" secondAttribute="leading" constant="8" id="bdx-M2-fZZ"/>
-                <constraint firstItem="Gdd-eF-aFi" firstAttribute="trailing" secondItem="408-oW-7TS" secondAttribute="trailing" constant="8" id="mkQ-rB-pWH"/>
-                <constraint firstItem="408-oW-7TS" firstAttribute="leading" secondItem="Gdd-eF-aFi" secondAttribute="leading" constant="8" id="qtO-GM-eaG"/>
+                <constraint firstAttribute="trailing" secondItem="WG0-Df-2nG" secondAttribute="trailing" constant="15" id="W8T-44-e5Z"/>
+                <constraint firstItem="WG0-Df-2nG" firstAttribute="leading" secondItem="wb5-cx-Cct" secondAttribute="leading" constant="15" id="bdx-M2-fZZ"/>
+                <constraint firstItem="Gdd-eF-aFi" firstAttribute="trailing" secondItem="408-oW-7TS" secondAttribute="trailing" constant="15" id="mkQ-rB-pWH"/>
+                <constraint firstItem="408-oW-7TS" firstAttribute="leading" secondItem="Gdd-eF-aFi" secondAttribute="leading" constant="15" id="qtO-GM-eaG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Gdd-eF-aFi"/>

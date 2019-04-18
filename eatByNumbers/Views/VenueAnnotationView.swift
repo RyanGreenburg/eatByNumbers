@@ -82,7 +82,7 @@ class VenueAnnotationView: MKAnnotationView {
                 let venue = venueAnnotation.venue
                 venueDetailView.configureWith(venue)
             }
-            venueDetailView.layer.cornerRadius = venueDetailView.frame.width / 10
+            venueDetailView.layer.cornerRadius = venueDetailView.frame.height / 4
             venueDetailView.backgroundColor = Colors.lightGray.color()
             return venueDetailView
         }

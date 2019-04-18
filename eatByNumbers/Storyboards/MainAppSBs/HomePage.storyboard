@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home Page View Controller-->
+        <!--My Favorite Spots-->
         <scene sceneID="aGa-Ck-dpu">
             <objects>
                 <viewController storyboardIdentifier="HomePageVC" id="Ze0-vD-TNe" customClass="HomePageViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
@@ -36,14 +36,14 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5cG-KT-6a1">
-                                <rect key="frame" x="0.0" y="234" width="414" height="628"/>
+                                <rect key="frame" x="20" y="276" width="374" height="586"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="foodSpotCell" textLabel="8RG-5O-fUQ" detailTextLabel="vH1-3e-keX" rowHeight="83" style="IBUITableViewCellStyleSubtitle" id="cZo-PI-klX">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="83"/>
+                                        <rect key="frame" x="0.0" y="28" width="374" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cZo-PI-klX" id="Cdp-2L-foH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="82.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8RG-5O-fUQ">
@@ -70,22 +70,24 @@
                         <constraints>
                             <constraint firstItem="EvQ-hm-D3f" firstAttribute="leading" secondItem="0KR-Zc-Z34" secondAttribute="leading" constant="8" id="0nL-16-Y4M"/>
                             <constraint firstItem="5cG-KT-6a1" firstAttribute="bottom" secondItem="0KR-Zc-Z34" secondAttribute="bottom" id="3p0-Gf-Lzo"/>
-                            <constraint firstItem="5cG-KT-6a1" firstAttribute="top" secondItem="EvQ-hm-D3f" secondAttribute="bottom" constant="8" id="Fes-YN-zey"/>
-                            <constraint firstItem="0KR-Zc-Z34" firstAttribute="trailing" secondItem="5cG-KT-6a1" secondAttribute="trailing" id="JXF-am-06O"/>
+                            <constraint firstItem="5cG-KT-6a1" firstAttribute="top" secondItem="EvQ-hm-D3f" secondAttribute="bottom" constant="50" id="Fes-YN-zey"/>
+                            <constraint firstItem="0KR-Zc-Z34" firstAttribute="trailing" secondItem="5cG-KT-6a1" secondAttribute="trailing" constant="20" id="JXF-am-06O"/>
                             <constraint firstItem="0KR-Zc-Z34" firstAttribute="trailing" secondItem="EvQ-hm-D3f" secondAttribute="trailing" constant="8" id="SpO-bX-3oG"/>
-                            <constraint firstItem="5cG-KT-6a1" firstAttribute="leading" secondItem="0KR-Zc-Z34" secondAttribute="leading" id="VEO-vc-xxf"/>
+                            <constraint firstItem="5cG-KT-6a1" firstAttribute="leading" secondItem="0KR-Zc-Z34" secondAttribute="leading" constant="20" id="VEO-vc-xxf"/>
                             <constraint firstItem="EvQ-hm-D3f" firstAttribute="top" secondItem="0KR-Zc-Z34" secondAttribute="top" constant="8" id="bMT-kD-nTw"/>
                             <constraint firstItem="5cG-KT-6a1" firstAttribute="centerX" secondItem="0D3-NW-XGO" secondAttribute="centerX" id="r7d-z4-WlQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0KR-Zc-Z34"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9mh-Bs-JqP">
+                    <navigationItem key="navigationItem" title="My Favorite Spots" id="9mh-Bs-JqP">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="A3E-6H-Jgq">
+                            <color key="tintColor" red="0.0" green="0.6440176326" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="doneButtonTapped:" destination="Ze0-vD-TNe" id="ls8-Pf-JjI"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="3XR-55-cTc">
+                            <color key="tintColor" red="0.0" green="0.6440176326" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="editButtonTapped:" destination="Ze0-vD-TNe" id="CkR-2E-5Pz"/>
                                 <segue destination="pHc-nd-brA" kind="show" identifier="toEditVC" id="WVJ-wg-sth"/>
@@ -111,6 +113,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="avU-rf-isr">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.058823529411764705" green="0.058823529411764705" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
