@@ -118,7 +118,9 @@ extension EditProfileTableViewController {
         tableView.backgroundColor = Colors.lightGray.color()
         saveButton.backgroundColor = Colors.lightBlue.color()
         saveButton.setTitleColor(Colors.white.color(), for: .normal)
+        saveButton.layer.cornerRadius = saveButton.frame.height / 4
         deleteButton.setTitleColor(.red, for: .normal)
         deleteButton.backgroundColor = Colors.darkBlue.color()
+        deleteButton.layer.cornerRadius = deleteButton.frame.height / 4
     }
 }

@@ -26,6 +26,7 @@ class HomePageViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         setSearchController()
+        setViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +70,14 @@ class HomePageViewController: UIViewController {
         nameLabel.text = user.username
         userFoodSpots = UserController.shared.userFoodSpots
         tableView.reloadData()
+    }
+    
+    func setViews() {
+        self.view.backgroundColor = Colors.lightGray.color()
+        tableView.tableFooterView = UIView()
+        tableView.tableFooterView?.backgroundColor = .clear
+        tableView.backgroundColor = .clear
+        nameLabel.textColor = Colors.white.color()
     }
 
     

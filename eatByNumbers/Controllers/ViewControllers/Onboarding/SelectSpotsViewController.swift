@@ -22,9 +22,9 @@ class SelectSpotsViewController: UIViewController {
     
     var regionInMeters: Double = 1000
     
+    @IBOutlet weak var selectSpotsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var showMapButton: UIButton!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
     
@@ -36,6 +36,7 @@ class SelectSpotsViewController: UIViewController {
         tableView.dataSource = self
         setSearchController()
         checkLocationServices()
+        setViews()
     }
 
     func setSearchController() {
@@ -86,18 +87,6 @@ class SelectSpotsViewController: UIViewController {
     @IBAction func doneBarButtonTapped(_ sender: Any) {
         
         goToHomePage()
-//        if foodSpots.count == 0 {
-//        } else {
-//            guard let user = user,
-//                let foodSpotRefs = user.favoriteSpotsRefs
-//                else { return }
-//
-//            UserController.shared.update(user: user, with: foodSpotRefs) { (success) in
-//                if success {
-//                    self.goToHomePage()
-//                }
-//            }
-//        }
     }
     
     func goToHomePage() {
@@ -105,17 +94,6 @@ class SelectSpotsViewController: UIViewController {
         guard let viewController = storyboard.instantiateInitialViewController() else { return }
         
         present(viewController, animated: true, completion: nil)
-    }
-    
-    // NEED TO COLLAPSE MAP NOT JUST HIDE IT
-    @IBAction func showMapButtonTapped(_ sender: Any) {
-        if mapView.isHidden == false {
-            mapView.isHidden = true
-            showMapButton.backgroundColor = .green
-        } else {
-            mapView.isHidden = false
-            showMapButton.backgroundColor = .red
-        }
     }
 }
 
@@ -250,7 +228,11 @@ extension SelectSpotsViewController: UITableViewDelegate, UITableViewDataSource 
         let location = foodSpots[indexPath.row]
         
         cell.textLabel?.text = location.name
+        cell.textLabel?.textColor = Colors.white.color()
         cell.detailTextLabel?.text = location.address
+        cell.detailTextLabel?.textColor = Colors.white.color()
+        
+        cell.backgroundColor = .clear
         
         return cell
     }
@@ -262,6 +244,6 @@ extension SelectSpotsViewController {
         self.view.backgroundColor = Colors.lightGray.color()
         tableView.tableFooterView = UIView()
         tableView.tableFooterView?.backgroundColor = .clear
-        
+        selectSpotsLabel.textColor = Colors.white.color()
     }
 }

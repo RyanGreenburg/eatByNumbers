@@ -68,6 +68,13 @@ extension LocationsTableViewController {
         }
         
         cell.detailTextLabel?.text = addressString
+        
+        cell.textLabel?.textColor = Colors.white.color()
+        cell.textLabel?.backgroundColor = .clear
+        cell.detailTextLabel?.textColor = Colors.white.color()
+        cell.detailTextLabel?.backgroundColor = .clear
+        cell.backgroundColor = Colors.darkBlue.color().withAlphaComponent(0.8)
+        
         return cell
     }
     

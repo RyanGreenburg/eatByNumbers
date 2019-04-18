@@ -45,13 +45,15 @@ class FindSpotsViewController: UIViewController {
         hungryButton.setTitleColor(Colors.white.color(), for: .normal)
         hungryButton.backgroundColor = Colors.lightBlue.color()
         hungryButton.layer.cornerRadius = hungryButton.frame.height / 4
-        segmentedControl.tintColor = Colors.lightGray.color()
+        segmentedControl.tintColor = Colors.darkBlue.color()
         suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
         centerButton.layer.cornerRadius = centerButton.frame.width / 2
         suggestionButton.imageView?.clipsToBounds = true
         centerButton.imageView?.clipsToBounds = true
         suggestionButton.layer.masksToBounds = true
         centerButton.layer.masksToBounds = true
+        mapView.showsPointsOfInterest = false
+        userButton.layer.cornerRadius = userButton.frame.height / 2
     }
     
     func updateViews() {
