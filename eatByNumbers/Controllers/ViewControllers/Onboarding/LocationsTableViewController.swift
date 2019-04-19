@@ -99,10 +99,9 @@ extension LocationsTableViewController {
             let filtered = UserController.shared.userFoodSpots.filter { $0.recordID == newFoodSpot.recordID }
             
             if UserController.shared.userFoodSpots.count < 10 && filtered.count == 0 {
-                
-                UserController.shared.userFoodSpots.append(newFoodSpot)
                 FoodSpotController.shared.saveFoodSpot(withName: name, address: address, location: location) { (success) in
                     if success {
+                        NotificationCenter.default.post(name: Notification.Name("userFoodSpotsChanged"), object: nil)
                         DispatchQueue.main.async {
                             self.dismiss(animated: true, completion: nil)
                         }

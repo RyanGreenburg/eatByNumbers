@@ -60,17 +60,7 @@ class FoodSpotController {
                         let foodSpot = FoodSpot(record: record) else { completion(false) ; return }
                     self.allFoodSpots.append(foodSpot)
                     UserController.shared.userFoodSpots.append(foodSpot)
-                    
-//                    let foodSpotRef = reference.first!
-//                    UserController.shared.loggedInUser?.favoriteSpotsRefs?.append(foodSpotRef)
-//
-//                    if let user = UserController.shared.loggedInUser {
-//                        UserController.shared.update(user: user, with: foodSpotRef, completion: { (success) in
-//                            if success {
-//                                print("Added foodSpot Reference to User successfully")
-//                            }
-//                        })
-//                    }
+
                     completion(true)
                 })
             } else {
