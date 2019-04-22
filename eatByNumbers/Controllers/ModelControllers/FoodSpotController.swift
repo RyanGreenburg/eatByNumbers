@@ -113,14 +113,24 @@ class FoodSpotController {
         let filteredRefs = foodSpotRefs.filter { $0.recordID != user.recordID }
         foodSpot.usersFavoriteReferences = filteredRefs
         
-        let updateRecord = CKRecord(foodSpot: foodSpot)
-        
-        CloudKitManager.shared.update(record: updateRecord) { (error) in
-            if let error = error {
-                print("Error updating record : \(error.localizedDescription)")
+        if foodSpot.usersFavoriteReferences.count == 0 {
+            delete(foodSpot: foodSpot) { (success) in
+                if success {
+                    completion(true)
+                }
                 completion(false)
             }
-            completion(true)
+        } else {
+
+            let updateRecord = CKRecord(foodSpot: foodSpot)
+            
+            CloudKitManager.shared.update(record: updateRecord) { (error) in
+                if let error = error {
+                    print("Error updating record : \(error.localizedDescription)")
+                    completion(false)
+                }
+                completion(true)
+            }
         }
     }
     

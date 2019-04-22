@@ -118,34 +118,16 @@ class UserController {
         }
     }
     
-    func remove(foodSpot: FoodSpot, fromUser user: User, completion: @escaping (Bool) -> Void) {
-        guard let userFoodSpotRefs = user.favoriteSpotsRefs else { return }
-        
-        let foodSpotID = foodSpot.recordID
-        let filtered = userFoodSpotRefs.filter{ $0.recordID != foodSpotID }
-        user.favoriteSpotsRefs = filtered
-        
-        let updateRecord = CKRecord(user: user)
-        
-        CloudKitManager.shared.update(record: updateRecord) { (error) in
-            if let error = error {
-                print("Error updating user : \(error.localizedDescription) \n---\n \(error)")
-                completion(false)
-                return
-            }
-            print("FoodSpot removed from user successfully")
-            FoodSpotController.shared.remove(user: user, fromFoodSpot: foodSpot, completion: { (success) in
-                if success {
-                    print("User removed from foodSpot successfully")
-                }
-            })
-            
-            completion(true)
-        }
-    }
-    
     // delete
     func delete(user: User, completion: @escaping (Bool) -> Void) {
+        
+        if user.favoriteSpots != nil {
+            for foodSpot in user.favoriteSpots! {
+                FoodSpotController.shared.remove(user: user, fromFoodSpot: foodSpot) { (success) in
+                    // handle
+                }
+            }
+        }
         
         let recordID = user.recordID
         
