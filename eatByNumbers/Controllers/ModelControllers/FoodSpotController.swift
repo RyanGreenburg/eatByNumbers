@@ -113,7 +113,7 @@ class FoodSpotController {
         let filteredRefs = foodSpotRefs.filter { $0.recordID != user.recordID }
         foodSpot.usersFavoriteReferences = filteredRefs
         
-        if foodSpot.usersFavoriteReferences.count == 0 {
+        if filteredRefs.count == 0 {
             delete(foodSpot: foodSpot) { (success) in
                 if success {
                     completion(true)
@@ -136,22 +136,13 @@ class FoodSpotController {
     
     // delete
     func delete(foodSpot: FoodSpot, completion: @escaping (Bool) -> Void) {
-        CKContainer.default().fetchUserRecordID { (recordID, error) in
+        
+        CloudKitManager.shared.delete(record: foodSpot.recordID) { (error) in
             if let error = error {
-                print("Error fetching user AppleID : \(error.localizedDescription)")
+                print("Error deleting foodSpot record : \(error.localizedDescription)")
                 completion(false)
             }
-            
-            guard let recordID = recordID else { completion(false) ; return }
-            
-            CloudKitManager.shared.delete(record: recordID, completion: { (error) in
-                if let error = error {
-                    print("Error deleting user from CloudKit : \(error.localizedDescription)")
-                }
-                // remove food spot?
-                
-                completion(true)
-            })
+            completion(true)
         }
     }
 }
