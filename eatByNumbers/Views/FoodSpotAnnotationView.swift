@@ -23,6 +23,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         self.canShowCallout = false
+        self.centerOffset = CGPoint(x: 0, y: -5)
         let image = UIImage(named: "foodSpotIcon")
         let resizedImage = image?.resizeImage(targetSize: CGSize(width: 50, height: 50))
         self.image = resizedImage
@@ -31,6 +32,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.canShowCallout = false
+        self.centerOffset = CGPoint(x: 0, y: -5)
         let image = UIImage(named: "foodSpotIcon")
         let resizedImage = image?.resizeImage(targetSize: CGSize(width: 50, height: 50))
         self.image = resizedImage
@@ -52,7 +54,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
                 
                 if animated {
                     self.customCalloutView?.alpha = 0.0
-                    UIView.animate(withDuration: 0.2) {
+                    UIView.animate(withDuration: 0.1) {
                         self.customCalloutView?.alpha = 1.0
                     }
                 }
@@ -60,7 +62,7 @@ class FoodSpotAnnotationView: MKAnnotationView {
         } else {
             if customCalloutView != nil {
                 if animated {
-                    UIView.animate(withDuration: 0.2, animations: {
+                    UIView.animate(withDuration: 0.1, animations: {
                         self.customCalloutView?.alpha = 0.0
                     }) { (success) in
                         if success {
@@ -71,6 +73,13 @@ class FoodSpotAnnotationView: MKAnnotationView {
                     self.customCalloutView?.removeFromSuperview()
                 }
             }
+        }
+    }
+    
+    func animateDrop() {
+        self.frame.origin.y = -1000
+        UIView.animate(withDuration: 1) {
+            self.frame.origin.y = 0
         }
     }
     

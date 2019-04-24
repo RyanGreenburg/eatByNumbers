@@ -97,6 +97,8 @@ class FindSpotsViewController: UIViewController {
     }
     
     @IBAction func hungryButtonTapped(_ sender: Any) {
+        regionInMeters = 10000
+        centerViewOnUserLocation()
         updateViews()
     }
     @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
@@ -149,7 +151,6 @@ class FindSpotsViewController: UIViewController {
     }
     
     func displayAnnotations(_ foodSpotAnnotations: [MKPointAnnotation], _ venueAnnotations: [MKPointAnnotation]) {
-        
         var filteredAnnotations = venueAnnotations.filter { (venueAnnotation) -> Bool in
             return foodSpotAnnotations.contains(where: { $0.title == venueAnnotation.title && $0.subtitle == venueAnnotation.subtitle }) == true ? false : true
         }
@@ -224,6 +225,7 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
             let reuseID = "venuePin"
             let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID, for: venueAnnotation) as? VenueAnnotationView
             pinView?.venueDetailDelegate = self
+            pinView?.animateDrop()
             return pinView
         }
         
@@ -231,16 +233,29 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
             let reuseID = "foodSpotPin"
             let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID, for: foodSpotAnnotation) as? FoodSpotAnnotationView
             pinView?.foodSpotDetailDelegate = self
+            pinView?.animateDrop()
             return pinView
         }
         return nil
     }
     
-    func getDirections(){
-        if let selectedPin = selectedPlacemark {
-            let mapItem = MKMapItem(placemark: selectedPin)
-            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-            mapItem.openInMaps(launchOptions: launchOptions)
+    func getDirections(for location: String) {
+        if selectedPlacemark != nil {
+            
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = location
+            request.region = mapView.region
+            let search = MKLocalSearch(request: request)
+            search.start { (response, error) in
+                if let error = error {
+                    print("Error searching for location : \(error)")
+                }
+                guard let response = response else { return }
+                
+                let mapItem = response.mapItems.first!
+                let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+                mapItem.openInMaps(launchOptions: launchOptions)
+            }
         }
     }
     
@@ -288,12 +303,12 @@ extension FindSpotsViewController: FoodSpotDetailViewDelegate, VenueDetailViewDe
         let coordinate = CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lng)
         let placemark = MKPlacemark(coordinate: coordinate)
         selectedPlacemark = placemark
-        getDirections()
+        getDirections(for: venue.name!)
     }
     
     func directionsRequestedFor(_ foodSpot: FoodSpot) {
         let placemark = MKPlacemark(coordinate: foodSpot.location.coordinate)
         selectedPlacemark = placemark
-        getDirections()
+        getDirections(for: foodSpot.name)
     }
 }

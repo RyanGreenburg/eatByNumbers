@@ -25,6 +25,7 @@ class HomePageViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name("userFoodSpotsChanged"), object: nil)
         setSearchController()
         setViews()
     }
@@ -32,6 +33,10 @@ class HomePageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("userFoodSpotsChanged"), object: nil)
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
@@ -56,6 +61,13 @@ class HomePageViewController: UIViewController {
         definesPresentationContext = true
         locationsTVC?.tableView.tableFooterView = UIView()
         locationsTVC?.tableView.tableFooterView?.backgroundColor = .clear
+    }
+    
+    @objc func reloadTableView() {
+        userFoodSpots = UserController.shared.userFoodSpots
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func updateViews() {
