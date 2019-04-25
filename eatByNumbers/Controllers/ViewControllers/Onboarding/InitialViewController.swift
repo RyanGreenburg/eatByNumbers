@@ -19,6 +19,7 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var foundUserLabel: UILabel!
     @IBOutlet weak var fetchingFoodSpotsLabel: UILabel!
     @IBOutlet weak var foundFoodSpotsLabel: UILabel!
+    @IBOutlet weak var logoImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,5 +111,7 @@ extension InitialViewController {
         fetchingFoodSpotsLabel.textColor = Colors.white.color()
         foundUserLabel.textColor = Colors.lightBlue.color()
         foundFoodSpotsLabel.textColor = Colors.lightBlue.color()
+        logoImage.layer.cornerRadius = logoImage.frame.height / 4
+        logoImage.clipsToBounds = true
     }
 }
