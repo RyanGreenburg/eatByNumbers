@@ -17,6 +17,7 @@ class NewUserViewController: UIViewController {
     let locationManager = CLLocationManager()
     
     // MARK: - Outlets
+    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var allowLocationButton: UIButton!
@@ -94,6 +95,7 @@ extension NewUserViewController : UITextFieldDelegate {
 extension NewUserViewController {
     func setupViews() {
         self.view.backgroundColor = Colors.lightGray.color()
+        backgroundView.backgroundColor = Colors.lightGray.color()
         allowLocationButton.backgroundColor = Colors.lightBlue.color()
         allowLocationButton.setTitleColor(Colors.white.color(), for: .normal)
         allowLocationButton.layer.cornerRadius = allowLocationButton.frame.height / 4

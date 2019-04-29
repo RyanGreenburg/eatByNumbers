@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="474-YN-Kmz">
-                                <rect key="frame" x="0.0" y="108" width="414" height="450"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="450"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="450" id="U8b-hU-gNQ"/>
                                 </constraints>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-Ya-GEM">
-                                <rect key="frame" x="0.0" y="558" width="414" height="304"/>
+                                <rect key="frame" x="0.0" y="450" width="414" height="412"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" textLabel="pYx-yz-b8k" detailTextLabel="z8t-Hx-ewj" style="IBUITableViewCellStyleSubtitle" id="uLo-m3-nHv">
@@ -54,9 +54,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Favorite Food Spots" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIg-p2-pHD">
-                                <rect key="frame" x="35.5" y="48" width="343" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Favorite Food Spots" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIg-p2-pHD">
+                                <rect key="frame" x="0.0" y="48" width="414" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -65,7 +65,7 @@
                         <constraints>
                             <constraint firstItem="8ah-Ya-GEM" firstAttribute="top" secondItem="474-YN-Kmz" secondAttribute="bottom" id="CZd-4u-Kka"/>
                             <constraint firstItem="lnW-LD-lFb" firstAttribute="trailing" secondItem="8ah-Ya-GEM" secondAttribute="trailing" id="F9K-uM-zmR"/>
-                            <constraint firstItem="474-YN-Kmz" firstAttribute="top" secondItem="rIg-p2-pHD" secondAttribute="bottom" constant="24" id="OK1-xH-hRt"/>
+                            <constraint firstItem="474-YN-Kmz" firstAttribute="top" secondItem="96a-65-ZLD" secondAttribute="top" id="OK1-xH-hRt"/>
                             <constraint firstItem="8ah-Ya-GEM" firstAttribute="leading" secondItem="lnW-LD-lFb" secondAttribute="leading" id="P73-MK-G2u"/>
                             <constraint firstItem="8ah-Ya-GEM" firstAttribute="top" secondItem="474-YN-Kmz" secondAttribute="bottom" id="ROw-x1-jPF"/>
                             <constraint firstItem="rIg-p2-pHD" firstAttribute="centerX" secondItem="96a-65-ZLD" secondAttribute="centerX" id="Ukt-NR-emK"/>
@@ -73,6 +73,7 @@
                             <constraint firstItem="8ah-Ya-GEM" firstAttribute="bottom" secondItem="lnW-LD-lFb" secondAttribute="bottom" id="Zle-g0-4Lg"/>
                             <constraint firstItem="lnW-LD-lFb" firstAttribute="trailing" secondItem="474-YN-Kmz" secondAttribute="trailing" id="cJK-cY-7oc"/>
                             <constraint firstItem="474-YN-Kmz" firstAttribute="leading" secondItem="lnW-LD-lFb" secondAttribute="leading" id="ws4-H9-fkQ"/>
+                            <constraint firstItem="rIg-p2-pHD" firstAttribute="leading" secondItem="474-YN-Kmz" secondAttribute="leading" id="zgn-2G-7BA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lnW-LD-lFb"/>
                     </view>

@@ -157,6 +157,7 @@ extension SelectSpotsViewController: MKMapViewDelegate, UINavigationControllerDe
         pinView?.canShowCallout = true
         let smallSqure = CGSize(width: 30, height: 30)
         let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSqure))
+        button.setBackgroundImage(UIImage(named: "logo"), for: .normal)
         button.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
         pinView?.leftCalloutAccessoryView = button
         return pinView
@@ -244,6 +245,6 @@ extension SelectSpotsViewController {
         self.view.backgroundColor = Colors.lightGray.color()
         tableView.tableFooterView = UIView()
         tableView.tableFooterView?.backgroundColor = .clear
-        selectSpotsLabel.textColor = Colors.white.color()
+        selectSpotsLabel.textColor = Colors.darkBlue.color()
     }
 }
