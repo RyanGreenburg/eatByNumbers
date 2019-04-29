@@ -15,8 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
             endingLineNumber = "128"
-            landmarkName = "tableView(_:commit:forRowAt:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -26,12 +26,12 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/HomePageViewController.swift"
-                  timestampString = "577649827.502225"
+                  timestampString = "578249604.973555"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "128"
                   endingLineNumber = "128"
-                  offsetFromSymbolStart = "992">
+                  offsetFromSymbolStart = "1046">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -41,12 +41,12 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/HomePageViewController.swift"
-                  timestampString = "577649827.504457"
+                  timestampString = "578249604.977146"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "129"
                   endingLineNumber = "129"
-                  offsetFromSymbolStart = "100">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
