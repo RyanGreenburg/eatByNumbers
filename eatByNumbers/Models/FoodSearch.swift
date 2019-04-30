@@ -17,13 +17,13 @@ struct Response: Codable {
     let venues: [Venue]?
     let groups: [Group]?
     let minivenues: [Venue]?
-    
 }
 
 struct Venue: Codable {
     let name: String?
     let location: Location
     let categories: [Category]
+    let id: String
 }
 
 struct Location: Codable {
@@ -51,3 +51,4 @@ struct Group: Codable {
 struct Item: Codable {
     let venue: Venue
 }
+

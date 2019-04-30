@@ -94,12 +94,13 @@ extension LocationsTableViewController {
             guard let address = selectedItem.location.address,
                 let name = selectedItem.name
                 else { return }
+            let id = selectedItem.id
             let location = CLLocation(latitude: selectedItem.location.lat, longitude: selectedItem.location.lng)
-            let newFoodSpot = FoodSpot(name: name, address: address, location: location)
+            let newFoodSpot = FoodSpot(id: id, name: name, address: address, location: location)
             let filtered = UserController.shared.userFoodSpots.filter { $0.recordID == newFoodSpot.recordID }
             
             if UserController.shared.userFoodSpots.count < 10 && filtered.count == 0 {
-                FoodSpotController.shared.saveFoodSpot(withName: name, address: address, location: location) { (success) in
+                FoodSpotController.shared.saveFoodSpot(withName: name, id: id, address: address, location: location) { (success) in
                     if success {
                         NotificationCenter.default.post(name: Notification.Name("userFoodSpotsChanged"), object: nil)
                         DispatchQueue.main.async {

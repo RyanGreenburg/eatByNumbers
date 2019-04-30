@@ -26,12 +26,12 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/HomePageViewController.swift"
-                  timestampString = "578249604.973555"
+                  timestampString = "578335597.9183789"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "128"
                   endingLineNumber = "128"
-                  offsetFromSymbolStart = "1046">
+                  offsetFromSymbolStart = "992">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -41,12 +41,12 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/HomePageViewController.swift"
-                  timestampString = "578249604.977146"
+                  timestampString = "578335597.9205379"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "129"
                   endingLineNumber = "129"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "100">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "eatByNumbers/Controllers/ModelControllers/FoodSpotController.swift"
-            timestampString = "577649827.4620759"
+            timestampString = "578335597.795894"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "138"

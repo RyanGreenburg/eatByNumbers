@@ -62,9 +62,12 @@ class SelectSpotsViewController: UIViewController {
             let name = venue.name,
             let address = venue.location.address
             else { return }
+        
+        let id = venue.id
+        
         let location = CLLocation(latitude: venue.location.lat, longitude: venue.location.lng)
         
-        let newFoodSpot = FoodSpot(name: name, address: address, location: location)
+        let newFoodSpot = FoodSpot(id: id, name: name, address: address, location: location)
         
         if foodSpots.count < 10 {
             foodSpots.append(newFoodSpot)
@@ -73,7 +76,7 @@ class SelectSpotsViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
         
-        FoodSpotController.shared.saveFoodSpot(withName: name, address: address, location: location) { (success) in
+        FoodSpotController.shared.saveFoodSpot(withName: name, id: id, address: address, location: location) { (success) in
             if success {
                 DispatchQueue.main.async {
                 self.mapView.removeAnnotations(self.mapView.annotations)
