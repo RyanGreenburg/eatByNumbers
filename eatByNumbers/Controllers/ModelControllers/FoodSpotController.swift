@@ -31,7 +31,7 @@ class FoodSpotController {
     // MARK: - CRUD
     
     // save
-    func saveFoodSpot(withName name: String, address: String, location: CLLocation, completion: @escaping (Bool) -> Void) {
+    func saveFoodSpot(withName name: String, id: String, address: String, location: CLLocation, completion: @escaping (Bool) -> Void) {
         
         let predicate = NSPredicate(format: "name == %@", name)
         let query = CKQuery(recordType: FoodSpotConstants.typeKey, predicate: predicate)
@@ -46,7 +46,7 @@ class FoodSpotController {
                 guard let recordID = UserController.shared.loggedInUser?.recordID else { completion(false) ; return }
                 
                 let reference = [CKRecord.Reference(recordID: recordID, action: .deleteSelf)]
-                let newFoodSpot = FoodSpot(name: name, address: address, location: location, usersFavoriteReferences: reference)
+                let newFoodSpot = FoodSpot(id: id, name: name, address: address, location: location, usersFavoriteReferences: reference)
                 
                 let foodSpotRecord = CKRecord(foodSpot: newFoodSpot)
                 

@@ -21,7 +21,7 @@ class FoodSpotAnnotation: MKPointAnnotation {
     }
     
     var name: String {
-        return foodSpot.name
+        return foodSpot.name!
     }
     
     var address: String {

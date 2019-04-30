@@ -97,6 +97,7 @@ class FindSpotsViewController: UIViewController {
     }
     
     @IBAction func hungryButtonTapped(_ sender: Any) {
+        mapView.removeAnnotations(mapView.annotations)
         regionInMeters = 10000
         centerViewOnUserLocation()
         updateViews()
@@ -127,7 +128,7 @@ class FindSpotsViewController: UIViewController {
             let annotation = FoodSpotAnnotation(foodSpot: item)
             annotation.coordinate = item.location.coordinate
             annotation.title = item.name
-            annotation.subtitle = item.address
+            annotation.subtitle = item.id
             if !annotations.contains(annotation) {
                 annotations.append(annotation)
             }
@@ -142,7 +143,7 @@ class FindSpotsViewController: UIViewController {
             let annotation = VenueAnnotation(venue: item)
             annotation.coordinate = CLLocationCoordinate2D(latitude: item.location.lat, longitude: item.location.lng)
             annotation.title = item.name
-            annotation.subtitle = item.location.address
+            annotation.subtitle = item.id
             if !annotations.contains(annotation) {
                 annotations.append(annotation)
             }
@@ -151,8 +152,9 @@ class FindSpotsViewController: UIViewController {
     }
     
     func displayAnnotations(_ foodSpotAnnotations: [MKPointAnnotation], _ venueAnnotations: [MKPointAnnotation]) {
+        
         var filteredAnnotations = venueAnnotations.filter { (venueAnnotation) -> Bool in
-            return foodSpotAnnotations.contains(where: { $0.title == venueAnnotation.title && $0.subtitle == venueAnnotation.subtitle }) == true ? false : true
+            return foodSpotAnnotations.contains(where: { $0.subtitle == venueAnnotation.subtitle }) == true ? false : true
         }
         
         filteredAnnotations += foodSpotAnnotations
@@ -287,11 +289,6 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
 // MARK: - CoreLocation Delegate
 extension FindSpotsViewController: CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-    }
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
     }
@@ -309,6 +306,6 @@ extension FindSpotsViewController: FoodSpotDetailViewDelegate, VenueDetailViewDe
     func directionsRequestedFor(_ foodSpot: FoodSpot) {
         let placemark = MKPlacemark(coordinate: foodSpot.location.coordinate)
         selectedPlacemark = placemark
-        getDirections(for: foodSpot.name)
+        getDirections(for: foodSpot.name!)
     }
 }

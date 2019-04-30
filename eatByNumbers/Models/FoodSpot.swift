@@ -14,13 +14,15 @@ import CoreLocation
 // conform to NSObject and MKAnnotation to create map items, https://www.raywenderlich.com/548-mapkit-tutorial-getting-started
 class FoodSpot {
     
-    var name: String
+    var id: String
+    var name: String?
     var address: String
     var location: CLLocation
     var usersFavoriteReferences: [CKRecord.Reference]
     var recordID: CKRecord.ID
     
-    init(name: String, address: String, location: CLLocation, usersFavoriteReferences: [CKRecord.Reference] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(id: String, name: String, address: String, location: CLLocation, usersFavoriteReferences: [CKRecord.Reference] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+        self.id = id
         self.name = name
         self.address = address
         self.location = location
@@ -29,13 +31,15 @@ class FoodSpot {
     }
     
     init?(record: CKRecord) {
-        guard let name = record[FoodSpotConstants.nameKey] as? String,
+        guard let id = record[FoodSpotConstants.idKey] as? String,
+            let name = record[FoodSpotConstants.nameKey] as? String,
             let address = record[FoodSpotConstants.addressKey] as? String,
             let location = record[FoodSpotConstants.locationKey] as? CLLocation,
             let usersFavoriteReferences = record[FoodSpotConstants.referenceKey] as? [CKRecord.Reference]
             else { return nil }
         
         self.recordID = record.recordID
+        self.id = id
         self.name = name
         self.address = address
         self.location = location
@@ -46,6 +50,8 @@ class FoodSpot {
 struct FoodSpotConstants {
     
     static let typeKey = "FoodSpot"
+    
+    static let idKey = "id"
     
     static let nameKey = "name"
     
@@ -61,6 +67,7 @@ extension CKRecord {
     convenience init(foodSpot: FoodSpot) {
         self.init(recordType: FoodSpotConstants.typeKey, recordID: foodSpot.recordID)
         
+        setValue(foodSpot.id, forKey: FoodSpotConstants.idKey)
         setValue(foodSpot.name, forKey: FoodSpotConstants.nameKey)
         setValue(foodSpot.address, forKey: FoodSpotConstants.addressKey)
         setValue(foodSpot.location, forKey: FoodSpotConstants.locationKey)
