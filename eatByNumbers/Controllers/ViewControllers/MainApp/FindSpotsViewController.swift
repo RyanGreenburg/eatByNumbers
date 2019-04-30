@@ -97,6 +97,7 @@ class FindSpotsViewController: UIViewController {
     }
     
     @IBAction func hungryButtonTapped(_ sender: Any) {
+        mapView.removeAnnotations(mapView.annotations)
         regionInMeters = 10000
         centerViewOnUserLocation()
         updateViews()
@@ -287,11 +288,6 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
 
 // MARK: - CoreLocation Delegate
 extension FindSpotsViewController: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-    }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()

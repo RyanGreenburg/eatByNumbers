@@ -95,4 +95,39 @@ class FoodSeachController {
         }
         dataTask.resume()
     }
+    
+    func searchByID(venueID: String, completion: @escaping (Venue?) -> Void) {
+        guard var url = baseVenueURL else { completion(nil) ; return }
+        
+        url.appendPathComponent(venueID)
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        
+        components?.queryItems = [id, key, version]
+        
+        guard let componentsURL = components?.url else { completion(nil) ; return }
+        print(componentsURL)
+        
+        let request = URLRequest(url: componentsURL)
+        
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print("Error downloading : \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else { completion(nil) ; return }
+            
+            do {
+                let decoder = JSONDecoder()
+                let venueDictionary = try decoder.decode(TopLevel.self, from: data)
+                let venue = venueDictionary.response.venue
+                completion(venue)
+            } catch {
+                print("Error decoding venues : \(error.localizedDescription) \n---\n\(error)")
+                completion(nil)
+            }
+        }
+        dataTask.resume()
+    }
 }
