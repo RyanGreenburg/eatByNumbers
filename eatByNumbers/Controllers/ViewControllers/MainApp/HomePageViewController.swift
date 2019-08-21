@@ -25,6 +25,7 @@ class HomePageViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        // THIS NEEDS TO MOVE
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: Notification.Name("userFoodSpotsChanged"), object: nil)
         setSearchController()
         setViews()

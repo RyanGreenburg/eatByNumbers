@@ -44,6 +44,7 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
 }
 
 extension PhotoSelectorViewController: UIImagePickerControllerDelegate {
+    
     func openCamera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePicker.sourceType = UIImagePickerController.SourceType.camera

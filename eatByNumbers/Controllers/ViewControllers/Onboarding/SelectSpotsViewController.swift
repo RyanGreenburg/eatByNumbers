@@ -76,12 +76,22 @@ class SelectSpotsViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
         
-        FoodSpotController.shared.saveFoodSpot(withName: name, id: id, address: address, location: location) { (success) in
+        FoodSpotController.shared.checkFoodSpotStatus(name: name) { (success) in
             if success {
                 DispatchQueue.main.async {
-                self.mapView.removeAnnotations(self.mapView.annotations)
-                self.centerViewOnUserLocation()
+                    self.mapView.removeAnnotations(self.mapView.annotations)
+                    self.centerViewOnUserLocation()
                     self.tableView.reloadData()
+                }
+            } else {
+                FoodSpotController.shared.saveFoodSpot(withName: name, id: id, address: address, location: location) { (success) in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.mapView.removeAnnotations(self.mapView.annotations)
+                            self.centerViewOnUserLocation()
+                            self.tableView.reloadData()
+                        }
+                    }
                 }
             }
         }

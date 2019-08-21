@@ -185,7 +185,6 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
         if let location = locationManager.location {
             let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
             mapView.setRegion(region, animated: true)
-            
         }
     }
     

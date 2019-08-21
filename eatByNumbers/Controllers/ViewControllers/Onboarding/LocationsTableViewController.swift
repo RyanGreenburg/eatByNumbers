@@ -100,12 +100,23 @@ extension LocationsTableViewController {
             let filtered = UserController.shared.userFoodSpots.filter { $0.recordID == newFoodSpot.recordID }
             
             if UserController.shared.userFoodSpots.count < 10 && filtered.count == 0 {
-                FoodSpotController.shared.saveFoodSpot(withName: name, id: id, address: address, location: location) { (success) in
+                FoodSpotController.shared.checkFoodSpotStatus(name: name) { (success) in
                     if success {
+                        print("FoodSpot exists, added User Reference")
                         NotificationCenter.default.post(name: Notification.Name("userFoodSpotsChanged"), object: nil)
                         DispatchQueue.main.async {
                             self.dismiss(animated: true, completion: nil)
                         }
+                    } else {
+                        FoodSpotController.shared.saveFoodSpot(withName: name, id: id, address: address, location: location, completion: { (success) in
+                            if success {
+                                print("Saved new foodSpot")
+                                NotificationCenter.default.post(name: Notification.Name("userFoodSpotsChanged"), object: nil)
+                                DispatchQueue.main.async {
+                                    self.dismiss(animated: true, completion: nil)
+                                }
+                            }
+                        })
                     }
                 }
             } else {

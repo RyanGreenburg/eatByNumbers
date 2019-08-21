@@ -15,8 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
             endingLineNumber = "128"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "tableView(_:commit:forRowAt:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -26,12 +26,12 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/HomePageViewController.swift"
-                  timestampString = "578431917.11509"
+                  timestampString = "583281054.0579129"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "128"
                   endingLineNumber = "128"
-                  offsetFromSymbolStart = "992">
+                  offsetFromSymbolStart = "1046">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -41,30 +41,14 @@
                   moduleName = "eatByNumbers"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ryangreenburg/Desktop/Xcode/personalProjects/eatByNumbers/eatByNumbers/Controllers/ViewControllers/MainApp/HomePageViewController.swift"
-                  timestampString = "578431917.117575"
+                  timestampString = "583281054.060539"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "129"
                   endingLineNumber = "129"
-                  offsetFromSymbolStart = "100">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "eatByNumbers/Controllers/ModelControllers/FoodSpotController.swift"
-            timestampString = "578335597.795894"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "delete(foodSpot:completion:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
