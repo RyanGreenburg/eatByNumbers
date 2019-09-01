@@ -27,6 +27,16 @@ struct Venue: Codable {
     let id: String
 }
 
+extension Venue: Hashable {
+    static func == (lhs: Venue, rhs: Venue) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+}
+
 struct Location: Codable {
     let address: String?
     let lat: Double

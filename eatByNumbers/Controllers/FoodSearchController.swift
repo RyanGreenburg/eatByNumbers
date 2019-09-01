@@ -18,7 +18,7 @@ class FoodSeachController {
     let version = URLQueryItem(name: "v", value: "20190301")
     let foodCategory = URLQueryItem(name: "categoryid", value: "4d4b7105d754a06374d81259")
     
-    func searchWith(searchTerm: String?, location: String, completion: @escaping ([Venue]) -> Void) {
+    func searchWith(searchTerm: String?, location: String, completion: @escaping (Set<Venue>) -> Void) {
         guard var url = baseVenueURL else { completion([]) ; return }
         url.appendPathComponent("explore")
         
@@ -48,12 +48,8 @@ class FoodSeachController {
             do {
                 let decoder = JSONDecoder()
                 let venueDictionary = try decoder.decode(TopLevel.self, from: data)
-                var tempVenueArray: [Venue] = []
-                for item in venueDictionary.response.groups![0].items {
-                    let venue = item.venue
-                    tempVenueArray.append(venue)
-                    completion(tempVenueArray)
-                }
+                let venues = Set(venueDictionary.response.groups![0].items.compactMap({ $0.venue }))
+                completion(venues)
             } catch {
                 print("Error decoding venues : \(error.localizedDescription) \n---\n\(error)")
                 completion([])

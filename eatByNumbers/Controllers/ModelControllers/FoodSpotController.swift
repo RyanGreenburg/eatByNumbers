@@ -14,7 +14,7 @@ class FoodSpotController {
     // singleton
     static let shared = FoodSpotController()
     // source of truth
-    var allFoodSpots: [FoodSpot] = [] {
+    var allFoodSpots: Set<FoodSpot> = [] {
         didSet {
             guard let userLocation = UserController.shared.userLocationManager?.location
                 else { return }
@@ -23,10 +23,10 @@ class FoodSpotController {
     }
     
     // spots within 50 miles of the user
-    var nearbyFoodSpots: [FoodSpot] = []
+    var nearbyFoodSpots: Set<FoodSpot> = []
     
     // API Call
-    var nearbyVenues: [Venue] = []
+    var nearbyVenues: Set<Venue> = []
     
     // MARK: - CRUD
     
@@ -47,7 +47,7 @@ class FoodSpotController {
             
             if case .success(let foodSpot) = result {
                 print("Saved FoodSpot to CloudKit")
-                self.allFoodSpots.append(foodSpot)
+                self.allFoodSpots.insert(foodSpot)
                 UserController.shared.userFoodSpots.append(foodSpot)
                 completion(true)
             }
@@ -101,12 +101,12 @@ class FoodSpotController {
             if case .success(let foodSpots) = result {
                 // Set the FoodSpot source of truth
                 guard let foodSpots = foodSpots, !foodSpots.isEmpty else { completion(false) ; return }
-                self.allFoodSpots = foodSpots
+                self.allFoodSpots = Set(foodSpots)
                 
                 // Set the user's foodSpots
                 guard let userID = UserController.shared.loggedInUser?.recordID else { completion(false) ; return }
                 let userFoodSpots = self.allFoodSpots.filter{( $0.usersFavoriteReferences.contains{( $0.recordID == userID)} )}
-                UserController.shared.userFoodSpots = userFoodSpots
+                UserController.shared.userFoodSpots = Array(userFoodSpots)
                 completion(true)
             }
         }

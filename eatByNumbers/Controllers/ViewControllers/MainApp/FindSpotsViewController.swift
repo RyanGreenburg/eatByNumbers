@@ -16,8 +16,8 @@ class FindSpotsViewController: UIViewController {
     }
     var regionInMeters: Double = 1000
     var selectedPlacemark: MKPlacemark?
-    var foodSpotItems: [FoodSpot] = []
-    var venueItems: [Venue] = []
+    var foodSpotItems: Set<FoodSpot> = []
+    var venueItems: Set<Venue> = []
     
     // MARK: - Outlets
     
@@ -58,7 +58,8 @@ class FindSpotsViewController: UIViewController {
     
     func updateViews() {
         foodSpotItems = FoodSpotController.shared.nearbyFoodSpots
-        venueItems = FoodSpotController.shared.nearbyVenues
+        venueItems = FoodSpotController.shared.nearbyVenues.filter{ venue in
+            return foodSpotItems.contains { $0.hashValue == venue.hashValue } }
         let venues = findVenueAnnotations(venueItems)
         let foodSpots = findFoodSpotAnnotations(foodSpotItems)
         displayAnnotations(foodSpots, venues)
@@ -121,7 +122,7 @@ class FindSpotsViewController: UIViewController {
     }
     
 // MARK: - Find Spots(FoodSpot)
-    func findFoodSpotAnnotations(_ foodSpots: [FoodSpot]) -> [MKPointAnnotation] {
+    func findFoodSpotAnnotations(_ foodSpots: Set<FoodSpot>) -> [MKPointAnnotation] {
         var annotations: [MKPointAnnotation] = []
         for item in foodSpots {
             // custom annotation?
@@ -137,7 +138,7 @@ class FindSpotsViewController: UIViewController {
     }
     
 // MARK: - Find Spots (API)
-    func findVenueAnnotations(_ venues: [Venue]) -> [MKPointAnnotation] {
+    func findVenueAnnotations(_ venues: Set<Venue>) -> [MKPointAnnotation] {
         var annotations: [MKPointAnnotation] = []
         for item in venues {
             let annotation = VenueAnnotation(venue: item)
@@ -152,13 +153,8 @@ class FindSpotsViewController: UIViewController {
     }
     
     func displayAnnotations(_ foodSpotAnnotations: [MKPointAnnotation], _ venueAnnotations: [MKPointAnnotation]) {
-        
-        var filteredAnnotations = venueAnnotations.filter { (venueAnnotation) -> Bool in
-            return foodSpotAnnotations.contains(where: { $0.subtitle == venueAnnotation.subtitle }) == true ? false : true
-        }
-        
-        filteredAnnotations += foodSpotAnnotations
-        mapView.addAnnotations(filteredAnnotations)
+        let annotations = foodSpotAnnotations + venueAnnotations
+        mapView.addAnnotations(annotations)
     }
 }
 

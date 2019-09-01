@@ -12,7 +12,7 @@ import CoreLocation
 
 class FoodSpot: CloudKitSyncable {
     
-    var id: String
+    let id: String
     var name: String?
     var address: String
     var location: CLLocation
@@ -57,6 +57,16 @@ class FoodSpot: CloudKitSyncable {
     }
 }
 
+extension FoodSpot: Hashable {
+    static func == (lhs: FoodSpot, rhs: FoodSpot) -> Bool {
+        return lhs.recordID == rhs.recordID
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+}
+
 struct FoodSpotConstants {
     
     static let typeKey = "FoodSpot"
@@ -65,10 +75,4 @@ struct FoodSpotConstants {
     static let addressKey = "address"
     static let locationKey = "location"
     static let referenceKey = "usersFavoriteReferences"
-}
-
-extension FoodSpot: Equatable {
-    static func == (lhs: FoodSpot, rhs: FoodSpot) -> Bool {
-       return lhs.recordID == rhs.recordID
-    }
 }

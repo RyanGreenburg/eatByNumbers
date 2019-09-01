@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zld-hk-xyn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XrD-os-z3J">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-zr-bnz">
-                                <rect key="frame" x="20" y="94" width="50" height="50"/>
+                                <rect key="frame" x="20" y="138" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="9Ta-1b-gMl"/>
                                     <constraint firstAttribute="width" secondItem="g8I-zr-bnz" secondAttribute="height" multiplier="1:1" id="Dny-NB-XPe"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijH-dv-s4n">
-                                <rect key="frame" x="344" y="94" width="50" height="50"/>
+                                <rect key="frame" x="344" y="138" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.32636776566505432" green="0.68799835443496704" blue="0.90986216068267822" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Qcs-CZ-Fts"/>
@@ -58,7 +58,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpn-qq-BKz">
-                                <rect key="frame" x="344" y="157" width="50" height="50"/>
+                                <rect key="frame" x="344" y="201" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vpn-qq-BKz" secondAttribute="height" multiplier="1:1" id="KRy-2p-d5Q"/>
                                     <constraint firstAttribute="width" constant="50" id="ZqW-rY-f3R"/>
@@ -97,7 +97,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx0-wB-yZR"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qkw-Um-lPs"/>
+                    <navigationItem key="navigationItem" id="qkw-Um-lPs">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="suk-16-FIO"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="zye-yO-EE1"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="centerButton" destination="vpn-qq-BKz" id="rey-MR-0RB"/>
                         <outlet property="hungryButton" destination="m4z-48-sB1" id="dDf-HR-UMo"/>
@@ -109,11 +112,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8i-IX-o9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1828.985507246377" y="156.69642857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="R10-6b-LGC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XrD-os-z3J" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fHQ-cW-2Qq">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zld-hk-xyn" kind="relationship" relationship="rootViewController" id="7DF-6W-fOD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SAl-yi-0qN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="918.84057971014499" y="156.69642857142856"/>
         </scene>
     </scenes>
     <resources>
-        <image name="suggestion" width="250" height="250"/>
-        <image name="userLocation" width="250" height="250"/>
+        <image name="suggestion" width="125" height="125"/>
+        <image name="userLocation" width="125" height="125"/>
     </resources>
 </document>
