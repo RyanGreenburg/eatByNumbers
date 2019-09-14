@@ -16,7 +16,7 @@ class FoodSpot: CloudKitSyncable {
     var name: String?
     var address: String
     var location: CLLocation
-    var usersFavoriteReferences: [CKRecord.Reference]
+    var listReferences: [CKRecord.Reference]
     var recordID: CKRecord.ID
     var ckRecord: CKRecord {
         let record = CKRecord(recordType: FoodSpot.recordType, recordID: self.recordID)
@@ -24,19 +24,19 @@ class FoodSpot: CloudKitSyncable {
         record.setValue(self.name, forKey: FoodSpotConstants.nameKey)
         record.setValue(self.address, forKey: FoodSpotConstants.addressKey)
         record.setValue(self.location, forKey: FoodSpotConstants.locationKey)
-        record.setValue(self.usersFavoriteReferences, forKey: FoodSpotConstants.referenceKey)
+        record.setValue(self.listReferences, forKey: FoodSpotConstants.referenceKey)
         return record
     }
     static var recordType: CKRecord.RecordType {
         return FoodSpotConstants.typeKey
     }
     
-    init(id: String, name: String, address: String, location: CLLocation, usersFavoriteReferences: [CKRecord.Reference] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(id: String, name: String, address: String, location: CLLocation, listReferences: [CKRecord.Reference] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.id = id
         self.name = name
         self.address = address
         self.location = location
-        self.usersFavoriteReferences = usersFavoriteReferences
+        self.listReferences = listReferences
         self.recordID = recordID
     }
     
@@ -45,7 +45,7 @@ class FoodSpot: CloudKitSyncable {
             let name = record[FoodSpotConstants.nameKey] as? String,
             let address = record[FoodSpotConstants.addressKey] as? String,
             let location = record[FoodSpotConstants.locationKey] as? CLLocation,
-            let usersFavoriteReferences = record[FoodSpotConstants.referenceKey] as? [CKRecord.Reference]
+            let listReferences = record[FoodSpotConstants.referenceKey] as? [CKRecord.Reference]
             else { return nil }
         
         self.recordID = record.recordID
@@ -53,7 +53,7 @@ class FoodSpot: CloudKitSyncable {
         self.name = name
         self.address = address
         self.location = location
-        self.usersFavoriteReferences = usersFavoriteReferences
+        self.listReferences = listReferences
     }
 }
 
@@ -74,5 +74,5 @@ struct FoodSpotConstants {
     static let nameKey = "name"
     static let addressKey = "address"
     static let locationKey = "location"
-    static let referenceKey = "usersFavoriteReferences"
+    static let referenceKey = "listReferences"
 }

@@ -36,7 +36,7 @@ class FoodSpotController {
         guard let recordID = UserController.shared.loggedInUser?.recordID else { completion(false) ; return }
         
         let reference = [CKRecord.Reference(recordID: recordID, action: .deleteSelf)]
-        let newFoodSpot = FoodSpot(id: id, name: name, address: address, location: location, usersFavoriteReferences: reference)
+        let newFoodSpot = FoodSpot(id: id, name: name, address: address, location: location, listReferences: reference)
         
         CloudKitManager.shared.save(object: newFoodSpot, completion: { (result: Result<FoodSpot, Error>) in
             
@@ -67,17 +67,20 @@ class FoodSpotController {
                 print("FoodSpot exists")
                 if let foodSpot = foodSpots?.first {
                     let reference = CKRecord.Reference(recordID: user.recordID, action: .none)
-                    if foodSpot.usersFavoriteReferences.contains(reference) {
-                        completion(false)
-                        return
-                    } else {
-                        foodSpot.usersFavoriteReferences.append(reference)
-                        self.update(foodSpot: foodSpot, completion: { (success) in
-                            if success {
-                                completion(true)
-                            }
-                        })
-                    }
+                    
+                    /// TODO: - NEED TO REFACTOR
+                    
+//                    if foodSpot.usersFavoriteReferences.contains(reference) {
+//                        completion(false)
+//                        return
+//                    } else {
+//                        foodSpot.usersFavoriteReferences.append(reference)
+//                        self.update(foodSpot: foodSpot, completion: { (success) in
+//                            if success {
+//                                completion(true)
+//                            }
+//                        })
+//                    }
                 } else {
                     completion(false)
                     return
@@ -105,8 +108,11 @@ class FoodSpotController {
                 
                 // Set the user's foodSpots
                 guard let userID = UserController.shared.loggedInUser?.recordID else { completion(false) ; return }
-                let userFoodSpots = self.allFoodSpots.filter{( $0.usersFavoriteReferences.contains{( $0.recordID == userID)} )}
-                UserController.shared.userFoodSpots = Array(userFoodSpots)
+                
+                /// TODO: - NEED TO REFACTOR
+                
+//                let userFoodSpots = self.allFoodSpots.filter{( $0.usersFavoriteReferences.contains{( $0.recordID == userID)} )}
+//                UserController.shared.userFoodSpots = Array(userFoodSpots)
                 completion(true)
             }
         }
@@ -126,29 +132,32 @@ class FoodSpotController {
     }
     
     func remove(user: User, fromFoodSpot foodSpot: FoodSpot, completion: @escaping (Bool) -> Void) {
-        let foodSpotRefs = foodSpot.usersFavoriteReferences
-        let filteredRefs = foodSpotRefs.filter { $0.recordID != user.recordID }
-        foodSpot.usersFavoriteReferences = filteredRefs
         
-        if filteredRefs.count == 0 {
-            delete(foodSpot: foodSpot) { (success) in
-                if success {
-                    completion(true)
-                }
-                completion(false)
-            }
-        } else {
-            CloudKitManager.shared.update(foodSpot) { (result: Result<FoodSpot, Error>) in
-                switch result{
-                case .failure(let error):
-                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-                    completion(false)
-                case .success(let foodSpot):
-                    print("Successfully revomed FoodSpot: \(foodSpot.recordID) from User: \(user.recordID)")
-                    completion(true)
-                }
-            }
-        }
+        /// TODO: - NEED TO REFACTOR
+        
+//        let foodSpotRefs = foodSpot.usersFavoriteReferences
+//        let filteredRefs = foodSpotRefs.filter { $0.recordID != user.recordID }
+//        foodSpot.usersFavoriteReferences = filteredRefs
+        
+//        if filteredRefs.count == 0 {
+//            delete(foodSpot: foodSpot) { (success) in
+//                if success {
+//                    completion(true)
+//                }
+//                completion(false)
+//            }
+//        } else {
+//            CloudKitManager.shared.update(foodSpot) { (result: Result<FoodSpot, Error>) in
+//                switch result{
+//                case .failure(let error):
+//                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+//                    completion(false)
+//                case .success(let foodSpot):
+//                    print("Successfully revomed FoodSpot: \(foodSpot.recordID) from User: \(user.recordID)")
+//                    completion(true)
+//                }
+//            }
+//        }
     }
     
     // delete
