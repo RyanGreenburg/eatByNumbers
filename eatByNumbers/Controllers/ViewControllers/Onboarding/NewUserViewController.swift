@@ -15,6 +15,7 @@ class NewUserViewController: UIViewController {
     var profilePhoto: UIImage?
     var user: User?
     let locationManager = CLLocationManager()
+    let cloudKitManager = CloudKitManager()
     
     // MARK: - Outlets
     @IBOutlet weak var backgroundView: UIView!
@@ -43,9 +44,11 @@ class NewUserViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let name = usernameTextField.text, !name.isEmpty,
-            let photo = profilePhoto else { return }
+            let photo = profilePhoto,
+            let appleUserRef = cloudKitManager.fetchAppleUserReference()
+            else { return }
         
-        let newUser = User(username: name, photo: photo, favoriteSpotsRefs: nil, appleUserRef: nil)
+        let newUser = User(username: name, photo: photo, appleUserRef: appleUserRef)
         user = newUser
         UserController.shared.createUserWith(name: name, photo: photo, foodSpotsRefs: nil) { (success) in
             if success {

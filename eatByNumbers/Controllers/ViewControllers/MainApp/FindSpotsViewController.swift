@@ -15,18 +15,16 @@ class FindSpotsViewController: UIViewController {
         return UserController.shared.userLocationManager ?? CLLocationManager()
     }
     var regionInMeters: Double = 1000
-    var selectedPlacemark: MKPlacemark?
+    var selectedFoodSpot: FoodSpot?
+    var selectedVenue: Venue?
     var foodSpotItems: Set<FoodSpot> = []
     var venueItems: Set<Venue> = []
+    var currentState = State.open
+    var detailsVC = DetailsViewController()
     
     // MARK: - Outlets
-    
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var hungryButton: UIButton!
-    @IBOutlet weak var centerButton: UIButton!
-    @IBOutlet weak var userButton: UIButton!
-    @IBOutlet weak var suggestionButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var drawerView: UIView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -36,24 +34,18 @@ class FindSpotsViewController: UIViewController {
         mapView.register(FoodSpotAnnotationView.self, forAnnotationViewWithReuseIdentifier: "foodSpotPin")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideDetailsView()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationServices()
     }
     
     func setViews() {
-        hungryButton.setTitleColor(Colors.white.color(), for: .normal)
-        hungryButton.backgroundColor = Colors.lightBlue.color()
-        hungryButton.layer.cornerRadius = hungryButton.frame.height / 4
-        segmentedControl.tintColor = Colors.darkBlue.color()
-        suggestionButton.layer.cornerRadius = suggestionButton.frame.width / 2
-        centerButton.layer.cornerRadius = centerButton.frame.width / 2
-        suggestionButton.imageView?.clipsToBounds = true
-        centerButton.imageView?.clipsToBounds = true
-        suggestionButton.layer.masksToBounds = true
-        centerButton.layer.masksToBounds = true
-        mapView.showsPointsOfInterest = false
-        userButton.layer.cornerRadius = userButton.frame.height / 2
+
     }
     
     func updateViews() {
@@ -66,60 +58,6 @@ class FindSpotsViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func suggestionButtonTapped(_ sender: Any) {
-        guard let suggestion = mapView.annotations.randomElement() else { return }
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(suggestion)
-    }
-    
-    @IBAction func userButtonTapped(_ sender: Any) {
-        if UserController.shared.loggedInUser != nil {
-            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-            guard let viewController = storyboard.instantiateInitialViewController() else { return }
-            present(viewController, animated: true, completion: nil)
-        } else {
-            let alert = AlertHelper.shared.blankAlertController("Create a Profile", andText: "To add your own favorite spots, you need to create a User Profile.")
-            
-            let goBack = UIAlertAction(title: "Go Back", style: .default) { (_) in
-                self.dismiss(animated: true, completion: nil)
-            }
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            alert.addAction(goBack)
-            alert.addAction(cancel)
-            
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func centerButtonTapped(_ sender: Any) {
-        centerViewOnUserLocation()
-    }
-    
-    @IBAction func hungryButtonTapped(_ sender: Any) {
-        mapView.removeAnnotations(mapView.annotations)
-        regionInMeters = 10000
-        centerViewOnUserLocation()
-        updateViews()
-    }
-    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-        let foodSpots = findFoodSpotAnnotations(foodSpotItems)
-        let venues = findVenueAnnotations(venueItems)
-        switch sender.selectedSegmentIndex {
-        case 0:
-            mapView.removeAnnotations(mapView.annotations)
-            displayAnnotations(foodSpots, venues)
-        case 1:
-            mapView.removeAnnotations(mapView.annotations)
-            displayAnnotations(foodSpots, [])
-        case 2:
-            mapView.removeAnnotations(mapView.annotations)
-            displayAnnotations([], venues)
-        default:
-            return
-        }
-    }
     
 // MARK: - Find Spots(FoodSpot)
     func findFoodSpotAnnotations(_ foodSpots: Set<FoodSpot>) -> [MKPointAnnotation] {
@@ -155,6 +93,16 @@ class FindSpotsViewController: UIViewController {
     func displayAnnotations(_ foodSpotAnnotations: [MKPointAnnotation], _ venueAnnotations: [MKPointAnnotation]) {
         let annotations = foodSpotAnnotations + venueAnnotations
         mapView.addAnnotations(annotations)
+    }
+    
+     // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "" {
+            if let destinationVC = segue.destination as? DetailsViewController {
+                detailsVC = destinationVC
+                destinationVC.delegate = self
+            }
+        }
     }
 }
 
@@ -221,7 +169,6 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
         if let venueAnnotation = annotation as? VenueAnnotation {
             let reuseID = "venuePin"
             let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID, for: venueAnnotation) as? VenueAnnotationView
-            pinView?.venueDetailDelegate = self
             pinView?.animateDrop()
             return pinView
         }
@@ -229,55 +176,29 @@ extension FindSpotsViewController: UINavigationControllerDelegate, MKMapViewDele
         if let foodSpotAnnotation = annotation as? FoodSpotAnnotation {
             let reuseID = "foodSpotPin"
             let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID, for: foodSpotAnnotation) as? FoodSpotAnnotationView
-            pinView?.foodSpotDetailDelegate = self
             pinView?.animateDrop()
             return pinView
         }
         return nil
     }
     
-    func getDirections(for location: String) {
-        if selectedPlacemark != nil {
-            
-            let request = MKLocalSearch.Request()
-            request.naturalLanguageQuery = location
-            request.region = mapView.region
-            let search = MKLocalSearch(request: request)
-            search.start { (response, error) in
-                if let error = error {
-                    print("Error searching for location : \(error)")
-                }
-                guard let response = response else { return }
-                
-                let mapItem = response.mapItems.first!
-                let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-                mapItem.openInMaps(launchOptions: launchOptions)
-            }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? FoodSpotAnnotation {
+            view.setSelected(true, animated: true)
+            detailsVC.foodSpot = annotation.foodSpot
+            showDetailsView()
+        } else if let annotation = view.annotation as? VenueAnnotation {
+            view.setSelected(true, animated: true)
+            detailsVC.venue = annotation.venue
+            showDetailsView()
         }
     }
     
-    func parseAddress(selectedItem:MKPlacemark) -> String {
-        // put a space between street address items
-        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
-        // put a comma between street and city/state
-        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
-        // put a space between city and state
-        let secondSpace = (selectedItem.subAdministrativeArea != nil && selectedItem.administrativeArea != nil) ? " " : ""
-        let addressLine = String(
-            format:"%@%@%@%@%@%@%@",
-            // street number
-            selectedItem.subThoroughfare ?? "",
-            firstSpace,
-            // street name
-            selectedItem.thoroughfare ?? "",
-            comma,
-            // city
-            selectedItem.locality ?? "",
-            secondSpace,
-            // state
-            selectedItem.administrativeArea ?? ""
-        )
-        return addressLine
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        view.setSelected(false, animated: true)
+        hideDetailsView()
+        detailsVC.foodSpot = nil
+        detailsVC.venue = nil
     }
 }
 
@@ -289,18 +210,71 @@ extension FindSpotsViewController: CLLocationManagerDelegate {
     }
 }
 
-extension FindSpotsViewController: FoodSpotDetailViewDelegate, VenueDetailViewDelegate {
+// MARK: - DrawerView Delegate
+extension FindSpotsViewController: DetailsViewControllerDelegate {
     
-    func directionsRequestedFor(_ venue: Venue) {
-        let coordinate = CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lng)
-        let placemark = MKPlacemark(coordinate: coordinate)
-        selectedPlacemark = placemark
-        getDirections(for: venue.name!)
+    func drawerPanned(recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            panViews(withPoint: CGPoint(x: self.view.center.x, y: self.view.center.y + recognizer.translation(in: drawerView).y))
+            recognizer.setTranslation(CGPoint.zero, in: drawerView)
+        case .changed:
+            panViews(withPoint: CGPoint(x: self.view.center.x, y: self.view.center.y + recognizer.translation(in: drawerView).y))
+            recognizer.setTranslation(CGPoint.zero, in: drawerView)
+        case .ended:
+            recognizer.setTranslation(CGPoint.zero, in: drawerView)
+            panDidEnd()
+        default:
+            break
+        }
     }
     
-    func directionsRequestedFor(_ foodSpot: FoodSpot) {
-        let placemark = MKPlacemark(coordinate: foodSpot.location.coordinate)
-        selectedPlacemark = placemark
-        getDirections(for: foodSpot.name!)
+    func panDidEnd() {
+        let aboveHalf = self.drawerView.frame.minY > (self.view.frame.height / 3)
+        let velocity = detailsVC.panGesture.velocity(in: self.view).y
+        
+        switch currentState {
+        case .closed:
+            if velocity < -500 {
+                showDetailsView()
+            }
+            if !aboveHalf {
+                showDetailsView()
+            }
+        case .open:
+            if velocity > 500 {
+                hideDetailsView()
+            }
+            if aboveHalf {
+                hideDetailsView()
+            }
+        }
+    }
+    
+    func animateForState(_ state: State, view: UIView, edge: CGFloat, to target: CGFloat, velocity: CGFloat) {
+        let distance = target - edge
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+            view.frame = view.frame.offsetBy(dx: 0, dy: distance)
+        }, completion: nil)
+    }
+    
+    func panViews(withPoint panPoint: CGPoint) {
+        if self.drawerView.frame.maxY < self.view.bounds.maxY {
+            self.drawerView.center.y += detailsVC.panGesture.translation(in: drawerView).y / 4
+        } else {
+            self.drawerView.center.y += detailsVC.panGesture.translation(in: drawerView).y
+        }
+    }
+    
+    func showDetailsView() {
+        let target = view.frame.maxY
+        animateForState(currentState, view: drawerView, edge: drawerView.frame.maxY, to: target, velocity: detailsVC.panGesture.velocity(in: drawerView).y)
+        currentState = State.open
+    }
+    
+    func hideDetailsView() {
+        let target = view.frame.maxY
+        animateForState(currentState, view: drawerView, edge: drawerView.frame.minY, to: target, velocity: detailsVC.panGesture.velocity(in: drawerView).y)
+        currentState = State.closed
     }
 }

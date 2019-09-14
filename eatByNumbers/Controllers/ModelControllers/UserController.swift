@@ -29,7 +29,7 @@ class UserController {
     func createUserWith(name: String, photo: UIImage, foodSpotsRefs: [CKRecord.Reference]?, completion: @escaping (Bool) -> Void) {
         
         guard let reference = CloudKitManager.shared.fetchAppleUserReference() else { completion(false) ; return }
-        let userToSave = User(username: name, photo: photo, favoriteSpotsRefs: foodSpotsRefs, appleUserRef: reference)
+        let userToSave = User(username: name, photo: photo, appleUserRef: reference)
         
         CloudKitManager.shared.save(object: userToSave) { (result: Result<User, Error>) in
             if case .failure(let error) = result {
@@ -70,10 +70,9 @@ class UserController {
     }
     
     // update
-    func update(user: User, withName name: String, photo: UIImage, foodSpots: [FoodSpot], completion: @escaping (Bool) -> Void) {
+    func update(user: User, withName name: String, photo: UIImage, completion: @escaping (Bool) -> Void) {
         user.photo = photo
         user.username = name
-        user.favoriteSpots = foodSpots
         
         CloudKitManager.shared.update(user) { (result) in
             switch result {
@@ -89,14 +88,6 @@ class UserController {
     
     // delete
     func delete(user: User, completion: @escaping (Bool) -> Void) {
-        
-        if user.favoriteSpots != nil {
-            for foodSpot in user.favoriteSpots! {
-                FoodSpotController.shared.remove(user: user, fromFoodSpot: foodSpot) { (success) in
-                    // handle
-                }
-            }
-        }
         
         CloudKitManager.shared.delete(user) { (result) in
             switch result {

@@ -38,9 +38,6 @@
                                                             <constraint firstAttribute="width" constant="250" id="1Os-L5-ZMG"/>
                                                             <constraint firstAttribute="width" secondItem="G6y-dg-gjM" secondAttribute="height" multiplier="1:1" id="kDt-aU-HiH"/>
                                                         </constraints>
-                                                        <connections>
-                                                            <segue destination="i1Q-5s-Q8U" kind="embed" identifier="photoSelectSegue" id="0IL-td-EBa"/>
-                                                        </connections>
                                                     </containerView>
                                                 </subviews>
                                             </stackView>
@@ -161,60 +158,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ktw-Ve-bPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
-        </scene>
-        <!--Photo Selector View Controller-->
-        <scene sceneID="E1y-kp-BYX">
-            <objects>
-                <viewController id="i1Q-5s-Q8U" customClass="PhotoSelectorViewController" customModule="eatByNumbers" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="IPM-eP-UfJ">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ak3-r4-VIY">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95X-7X-EKE">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeH-VD-Tbj">
-                                        <rect key="frame" x="0.0" y="150" width="250" height="100"/>
-                                        <state key="normal" title="Select Photo"/>
-                                        <connections>
-                                            <action selector="selectButtonTapped:" destination="i1Q-5s-Q8U" eventType="touchUpInside" id="F9D-58-dB1"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="BeH-VD-Tbj" secondAttribute="trailing" id="3pF-eV-NMp"/>
-                                    <constraint firstItem="BeH-VD-Tbj" firstAttribute="top" secondItem="95X-7X-EKE" secondAttribute="bottom" multiplier="0.6" id="SVb-Vs-T9d"/>
-                                    <constraint firstItem="BeH-VD-Tbj" firstAttribute="leading" secondItem="95X-7X-EKE" secondAttribute="leading" id="e9j-d6-Plw"/>
-                                    <constraint firstAttribute="bottom" secondItem="BeH-VD-Tbj" secondAttribute="bottom" id="zyw-Vb-j0H"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="ak3-r4-VIY" firstAttribute="leading" secondItem="IPM-eP-UfJ" secondAttribute="leading" id="3hU-zv-bhc"/>
-                            <constraint firstItem="95X-7X-EKE" firstAttribute="leading" secondItem="7jM-jy-u1A" secondAttribute="leading" id="AGD-Cs-7Q4"/>
-                            <constraint firstAttribute="bottom" secondItem="95X-7X-EKE" secondAttribute="bottom" id="Ba5-xA-ucf"/>
-                            <constraint firstAttribute="bottom" secondItem="ak3-r4-VIY" secondAttribute="bottom" id="Be2-GP-IAh"/>
-                            <constraint firstItem="ak3-r4-VIY" firstAttribute="top" secondItem="IPM-eP-UfJ" secondAttribute="top" id="Non-Gc-IKT"/>
-                            <constraint firstItem="7jM-jy-u1A" firstAttribute="trailing" secondItem="95X-7X-EKE" secondAttribute="trailing" id="Pum-DE-JRG"/>
-                            <constraint firstAttribute="trailing" secondItem="ak3-r4-VIY" secondAttribute="trailing" id="Q93-D7-t0d"/>
-                            <constraint firstAttribute="top" secondItem="95X-7X-EKE" secondAttribute="top" id="tJS-ho-NmM"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="7jM-jy-u1A"/>
-                    </view>
-                    <connections>
-                        <outlet property="buttonView" destination="95X-7X-EKE" id="eu9-Xa-g1K"/>
-                        <outlet property="photoView" destination="ak3-r4-VIY" id="MPu-XF-5hO"/>
-                        <outlet property="selectButton" destination="BeH-VD-Tbj" id="l4N-93-6zw"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ebR-8s-FCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1710" y="-97"/>
         </scene>
         <!--SelectFavoriteFoodSpotsVC-->
         <scene sceneID="fcO-Sr-b69">

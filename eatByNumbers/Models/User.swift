@@ -9,20 +9,24 @@
 import UIKit
 import CloudKit
 
+/// Custom User model object class
 class User: CloudKitSyncable {
-    
+    /// The username provided by the user
     var username: String
+    /// The data of the User's profile photo
     var photoData: Data?
-    var favoriteSpots: [FoodSpot]?
-    var photo: UIImage? {
+    /// The User's profile photo
+    var photo: UIImage {
         get {
-            guard let photoData = photoData else {return nil}
-            return UIImage(data: photoData)
+            guard let photoData = self.photoData else { return UIImage(named: "stockPhoto")!}
+            return UIImage(data: photoData)!
         }
         set {
-            photoData = newValue?.jpegData(compressionQuality: 1)
+            photoData = newValue.jpegData(compressionQuality: 1)
         }
     }
+    /// The User's array of lists
+    var lists: [List]
     
     // CloudKit properties
     static var recordType: CKRecord.RecordType {
@@ -30,17 +34,17 @@ class User: CloudKitSyncable {
     }
     var ckRecord: CKRecord {
         let ckRecord = CKRecord(recordType: User.recordType, recordID: self.recordID)
-        ckRecord.setValue(self.username, forKey: UserConstants.usernameKey)
-        ckRecord.setValue(self.imageAsset, forKey: UserConstants.photoKey)
-        ckRecord.setValue(self.favoriteSpotsRefs, forKey: UserConstants.favoriteSpotsRefKey)
-        ckRecord.setValue(self.appleUserRef, forKey: UserConstants.appleUserRefKey)
+        ckRecord.setValuesForKeys([
+            UserConstants.usernameKey: self.username,
+            UserConstants.photoKey: self.imageAsset,
+            UserConstants.appleUserRefKey: self.appleUserRef
+            ])
         return ckRecord
     }
     
-    var favoriteSpotsRefs: [CKRecord.Reference]?
-    var appleUserRef: CKRecord.Reference?
+    var appleUserRef: CKRecord.Reference
     var recordID: CKRecord.ID
-    var imageAsset: CKAsset? {
+    var imageAsset: CKAsset {
         get {
             let tempDirectory = NSTemporaryDirectory()
             let tempDirecotryURL = URL(fileURLWithPath: tempDirectory)
@@ -54,9 +58,9 @@ class User: CloudKitSyncable {
         }
     }
     
-    init(username: String, photo: UIImage, favoriteSpotsRefs: [CKRecord.Reference]?, appleUserRef: CKRecord.Reference?, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(username: String, photo: UIImage, lists: [List] = [], appleUserRef: CKRecord.Reference, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.username = username
-        self.favoriteSpotsRefs = favoriteSpotsRefs
+        self.lists = lists
         self.appleUserRef = appleUserRef
         self.recordID = recordID
         self.photo = photo
@@ -71,7 +75,7 @@ class User: CloudKitSyncable {
         self.username = username
         self.appleUserRef = appleUserRef
         self.recordID = record.recordID
-        self.favoriteSpotsRefs = record[UserConstants.favoriteSpotsRefKey] as? [CKRecord.Reference]
+        self.lists = []
         
         do {
             try self.photoData = Data(contentsOf: imageAsset.fileURL!)

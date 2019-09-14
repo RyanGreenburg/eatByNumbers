@@ -41,7 +41,7 @@ class EditProfileTableViewController: UITableViewController, PhotoSelectorViewCo
             let photo = photo
             else { return }
         
-        UserController.shared.update(user: user, withName: name, photo: photo, foodSpots: foodSpots) { (success) in
+        UserController.shared.update(user: user, withName: name, photo: photo) { (success) in
             if success {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)

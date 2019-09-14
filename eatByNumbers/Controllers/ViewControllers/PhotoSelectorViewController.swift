@@ -72,7 +72,7 @@ extension PhotoSelectorViewController: UIImagePickerControllerDelegate {
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let pickedImage = info[.originalImage] as? UIImage {
             guard let delegate = delegate
                 else { return }
             delegate.photoSelectorViewControllerSelected(image: pickedImage)
