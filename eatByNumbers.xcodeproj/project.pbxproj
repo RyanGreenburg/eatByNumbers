@@ -44,6 +44,7 @@
 		62BD97FC232D654F00473239 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BD97FB232D654F00473239 /* UserTests.swift */; };
 		62BD97FF232D8C1E00473239 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BD97FE232D8C1E00473239 /* ListTests.swift */; };
 		62BD9801232D8EDC00473239 /* FoodSpotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BD9800232D8EDC00473239 /* FoodSpotTests.swift */; };
+		62BD9803232E8CD100473239 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BD9802232E8CD100473239 /* ListController.swift */; };
 		62EE2646232B277D0031A443 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE2645232B277D0031A443 /* List.swift */; };
 		62EE266D232D650E0031A443 /* eatByNumbersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE266C232D650E0031A443 /* eatByNumbersTests.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,7 @@
 		62BD97FB232D654F00473239 /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		62BD97FE232D8C1E00473239 /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		62BD9800232D8EDC00473239 /* FoodSpotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSpotTests.swift; sourceTree = "<group>"; };
+		62BD9802232E8CD100473239 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		62EE2645232B277D0031A443 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		62EE266A232D650E0031A443 /* eatByNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eatByNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62EE266C232D650E0031A443 /* eatByNumbersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eatByNumbersTests.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				62B8E1352254FC6900196ED9 /* UserController.swift */,
 				62B8E13B2255012C00196ED9 /* FoodSpotController.swift */,
+				62BD9802232E8CD100473239 /* ListController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				62B8E13C2255012C00196ED9 /* FoodSpotController.swift in Sources */,
 				62B8E17B225D3CD300196ED9 /* FoodSpotAnnotationView.swift in Sources */,
 				62957FCE2264F6D500E70E4C /* VenueAnnotationView.swift in Sources */,
+				62BD9803232E8CD100473239 /* ListController.swift in Sources */,
 				62B8E160225A5A5000196ED9 /* FoodSearch.swift in Sources */,
 				62B8E145225523DC00196ED9 /* AlertController.swift in Sources */,
 				62B8E11B2254FBE100196ED9 /* AppDelegate.swift in Sources */,
