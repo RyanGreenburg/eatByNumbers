@@ -26,7 +26,7 @@ class UserController {
     // MARK: - CRUD
     
     // create
-    func createUserWith(name: String, photo: UIImage, foodSpotsRefs: [CKRecord.Reference]?, completion: @escaping (Bool) -> Void) {
+    func createUserWith(name: String, photo: UIImage, completion: @escaping (_ isSuccess: Bool) -> Void) {
         
         guard let reference = CloudKitManager.shared.fetchAppleUserReference() else { completion(false) ; return }
         let userToSave = User(username: name, photo: photo, appleUserRef: reference)
